@@ -15,11 +15,7 @@ int main(int argc, char * argv[])
 {
     //La fenêtre
     SDL_Window *window = NULL;
-    //La surface contenue dans la fenêtre
-    SDL_Surface *screenSurface = NULL;
-    //L'image
-    SDL_Surface *imageSurface = NULL;
-    SDL_Surface *texte1 = NULL;
+    SDL_Surface *screenSurface = NULL, *imageSurface = NULL, *texte1 = NULL, *pionBleu = NULL, *pionRouge = NULL;
     
     //Initialise la SDL
     if (SDL_Init(SDL_INIT_VIDEO) == -1)
@@ -55,23 +51,34 @@ int main(int argc, char * argv[])
     screenSurface = SDL_GetWindowSurface(window);
     SDL_FillRect(screenSurface, NULL, SDL_MapRGB( screenSurface->format, 255, 255, 255 ));
     
-    // Chargement et position de l'image
-    //loadMedia(imageSurface, screenSurface);
-    imageSurface = SDL_LoadBMP("Images/hello_world.bmp");
+    // Chargement et position de l'image du plateau
+    imageSurface = loadMedia(imageSurface, screenSurface, "Images/jeu_hex_940.png");
     if (imageSurface == NULL)
-        printf("error");
-  /*  SDL_Rect posBoard;
-    posBoard.x = 280;
+        fprintf(stderr, "Impossible de charger l'image");
+    SDL_Rect posBoard;
+    posBoard.x = 300;
     posBoard.y = 100;
     
     //Charge la police d'écriture
     TTF_Font *fontMenu = TTF_OpenFont("Font/System San Francisco Display Regular.ttf",30);
     SDL_Color fontBlack = {0,0,0};
-    texte1 = TTF_RenderText_Blended(fontMenu,"Hello guys !",fontBlack); */
+    texte1 = TTF_RenderText_Blended(fontMenu,"Menu",fontBlack);
 
+    //Charge les pions
+    pionBleu = loadMedia(pionBleu, screenSurface,"Images/button-blue22.png");
+    SDL_Rect posPionBleu;
+    posPionBleu.x = 377;
+    posPionBleu.y = 149;
+    pionRouge = loadMedia(pionRouge, screenSurface, "Images/button-red22.png");
+    SDL_Rect posPionRouge;
+    posPionRouge.x = 545;
+    posPionRouge.y = 273;
+    
     //Applique les surfaces et met à jour l'écran
-    SDL_BlitSurface(imageSurface, NULL, screenSurface,NULL);//, &posBoard);
-    //SDL_BlitSurface(texte1,NULL,screenSurface,NULL);
+    SDL_BlitSurface(imageSurface, NULL, screenSurface, &posBoard);
+    SDL_BlitSurface(texte1,NULL,screenSurface,NULL);
+    SDL_BlitSurface(pionBleu,NULL,screenSurface,&posPionBleu);
+    SDL_BlitSurface(pionRouge,NULL,screenSurface,&posPionRouge);
     SDL_UpdateWindowSurface(window);
     //Met en pause l'affichage
     pause_interface();
@@ -81,6 +88,8 @@ int main(int argc, char * argv[])
     SDL_FreeSurface(imageSurface);
     SDL_FreeSurface(screenSurface);
     SDL_FreeSurface(texte1);
+    SDL_FreeSurface(pionBleu);
+    SDL_FreeSurface(pionRouge);
     //Supprime la fenêtre
     SDL_DestroyWindow(window);
     //Quitte SDL et les extensions
@@ -91,10 +100,10 @@ int main(int argc, char * argv[])
     return 0;
 }
 
-SDL_Surface *loadMedia (SDL_Surface *imageSurface, SDL_Surface *screenSurface)
+SDL_Surface *loadMedia (SDL_Surface *imageSurface, SDL_Surface *screenSurface, char Nom[])
 {
     SDL_Surface* optimizedSurface = NULL;
-    imageSurface = IMG_Load("jeu_hex_940.png");
+    imageSurface = IMG_Load(Nom);
     if(imageSurface == NULL)
     {
         fprintf(stderr,"Impossible de charger l'image !\n");
@@ -103,7 +112,7 @@ SDL_Surface *loadMedia (SDL_Surface *imageSurface, SDL_Surface *screenSurface)
     optimizedSurface = SDL_ConvertSurface(imageSurface, screenSurface->format, 0);
     if(optimizedSurface == NULL)
     {
-        fprintf(stderr, "Unable to optimize image ! SDL Error: %s\n", SDL_GetError());
+        fprintf(stderr, "Impossible d'optimiser l'image ! Error: %s\n", SDL_GetError());
         exit(EXIT_FAILURE);
     }
     

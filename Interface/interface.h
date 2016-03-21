@@ -10,6 +10,6 @@ Olivier Dufour - 2016
 void pause_interface ();
 
 //Charge l'image et l'optimise pour la fenêtre
-SDL_Surface *loadMedia (SDL_Surface *imageSurface, SDL_Surface *screenSurface);
+SDL_Surface *loadMedia (SDL_Surface *imageSurface, SDL_Surface *screenSurface, char Nom[]);
 
 #endif
