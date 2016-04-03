@@ -1,15 +1,11 @@
 /*
 Interface graphique du jeu HEX
-Olivier Dufour - 2016
 */
 
 #ifndef interface_h
 #define interface_h
 
-//Met en pause la fenêtre en attendnt une action 
-void pause_interface ();
+void render (SDL_Texture *texture, SDL_Renderer *renderer, SDL_Surface *surface, SDL_Rect position);
 
-//Charge l'image et l'optimise pour la fenêtre
-SDL_Surface *loadMedia (SDL_Surface *imageSurface, SDL_Surface *screenSurface, char Nom[]);
 
 #endif
