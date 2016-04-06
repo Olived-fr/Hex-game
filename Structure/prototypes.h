@@ -2,28 +2,51 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#define NB_LIGNES 11
-#define NB_COLONNES 11
+#define LIGNE_MAX 11
+#define COLONNE_MAX 11
 
-// Liste des types : Coordonnes, Coup, Type_Case, Plateau, Joueur
+// Liste des types : Coordonnes, Coup, Type_Case, Plateau, Joueur,Couleur
+
+typedef enum Couleur {rouge,bleu,neutre} Couleur; //Une case peut prendre les valeurs "rouge", "bleu" ou "neutre"
+typedef enum Joueur {joueur1,joueur2} Joueur; //une variable de type joueur peut prendre les valeurs "joueur1" ou "joueur2"
+
+typedef struct Coordonnees Coordonnees;
 
 struct Coordonnees
 {
 	int abscisses;
 	int ordonnees;
-}
+};
+
+typedef struct Coup Coup;
 
 struct Coup
 {
 	Coordonnees coord;
-	Type_Case couleur;
+	Couleur couleur;
 };
 
-typedef struct Coordonnees Coordonnees
+typedef struct Type_Case Type_Case;
+
+struct Type_Case
+{
+	Couleur coul;
+	Coordonnees co;
+	Type_Case* NE;
+	Type_Case* NO;
+	Type_Case* E;
+	Type_Case* O;
+	Type_Case* SE;
+	Type_Case* SO;
+};
+
+typedef Type_Case** Plateau; //Le plateau est un tableau à deux dimensions de cases
+
+/*NOTE : les coordonnées du plateau sont [0-10][0-10], pour toute
+ * interaction avec l'utilisateur ne pas oublier que ce dernier écrit et lit de sintervalles [1-11][1-11]*/
+ 
+typedef struct Coordonnees Coordonnees;
 typedef struct Coup Coup;
-enum Type_Case {rouge,bleu,neutre}; //Une case peut prendre les valeurs "rouge", "bleu" ou "neutre"
-typedef Type_Case Plateau[NB_LIGNES,NB_COLONNES]; //Le plateau est un tableau à deux dimensions de cases
-enum Joueur {joueur1,joueur2}; //une variable de type joueur peut prendre les valeurs "joueur1" ou "joueur2"
 
 /* REPRESENTATION INTERNE DU TABLEAU */
 
