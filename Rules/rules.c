@@ -1,3 +1,5 @@
+#include "rules.h"
+
 int choix_du_joueur()
 {
 	if(/* condition */)
@@ -15,7 +17,13 @@ int choix_du_joueur()
 	return ;
 }
 
-bool premier_joueur()
+bool premier_joueur(Joueur choix_premier)
 {
-	return ;
+	return choix_premier==joueur1;
+}
+
+void nouvelle_partie(Plateau p)
+{
+	p=initialiser_plateau();
+	creation_config();
 }
