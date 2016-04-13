@@ -1,4 +1,4 @@
-#include "prototypes.h"
+#include "plateau.h"
 
 Plateau initialiser_plateau()
 {
@@ -123,14 +123,14 @@ bool est_vide(Plateau p)
 	return (p[x]);
 }
 
-bool dans_plateau(Coordonnees c)
+bool dans_plateau(Coordonnees_tab c)
 {
 	bool abs_correcte=(0<=c.abscisse) && (c.abscisse<LIGNE_MAX);
 	bool ord_correcte=(0<=c.ordonnee) && (c.ordonnee<LIGNE_MAX);
 	return (abs_correcte && ord_correcte);
 }
 
-int nb_voisin(Coordonnees coor,Type_Case c)
+int nb_voisin(Coordonnees_tab coor,Type_Case c)
 {
 	int nb_voisins=0;
 	if(c.NE!=NULL)
@@ -162,7 +162,14 @@ Couleur couleur_joueur(Joueur j)
 		return bleu;
 }
 
-bool coup_valide(Plateau p,Coordonnees c)
+Plateau choix_coup(Plateau p,Coup c)
+{
+	if(coup_valide(p,c.coord))
+		p[c.coord.abscisse][c.coord.ordonnee].coul=c.couleur;
+	return p;
+}
+
+bool coup_valide(Plateau p,Coordonnees_tab c)
 {
 	return dans_plateau(c) && p[c.abscisse][c.ordonnee].coul==neutre;
 }
