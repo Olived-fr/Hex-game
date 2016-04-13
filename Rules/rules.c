@@ -1,29 +1,32 @@
 #include "rules.h"
 
-int choix_du_joueur()
-{
-	if(/* condition */)
-	{
-		return 1;
-	}
-	else if (/* condition */)
-	{
-		return 2;
-	}
-	else
-	{
-		return 3;
-	}
-	return ;
-}
-
 bool premier_joueur(Joueur choix_premier)
 {
 	return choix_premier==joueur1;
 }
 
-void nouvelle_partie(Plateau p)
+void nouvelle_partie(Plateau p, int choix)
 {
-	p=initialiser_plateau();
-	creation_config();
+	switch (choix)
+	{
+		case 1:
+			p=initialiser_plateau();
+			creation_config();
+		break;
+
+		case 2:
+			p=initialiser_plateau();
+			creation_config();
+		break;
+
+		case 3:
+			p=initialiser_plateau();
+			creation_config();
+		break;
+
+		default:
+			exit(1);
+		break;
+	}
+	
 }
