@@ -56,6 +56,15 @@ s_Menu loadMenu (s_Interface interface)
 {
 		
 	s_Menu menu;
+	
+	menu.mainMenu[0] = "Jouer";
+	menu.mainMenu[1] = "Charger";
+	menu.mainMenu[2] = "Quitter";
+	
+	menu.playMenu[0] = " Humain vs Humain";
+	menu.playMenu[1] = "    Humain vs IA1";
+	menu.playMenu[2] = "    Humain vs IA2";
+	menu.playMenu[3] = "          Retour";
 		
 	menu.fontMenu = TTF_OpenFont("Font/System San Francisco Display Regular.ttf",20);
 	
@@ -99,6 +108,7 @@ s_Menu loadMenu (s_Interface interface)
 }
 
 
+
 /******************************************** Chargement du plateau *************************************/
 
 s_Board loadBoard(s_Interface interface)
@@ -109,21 +119,18 @@ s_Board loadBoard(s_Interface interface)
 	board.boardSurface = IMG_Load("Images/jeu_hex_640.png");
 	if (board.boardSurface == NULL)
 		fprintf(stderr, "Impossible de charger l'image");
-	board.posBoard.x = 370;
+	board.posBoard.x = 300;
 	board.posBoard.y = 100;
 	SDL_BlitSurface(board.boardSurface, NULL, interface.screenSurface, &board.posBoard);
 	
 		//Chargement des pions
 	board.pionBleu = IMG_Load("Images/button-blue22.png");
-	board.posPionBleu.x = 845;
-	board.posPionBleu.y = 150;
 	board.pionRouge = IMG_Load("Images/button-red22.png");
-	board.posPionRouge.x = 545;
-	board.posPionRouge.y = 290;
 	
 	
 	return board;
 }
+
 
 
 /********************************************** Fermeture de la SDL **********************************/
@@ -150,6 +157,32 @@ void Quit(s_Board board, s_Interface interface, s_Menu menu)
 
 
 
+/************************************ Choix de l'option du menu *************************************/
+
+int choixMenu (s_Coord clic, s_Menu menu)
+{
+	
+	if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 120 && clic.CoordY < 199)
+	{
+		return 0;
+	}
+	if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 200 && clic.CoordY < 279)
+	{
+		return 1;
+	}
+	if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 280 && clic.CoordY < 359)
+	{
+		return 2;
+	}
+	if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 360 && clic.CoordY < 439)
+	{
+		return 3;
+	}
+	
+	return -1;
+}
+
+
 /********************************* Programme principal et boucle des évènements *******************************/
 
 int main(int argc, char * argv[])
@@ -161,8 +194,8 @@ int main(int argc, char * argv[])
 	s_Board board;
 	
 	interface = Init();
-	menu = loadMenu(interface);
 	board = loadBoard(interface);
+	menu = loadMenu(interface);
 	
 	menu.mainMenu[0] = "Jouer";
 	menu.mainMenu[1] = "Charger";
@@ -173,8 +206,10 @@ int main(int argc, char * argv[])
 	menu.playMenu[2] = "    Humain vs IA2";
 	menu.playMenu[3] = "          Retour";
 	
+
 	
-    int quit = false;
+    bool quit = false;
+	int choix;
 	menu.actualMenu = menu.mainMenu;
     SDL_Event event;
 	
@@ -191,13 +226,23 @@ int main(int argc, char * argv[])
 			case SDL_MOUSEBUTTONDOWN: //On clique sur la souris
 				if (event.button.button == SDL_BUTTON_LEFT)
 				{
+					clic.CoordX = event.motion.x;
+					clic.CoordY = event.motion.y;
+					
+					if (clic.CoordX > 300 && clic.CoordY > 100 && clic.CoordY < 500)
+					{
+						board.posPionBleu.x = clic.CoordX;
+						board.posPionBleu.y = clic.CoordY;
+					}
+					
+					else
+					{
+					choix = choixMenu(clic, menu);
 				
 					if (menu.actualMenu == menu.mainMenu)
 					{
-						clic.CoordX = event.motion.x;
-						clic.CoordY = event.motion.y;
-						
-						if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 200 && clic.CoordY < 279) //1er bouton du menu
+						if (choix == 1)
+		
 						{
 							SDL_BlitSurface(menu.menuSurface,NULL,interface.screenSurface,&menu.posMenu);
 							menu.actualMenu = menu.playMenu;
@@ -211,11 +256,11 @@ int main(int argc, char * argv[])
 							}
 	
 						}
-						if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 280 && clic.CoordY < 359) //2e bouton du menu
+						if (choix == 2)
 						{
 							;
 						}
-						if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 360 && clic.CoordY < 439) //3e bouton du menu
+						if (choix == 3)
 						{
 							quit = true;
 						}
@@ -223,22 +268,19 @@ int main(int argc, char * argv[])
 					
 					else if (menu.actualMenu == menu.playMenu)
 					{
-						clic.CoordX = event.motion.x;
-						clic.CoordY = event.motion.y;
-						
-						if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 120 && clic.CoordY < 199)
+						if (choix == 0)
 						{
 							;
 						}
-						if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 200 && clic.CoordY < 279)
+						if (choix == 1)
 						{
 							;
 						}
-						if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 280 && clic.CoordY < 359)
+						if (choix == 2)
 						{
 							;
 						}
-						if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 360 && clic.CoordY < 439)
+						if (choix == 3)
 						{
 							SDL_BlitSurface(menu.menuSurface,NULL,interface.screenSurface,&menu.posMenu);
 							menu.actualMenu = menu.mainMenu;
@@ -256,6 +298,7 @@ int main(int argc, char * argv[])
 								menu.posText.y += MenuOptionHeight;
 							}
 						}
+					}
 					}
 				}
 				break;
@@ -280,50 +323,4 @@ int main(int argc, char * argv[])
 }
 
 
-
-
-
-/*
-int choixMenu ( Coord clic, char **actualMenu)
-{
-	if (actualMenu == mainMenu)
-	{
-		clic.CoordX = event.motion.x;
-		clic.CoordY = event.motion.y;
-		
-		if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 200 && clic.CoordY < 279) //1er bouton du menu
-		{
-			return
-		}
-		if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 280 && clic.CoordY < 359) //2e bouton du menu
-		{
-			;
-		}
-		if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 360 && clic.CoordY < 439) //3e bouton du menu
-		{
-			quit = true;
-		}
-	}
-	
-	else if (actualMenu == playMenu)
-	{
-		clic.CoordX = event.motion.x;
-		clic.CoordY = event.motion.y;
-		
-		if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 120 && clic.CoordY < 199)
-		{
-			;
-		}
-		if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 200 && clic.CoordY < 279)
-		{
-			;
-		}
-		if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 280 && clic.CoordY < 359)
-		{
-			;
-		}
-		if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 360 && clic.CoordY < 439)
-		{
-
-}*/
 

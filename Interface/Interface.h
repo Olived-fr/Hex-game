@@ -1,6 +1,6 @@
-/*
-Interface graphique du jeu HEX
-*/
+/**********************************/
+/* Interface graphique du jeu HEX */
+/**********************************/
 
 #ifndef interface_h
 #define interface_h
@@ -14,6 +14,7 @@ Interface graphique du jeu HEX
 #include <SDL2_image/SDL_image.h>
 #include <SDL2_ttf/SDL_ttf.h>
 
+/*************************************** Constantes de la SDL **************************/
 const int SCREEN_WIDTH = 1024;
 const int SCREEN_HEIGHT = 640;
 const int MenuOptionHeight = 80;
@@ -21,6 +22,8 @@ const int nbMenuChoice = 3;
 const int nbPlayMenuChoice = 4;
 const SDL_Color Black = {0,0,0};
 
+
+/******************************************Structures *************************************/
 typedef struct s_Interface s_Interface;
 struct s_Interface
 {
@@ -53,11 +56,13 @@ struct s_Board
 	SDL_Rect posPionBleu, posPionRouge, posBoard;
 };
 
-int choixMenu( s_Coord clic, char **actualMenu);
+
+/******************************************Prototypes ***************************************/
 s_Interface Init();
 s_Menu loadMenu(s_Interface interface);
 s_Board loadBoard(s_Interface interface);
 void Quit(s_Board, s_Interface, s_Menu);
+int choixMenu ( s_Coord clic, s_Menu menu);
 
 
 #endif
