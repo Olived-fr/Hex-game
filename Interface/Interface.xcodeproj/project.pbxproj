@@ -31,7 +31,7 @@
 		096FDBB31CA0123A005754F0 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
 		096FDBB41CA0123A005754F0 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		096FDBB81CA0124F005754F0 /* Interface.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Interface.c; sourceTree = SOURCE_ROOT; };
-		096FDBBA1CA0125B005754F0 /* interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interface.h; sourceTree = SOURCE_ROOT; };
+		096FDBBA1CA0125B005754F0 /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interface.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +70,7 @@
 		0950A5041C9FFF8900BF1207 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				096FDBBA1CA0125B005754F0 /* interface.h */,
+				096FDBBA1CA0125B005754F0 /* Interface.h */,
 				096FDBB81CA0124F005754F0 /* Interface.c */,
 			);
 			path = Interface;
