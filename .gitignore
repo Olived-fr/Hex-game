@@ -83,3 +83,17 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+Interface/Interface
+
+*.xcuserstate
+
+*.xcbkptlist
+
+*.xcscheme
+
+*.plist
+
+*.ttf
+
+*.png
