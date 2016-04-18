@@ -1,4 +1,4 @@
-#include "prototypes.h"
+#include "plateau.h"
 
 Plateau initialiser_plateau()
 {
@@ -12,6 +12,8 @@ Plateau initialiser_plateau()
 	{
 		for(y=0;y<COLONNE_MAX;y++)//et de toutes les colonnes
 		{
+			p[x][y].co.abscisse=x;
+			p[x][y].co.ordonnee=y;
 			p[x][y].coul=neutre;//initialisation de toutes les cases avec la couleur 'neutre'
 			switch(y)
 			{
@@ -90,4 +92,84 @@ Plateau initialiser_plateau()
 		}
 	}
 	return p;
+}
+
+Joueur changer_joueur(Joueur joueur_courant)
+{
+	if(joueur_courant==joueur1)
+		return joueur2;
+	else
+		return joueur1;
+}
+
+bool sont_voisines(Type_Case c1,Type_Case c2)
+{
+		bool abs_voisines=(c1.co.abscisse==c2.co.abscisse) || (c1.co.abscisse==c2.co.abscisse+1) || (c1.co.abscisse==c2.co.abscisse-1);
+		bool ord_voisines=(c1.co.ordonnee==c2.co.ordonnee) || (c1.co.ordonnee==c2.co.ordonnee+1) || (c1.co.ordonnee==c2.co.ordonnee-1);
+		return (abs_voisines && ord_voisines);
+}
+
+bool est_vide(Plateau p)
+{
+	int x=0;
+	int y=0;
+	while(x<LIGNE_MAX && p[x][y].coul==neutre)
+	{
+		y=0;
+		while(y<COLONNE_MAX && p[x][y].coul==neutre)
+			y++;
+		if(p[x][y].coul==neutre)x++;
+	}
+	return (p[x]);
+}
+
+bool dans_plateau(Coordonnees_tab c)
+{
+	bool abs_correcte=(0<=c.abscisse) && (c.abscisse<LIGNE_MAX);
+	bool ord_correcte=(0<=c.ordonnee) && (c.ordonnee<LIGNE_MAX);
+	return (abs_correcte && ord_correcte);
+}
+
+int nb_voisin(Coordonnees_tab coor,Type_Case c)
+{
+	int nb_voisins=0;
+	if(c.NE!=NULL)
+		if(c.NE->coul==c.coul)
+			nb_voisins++;
+	if(c.NO!=NULL)
+		if(c.NO->coul==c.coul)
+			nb_voisins++;
+	if(c.E!=NULL)
+		if(c.E->coul==c.coul)
+			nb_voisins++;
+	if(c.O!=NULL)
+		if(c.O->coul==c.coul)
+			nb_voisins++;
+	if(c.SE!=NULL)
+		if(c.NE->coul==c.coul)
+			nb_voisins++;
+	if(c.SO!=NULL)
+		if(c.NE->coul==c.coul)
+			nb_voisins++;
+	return nb_voisins;
+}
+
+Couleur couleur_joueur(Joueur j)
+{
+	if(j==joueur1)
+		return rouge;
+	else
+		return bleu;
+}
+
+Plateau choix_coup(Plateau p,Coup c)
+{
+	if(coup_valide(p,c.coord))
+		p[c.coord.abscisse][c.coord.ordonnee].coul=c.couleur;
+	return p;
+}
+
+bool coup_valide(Plateau p,Coordonnees_tab c)
+{
+	return dans_plateau(c) && p[c.abscisse][c.ordonnee].coul==neutre;
 }
