@@ -5,3 +5,4 @@
 
 bool verif_file(char *name);
 void creation_config();
+void board_save(char Nom[]);
