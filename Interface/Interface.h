@@ -13,13 +13,17 @@
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
 #include <SDL2_ttf/SDL_ttf.h>
+#include "../Structure/plateau.h"
+	//#include "../Regles/regles.h"
+	//#include "../Persistance/persistance.h"
 
 /*************************************** Constantes de la SDL **************************/
-const int SCREEN_WIDTH = 1024;
-const int SCREEN_HEIGHT = 640;
-const int MenuOptionHeight = 80;
-const int nbMenuChoice = 3;
-const int nbPlayMenuChoice = 4;
+#define nbMenuChoice 4
+#define nbPlayMenuChoice 4
+#define nbinGameMenuChoice 4
+#define MenuOptionHeight 80
+const int SCREEN_WIDTH = 1120;
+const int SCREEN_HEIGHT = 720;
 const SDL_Color Black = {0,0,0};
 
 
@@ -31,7 +35,7 @@ struct s_Interface
 	SDL_Surface *screenSurface;
 };
 
-typedef struct s_Coord s_Coord;
+typedef struct s_Coord Coord_SDL;
 struct s_Coord
 {
 	int CoordX;
@@ -44,6 +48,7 @@ struct s_Menu
 	char **actualMenu;
 	char *mainMenu[nbMenuChoice];
 	char *playMenu[nbPlayMenuChoice];
+	char *inGameMenu[nbinGameMenuChoice];
 	SDL_Rect posMenu, posText, posCopyright;
 	SDL_Surface *menuSurface, *menuText, *copyrightSurface, *copyrightText;
 	TTF_Font *fontMenu;
@@ -62,7 +67,10 @@ s_Interface Init();
 s_Menu loadMenu(s_Interface interface);
 s_Board loadBoard(s_Interface interface);
 void Quit(s_Board, s_Interface, s_Menu);
-int choixMenu ( s_Coord clic, s_Menu menu);
-
+int choixMenu ( Coord_SDL clic, s_Menu menu);
+Coord_SDL pos_pion_SDL (Coordonnees_tab coord_tab, s_Board board);
+Coordonnees_tab pos_pion_tab (Coord_SDL coord, s_Board board);
+bool clic_on_board (Coord_SDL coord, s_Board board);
+void MaJ_Menu (s_Menu menu, s_Interface interface, int nbChoice);
 
 #endif
