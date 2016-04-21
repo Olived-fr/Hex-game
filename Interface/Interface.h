@@ -14,7 +14,7 @@
 #include <SDL2_image/SDL_image.h>
 #include <SDL2_ttf/SDL_ttf.h>
 #include "../Structure/plateau.h"
-	//#include "../Regles/regles.h"
+#include "../Regles/regles.h"
 	//#include "../Persistance/persistance.h"
 
 /*************************************** Constantes de la SDL **************************/

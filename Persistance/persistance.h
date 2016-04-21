@@ -1,3 +1,6 @@
+#ifndef persistance_h
+#define persistance_h
+
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
@@ -7,3 +10,5 @@ bool verif_file(char *name);
 void creation_config();
 void board_save();
 void historique(bool b);
+
+#endif

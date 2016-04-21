@@ -1,3 +1,6 @@
+#ifndef plateau_h
+#define plateau_h
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
@@ -63,30 +66,7 @@ bool sont_voisines(Type_Case,Type_Case); // renvoie true si c1 et c2 sont des ca
 int nb_voisin(Coordonnees_tab coor,Type_Case c);//renvoie le nombre de voisin de la case de Coordonnees coor qui ont la couleur c
 /* Cette fonction sera utile lors de la determination du vainqueur */
 
-/*----------------------------------*/
 
-/* TOUR DE JEU */
 
-Joueur changer_joueur(Joueur joueur_courant); //renvoie "joueur1" si joueur_courant==joueur2 et renvoie "joueur2" si joueur_courant==joueur1
-Couleur couleur_joueur(Joueur j);//renvoie "bleu" si j est égal à "joueur1" et "rouge si j est égal à "joueur2"
 
-/*----------------------------------*/
-
-/* VERIFICATION DE LA VALIDITE D'UN COUP */
-
-Plateau choix_coup(Plateau p,Coup c);/* Mets à jour un tableau en fonction d'un coup c après avoir vérifie la validité de ce dernier*/
-bool coup_valide(Plateau p,Coordonnees_tab c); // renvoie true si la case de coordonnees c est libre et est dans le plateau
-
-/*----------------------------------*/
-
-/* IA1 */
-
-void partie_IA1(); //Lance une partie humain vs IA1
-
-/*----------------------------------*/
-
-/* IA2 */
-
-void partie_IA2(); //Lance une partie humain vs IA1
-
-/*----------------------------------*/
+#endif

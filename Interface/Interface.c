@@ -80,7 +80,7 @@ s_Menu loadMenu (s_Interface interface)
 	}
 
 		//Surface du menu principal
-	menu.menuSurface = IMG_Load("Images/Menu1.png");
+	menu.menuSurface = IMG_Load("Images/Menu.png");
 	menu.posMenu.x = 5;
 	menu.posMenu.y = 200;
 	SDL_BlitSurface(menu.menuSurface,NULL,interface.screenSurface,&menu.posMenu);
@@ -134,13 +134,13 @@ s_Board loadBoard (s_Interface interface)
 	s_Board board;
 
 		//Chargement et position de l'image du plateau
-	board.boardSurface = IMG_Load("Images/hex.png");
+	board.boardSurface = IMG_Load("Images/hexBoard.png");
 	board.posBoard.x = 300;
 	board.posBoard.y = 120;
 
 		//Chargement des pions
-	board.pionBleu = IMG_Load("Images/HexBlue1.png");
-	board.pionRouge = IMG_Load("Images/HexRed1.png");
+	board.pionBleu = IMG_Load("Images/HexBlue.png");
+	board.pionRouge = IMG_Load("Images/HexRed.png");
 
 	if (board.boardSurface == NULL || board.pionBleu == NULL || board.pionRouge == NULL)
 	{
@@ -211,51 +211,18 @@ Coord_SDL pos_pion_SDL (Coordonnees_tab coord_tab, s_Board board)
 {
 	Coord_SDL coord;
 
-	coord.CoordX = coord_tab.abscisse * 29 + coord_tab.abscisse + 1 + board.posBoard.x + 18 + (15 * coord_tab.ordonnee);
-	coord.CoordY = coord_tab.ordonnee * 31 + coord_tab.ordonnee + 1 + board.posBoard.y + 18 - (7 * coord_tab.ordonnee);
-	
+	coord.CoordX = coord_tab.abscisse * 44 + coord_tab.abscisse + coord_tab.ordonnee * 23 + board.posBoard.x + 6;
+	coord.CoordY = coord_tab.ordonnee * 50 + coord_tab.ordonnee - coord_tab.ordonnee * 12 + board.posBoard.y + 10;
 	return coord;
 }
 
-/*
-Coordonnees_tab pos_pion_tab (Coord_SDL coord, s_Board board)
-{
-	Coordonnees_tab coord_tab;
-	
-	int sectX = coord.CoordX - board.posBoard.x ;
-	int sectY = coord.CoordY - board.posBoard.y ;
-	
-	if (sectY < 0 || sectX < 0)
-	{
-		coord_tab.abscisse = -1;
-		coord_tab.ordonnee = -1;
-	}
-	else
-	{
- 
-		coord_tab.ordonnee = (sectY / 40);
-	
-		if (coord_tab.ordonnee % 2 == 0)
-			coord_tab.abscisse = (sectX / 45);
-		else
-			coord_tab.abscisse =  ((sectX -15) / 45) ;
-		coord_tab.abscisse-= (coord_tab.ordonnee/2);
-	}
-		coord_tab.abscisse = sectX / 45 ;
-	coord_tab.ordonnee = sectY / 40;
 
-
-		coord_tab.abscisse = sectX/45 + coord_tab.ordonnee/2;
-	}
-	return coord_tab;
-}
-*/
 Coordonnees_tab pos_pion_tab (Coord_SDL co, s_Board board)
 {
 	Coordonnees_tab c;
-	int relX = co.CoordX - board.posBoard.x - 19;
-	int relY = co.CoordY - board.posBoard.y - 19;
-	if (relY < 0 || relX < 0)
+	int sectX = co.CoordX - board.posBoard.x-6;
+	int sectY = co.CoordY - board.posBoard.y-10;
+	if (sectY < 0 || sectX < 0)
 	{
 		c.abscisse = -1;
 		c.ordonnee = -1;
@@ -267,48 +234,46 @@ Coordonnees_tab pos_pion_tab (Coord_SDL co, s_Board board)
 	c.abscisse = 0;
 	c.ordonnee = 0;
 	
-	while ((y + 50 < relY || x + 44 < relX) && c.ordonnee != 11 )
+	while ((y + 50 < sectY || x + 44 < sectX) && c.ordonnee != 11 )
 	{
 		c.abscisse += 1;
-		x += 30;
+		x += 45;
 		if (c.abscisse == 11)
 		{
 			c.abscisse = 0;
 			c.ordonnee += 1;
-			y += 25;
-			x = c.ordonnee * 15;
+			y += 40;
+			x = c.ordonnee * 23;
 		}
 	}
 	if (c.ordonnee != 11)
 	{
 		int i,j;
-		i = relX - x;
-		j = relY - y;
+		i = sectX - x;
+		j = sectY - y;
 		if (i < 0 || j < 0)
 		{
 			c.abscisse = -1;
 			c.ordonnee = -1;
 			return c;
 		}
-		if (j > 24)
+		if (j > 37)
 		{
-			if (i < 15)
+			if (i < 23)
 			{
-				if (j > (((i+1)/2) + 24))
+				if (j > (((i+1)/2) + 37))
 				{
 					c.abscisse -= 1;
 					c.ordonnee += 1;
 				}
-			} else if (i > 15)
+			} else if (i > 23)
 			{
 				if (j > ((-(i+1)/2) + 39))
 					c.ordonnee += 1;
 			}
 		}
 	}
-	
 
-	
 	return c;
 }
 
@@ -321,7 +286,13 @@ bool clic_on_board (Coord_SDL coord, s_Board board)
 	return (coord_tab.abscisse >= 0 && coord_tab.abscisse < 11 && coord_tab.ordonnee >= 0 && coord_tab.ordonnee < 11);
 }
 
-
+Joueur changer_joueur(Joueur joueur_courant)
+{
+	if (joueur_courant==joueur1)
+		return joueur2;
+	else
+		return joueur1;
+}
 
 /********************************* Programme principal et boucle des évènements *******************************/
 
@@ -438,18 +409,25 @@ int main (int argc, char * argv[])
 						
 						if (clic_on_board(clic,board))
 						{
-						printf("%d %d\n",clic.CoordX,clic.CoordY);
+							printf("%d %d\n",clic.CoordX,clic.CoordY);
 							coord_tab = pos_pion_tab(clic, board);
 							clic = pos_pion_SDL(coord_tab, board);
-						board.posPionRouge.x = clic.CoordX;
-						board.posPionRouge.y = clic.CoordY;
 							printf("%d %d\n", coord_tab.abscisse, coord_tab.ordonnee);
-						printf("%d %d\n", clic.CoordX, clic.CoordY);
+							printf("%d %d\n\n", clic.CoordX, clic.CoordY);
 							if (joueur_courant == joueur1)
-							SDL_BlitSurface(board.pionBleu,NULL,interface.screenSurface,&board.posPionBleu);
+							{
+								board.posPionBleu.x = clic.CoordX;
+								board.posPionBleu.y = clic.CoordY;
+								SDL_BlitSurface(board.pionBleu,NULL,interface.screenSurface,&board.posPionBleu);
+							}
 							else
-							SDL_BlitSurface(board.pionRouge,NULL,interface.screenSurface,&board.posPionRouge);
-							changer_joueur(joueur_courant);
+							{
+								board.posPionRouge.x = clic.CoordX;
+								board.posPionRouge.y = clic.CoordY;
+								SDL_BlitSurface(board.pionRouge,NULL,interface.screenSurface,&board.posPionRouge);
+							}
+							
+							joueur_courant = changer_joueur(joueur_courant);
 						}
 					}
 					
