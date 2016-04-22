@@ -15,16 +15,13 @@
 #include <SDL2_ttf/SDL_ttf.h>
 #include "../Structure/plateau.h"
 #include "../Regles/regles.h"
-	//#include "../Persistance/persistance.h"
 
 /*************************************** Constantes de la SDL **************************/
 #define nbMenuChoice 4
 #define nbPlayMenuChoice 4
 #define nbinGameMenuChoice 4
 #define MenuOptionHeight 80
-const int SCREEN_WIDTH = 1120;
-const int SCREEN_HEIGHT = 720;
-const SDL_Color Black = {0,0,0};
+
 
 
 /******************************************Structures *************************************/
