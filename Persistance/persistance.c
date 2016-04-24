@@ -76,7 +76,7 @@ void board_save(Plateau p)
 	fclose(fichier);
 }
 
-void historique(bool b, Coordonnees cor)
+void historique(bool b, Coordonnees_tab cor)
 {
 	if(!verif_file("config.txt"))
 	{
