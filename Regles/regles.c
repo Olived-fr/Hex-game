@@ -153,12 +153,6 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 	}
 }
 
-int main()
-{
-
-    return 0;
-}
-
 Joueur changer_joueur(Joueur joueur_courant) 
 {
 	if (joueur_courant==joueur1)
@@ -176,8 +170,6 @@ Couleur couleur_joueur(Joueur j)
 		return bleu;
 }
 
-
-
 Plateau choix_coup(Plateau p,Coup c)
 {
 	if(coup_valide(p,c.coord))
@@ -188,5 +180,11 @@ Plateau choix_coup(Plateau p,Coup c)
 bool coup_valide(Plateau p,Coordonnees_tab c)
 {
 	return dans_plateau(c) && p[c.abscisse][c.ordonnee].coul==neutre;
+}
+
+int main()
+{
+
+    return 0;
 }
 
