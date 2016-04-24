@@ -55,7 +55,10 @@ bool bord_oppose(Type_Case deb, Type_Case comp)
 	{
 		return (comp.NO==NULL && comp.NE==NULL);
 	}
-
+	else
+	{
+		return false;
+	}
 }
 
 bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
