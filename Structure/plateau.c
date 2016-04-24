@@ -1,12 +1,8 @@
 #include "plateau.h"
 
-Plateau initialiser_plateau()
+void initialiser_plateau(Plateau p)
 {
 	int i;
-	Plateau p;
-	p=malloc(LIGNE_MAX*sizeof(Type_Case));
-	for(i=0;i<LIGNE_MAX;i++)
-		p[i]=malloc(COLONNE_MAX*sizeof(Type_Case));
 	int x,y;
 	for(x=0;x<LIGNE_MAX;x++)//parcourt de toutes les lignes
 	{
@@ -122,30 +118,6 @@ bool dans_plateau(Coordonnees_tab c)
 	bool abs_correcte=(0<=c.abscisse) && (c.abscisse<LIGNE_MAX);
 	bool ord_correcte=(0<=c.ordonnee) && (c.ordonnee<LIGNE_MAX);
 	return (abs_correcte && ord_correcte);
-}
-
-int nb_voisin(Coordonnees_tab coor,Type_Case c)
-{
-	int nb_voisins=0;
-	if(c.NE!=NULL)
-		if(c.NE->coul==c.coul)
-			nb_voisins++;
-	if(c.NO!=NULL)
-		if(c.NO->coul==c.coul)
-			nb_voisins++;
-	if(c.E!=NULL)
-		if(c.E->coul==c.coul)
-			nb_voisins++;
-	if(c.O!=NULL)
-		if(c.O->coul==c.coul)
-			nb_voisins++;
-	if(c.SE!=NULL)
-		if(c.NE->coul==c.coul)
-			nb_voisins++;
-	if(c.SO!=NULL)
-		if(c.NE->coul==c.coul)
-			nb_voisins++;
-	return nb_voisins;
 }
 
 

@@ -8,7 +8,7 @@ bool premier_joueur(Joueur choix_premier)
 Plateau nouvelle_partie()
 {
 	Plateau p;
-	p=initialiser_plateau();
+	initialiser_plateau(p);
 	creation_config();
 
 	return p;
@@ -154,37 +154,26 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 	}
 }
 
-Joueur changer_joueur(Joueur joueur_courant) 
+Couleur changer_joueur(Couleur couleur_courante) 
 {
-	if (joueur_courant==joueur1)
-		return joueur2;
-	else
-		return joueur1;
-}
-
-
-Couleur couleur_joueur(Joueur j)
-{
-	if(j==joueur1)
+	if (couleur_courante==joueur1)
 		return rouge;
 	else
 		return bleu;
 }
 
-Plateau choix_coup(Plateau p,Coup c)
+int choix_coup(Plateau p,Coordonnees_tab c,Couleur couleur_courante)
 {
-	if(coup_valide(p,c.coord))
-		p[c.coord.abscisse][c.coord.ordonnee].coul=c.couleur;
-	return p;
+	if(coup_valide(p,c))
+	{
+		p[c.abscisse][c.ordonnee].coul=couleur_courante;
+		return 0;
+	}
+	else 
+		return -1;
 }
 
 bool coup_valide(Plateau p,Coordonnees_tab c)
 {
 	return dans_plateau(c) && p[c.abscisse][c.ordonnee].coul==neutre;
-}
-
-int main()
-{
-
-    return 0;
 }
