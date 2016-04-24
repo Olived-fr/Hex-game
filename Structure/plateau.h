@@ -46,7 +46,7 @@ struct Type_Case
 typedef Type_Case** Plateau/*[LIGNE_MAX][COLONNE_MAX]*/; //Le plateau est un tableau à deux dimensions de cases
 
 /*NOTE : les coordonnées du plateau sont [0-10][0-10], pour toute
- * interaction avec l'utilisateur ne pas oublier que ce dernier écrit et lit des intervalles [1-11][1-11]*/
+ * interaction avec l'utilisateur ne pas oublier que ce dernier écrit et lit de sintervalles [1-11][1-11]*/
  
 typedef struct Coup Coup;
 
