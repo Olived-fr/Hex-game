@@ -70,68 +70,68 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 		switch (i)
 		{
 			case 0:
-				if(cur.SE==prev || cur.SE->coul!=cur.coul || cur.SE==NULL)
+				if(cur.SE==&prev || cur.SE->coul!=cur.coul || cur.SE==NULL)
 				{
 					i++;
 				}
 				else
 				{
-					fin_verify=verify_win(cur.SE,cur,deb);
+					fin_verify=verify_win(*cur.SE,cur,deb);
 				}
 			break;
 
 			case 1:
-				if(cur.SO==prev || cur.SO->coul!=cur.coul || cur.SO==NULL)
+				if(cur.SO==&prev || cur.SO->coul!=cur.coul || cur.SO==NULL)
 				{
 					i++;
 				}
 				else
 				{
-					fin_verify=verify_win(cur.SO,cur,deb);
+					fin_verify=verify_win(*cur.SO,cur,deb);
 				}
 			break;
 
 			case 2:
-				if(cur.O==prev || cur.O->coul!=cur.coul || cur.O==NULL)
+				if(cur.O==&prev || cur.O->coul!=cur.coul || cur.O==NULL)
 				{
 					i++;
 				}
 				else
 				{
-					fin_verify=verify_win(cur.O,cur,deb);
+					fin_verify=verify_win(*cur.O,cur,deb);
 				}
 			break;
 
 			case 3:
-				if(cur.NO==prev || cur.NO->coul!=cur.coul || cur.NO==NULL)
+				if(cur.NO==&prev || cur.NO->coul!=cur.coul || cur.NO==NULL)
 				{
 					i++;
 				}
 				else
 				{
-					fin_verify=verify_win(cur.NO,cur,deb);
+					fin_verify=verify_win(*cur.NO,cur,deb);
 				}
 			break;
 
 			case 4:
-				if(cur.NE==prev || cur.NE->coul!=cur.coul || cur.NE==NULL)
+				if(cur.NE==&prev || cur.NE->coul!=cur.coul || cur.NE==NULL)
 				{
 					i++;
 				}
 				else
 				{
-					fin_verify=verify_win(cur.NE,cur,deb);
+					fin_verify=verify_win(*cur.NE,cur,deb);
 				}
 			break;
 
 			default:
-				if(cur.E==prev || cur.E->coul!=cur.coul || cur.E==NULL)
+				if(cur.E==&prev || cur.E->coul!=cur.coul || cur.E==NULL)
 				{
 					i++;
 				}
 				else
 				{
-					fin_verify=verify_win(cur.E,cur,deb);
+					fin_verify=verify_win(*cur.E,cur,deb);
 				}
 			break;
 		}
@@ -156,9 +156,6 @@ Couleur changer_joueur(Couleur couleur_courante)
 	else
 		return bleu;
 }
-
-
-
 
 int choix_coup(Plateau p,Coordonnees_tab c,Couleur couleur_courante)
 {

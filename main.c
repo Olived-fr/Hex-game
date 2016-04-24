@@ -158,5 +158,5 @@ int main (int argc, char * argv[])
 		SDL_UpdateWindowSurface(interface.window);
 	}
 	
-	return 0;
+	return 0
 }
