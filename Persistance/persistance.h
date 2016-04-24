@@ -8,7 +8,7 @@
 
 bool verif_file(char *name);
 void creation_config();
-void board_save();
-void historique(bool b);
+void board_save(Plateau p);
+void historique(bool b, Coordonnees cor);
 
 #endif

@@ -22,7 +22,7 @@ void creation_config()
 	fclose(fichier);
 }
 
-void board_save()
+void board_save(Plateau p)
 /* Fonction de sauvegarde de tout le plateau, on l'écrit dans le fichier config entre les repères : /board /endboard */
 {
 	if(!verif_file("config.txt"))
@@ -76,7 +76,7 @@ void board_save()
 	fclose(fichier);
 }
 
-void historique(bool b)
+void historique(bool b, Coordonnees cor)
 {
 	if(!verif_file("config.txt"))
 	{
@@ -101,8 +101,8 @@ void historique(bool b)
 
 		fprintf(fichier,"\\game\n\n");
 
-		/* On écrit les coordonnées du premier coup placé dans le fichier 
-		fprintf(fichier,"\\play %d %d\n",abscisses,ordonnées); */
+		/* On écrit les coordonnées du premier coup placé dans le fichier */
+		fprintf(fichier,"\\play %d %d\n",cor.abscisse,cor.ordonnee);
 
 		// ceci est un test : fprintf(fichier,"\\play R 1 3\n");
 
@@ -122,8 +122,8 @@ void historique(bool b)
 
 		// ceci est un test : fprintf(fichier,"\\play B 2 2\n");
 
-		/* On écrit les coordonnées du dernier coup placé dans le fichier 
-		fprintf(fichier,"\\play %d %d\n",abscisses,ordonnées); */
+		/* On écrit les coordonnées du dernier coup placé dans le fichier */
+		fprintf(fichier,"\\play %d %d\n",cor.abscisse,cor.ordonnee);
 
 		/* Comme l'écriture dans le fichier écrase les anciennes données, on ré-écrit \endgame et \endhex */
 		fprintf(fichier,"\n\\endgame\n");
