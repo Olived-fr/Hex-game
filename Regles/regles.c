@@ -81,7 +81,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 				}
 				else
 				{
-					verify_win(cur.SE,cur);
+					verify_win(cur.SE,cur,deb);
 				}
 			break;
 
@@ -92,7 +92,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 				}
 				else
 				{
-					verify_win(cur.SO,cur);
+					verify_win(cur.SO,cur,deb);
 				}
 			break;
 
@@ -103,7 +103,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 				}
 				else
 				{
-					verify_win(cur.O,cur);
+					verify_win(cur.O,cur,deb);
 				}
 			break;
 
@@ -114,7 +114,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 				}
 				else
 				{
-					verify_win(cur.NO,cur);
+					verify_win(cur.NO,cur,deb);
 				}
 			break;
 
@@ -125,7 +125,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 				}
 				else
 				{
-					verify_win(cur.NE,cur);
+					verify_win(cur.NE,cur,deb);
 				}
 			break;
 
@@ -136,7 +136,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 				}
 				else
 				{
-					verify_win(cur.E,cur);
+					verify_win(cur.E,cur,deb);
 				}
 			break;
 		}
