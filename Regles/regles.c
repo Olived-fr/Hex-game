@@ -189,7 +189,7 @@ bool coup_valide(Plateau p,Coordonnees_tab c)
 {
 	return dans_plateau(c) && p[c.abscisse][c.ordonnee].coul==neutre;
 }
-<<<<<<< Updated upstream
+
 
 
 Joueur changer_joueur(Joueur joueur_courant) 
@@ -222,6 +222,4 @@ bool coup_valide(Plateau p,Coordonnees_tab c)
 {
 	return dans_plateau(c) && p[c.abscisse][c.ordonnee].coul==neutre;
 }
-=======
->>>>>>> origin/master
->>>>>>> Stashed changes
+
