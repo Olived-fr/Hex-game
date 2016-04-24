@@ -153,13 +153,11 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 	}
 }
 
-<<<<<<< HEAD
 int main()
 {
 
     return 0;
 }
-=======
 
 Joueur changer_joueur(Joueur joueur_courant) 
 {
