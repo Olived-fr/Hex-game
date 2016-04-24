@@ -68,20 +68,21 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 /* Vérification de la victoire d'un des deux joueurs */
 {
 	int i=0;
+	bool fin_verify=false;
 
-	while(!bord_oppose(deb,cur) && i!=6)
+	while(!bord_oppose(deb,cur) && i!=6 && !fin_verify)
 	/* On continue tant que tous les voisins n'ont pas été checkés et tant que le bord opposé n'a pas été trouvé */
 	{
 		switch (i)
 		{
 			case 0:
-				else if(cur.SE==prev || cur.SE->coul!=cur.coul || cur.SE==NULL)
+				if(cur.SE==prev || cur.SE->coul!=cur.coul || cur.SE==NULL)
 				{
 					i++;
 				}
 				else
 				{
-					verify_win(cur.SE,cur,deb);
+					fin_verify=verify_win(cur.SE,cur,deb);
 				}
 			break;
 
@@ -92,7 +93,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 				}
 				else
 				{
-					verify_win(cur.SO,cur,deb);
+					fin_verify=verify_win(cur.SO,cur,deb);
 				}
 			break;
 
@@ -103,7 +104,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 				}
 				else
 				{
-					verify_win(cur.O,cur,deb);
+					fin_verify=verify_win(cur.O,cur,deb);
 				}
 			break;
 
@@ -114,7 +115,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 				}
 				else
 				{
-					verify_win(cur.NO,cur,deb);
+					fin_verify=verify_win(cur.NO,cur,deb);
 				}
 			break;
 
@@ -125,7 +126,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 				}
 				else
 				{
-					verify_win(cur.NE,cur,deb);
+					fin_verify=verify_win(cur.NE,cur,deb);
 				}
 			break;
 
@@ -136,7 +137,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 				}
 				else
 				{
-					verify_win(cur.E,cur,deb);
+					fin_verify=verify_win(cur.E,cur,deb);
 				}
 			break;
 		}
