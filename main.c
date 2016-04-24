@@ -1,7 +1,7 @@
 /********************************************** Jeu HEX ***********************************/
-#include "Interface.h"
-#include "../Structure/plateau.h"
-#include "../Regles/regles.h"
+#include "./Interface/Interface.h"
+#include "./Structure/plateau.h"
+#include "./Regles/regles.h"
 
 
 int main (int argc, char * argv[])
@@ -31,6 +31,7 @@ int main (int argc, char * argv[])
 	menu.inGameMenu[2] = "Historique";
 	menu.inGameMenu[3] = "Quitter";
 	
+	Plateau board_tab;
 	Coordonnees_tab coord_tab;
 	bool quit = false;
 	int choix;
@@ -100,7 +101,7 @@ int main (int argc, char * argv[])
 					{
 						if (choix == 0)
 						{
-								//nouvelle_partie();
+							board_tab = nouvelle_partie();
 						}
 						if (choix == 1)
 						{
@@ -114,14 +115,12 @@ int main (int argc, char * argv[])
 						{
 							quit = true;
 						}
-						
-						if (clic_on_board(clic,board))
+						coord_tab = pos_pion_tab(clic, board);
+						if (dans_plateau(coord_tab))
 						{
-							printf("%d %d\n",clic.CoordX,clic.CoordY);
-							coord_tab = pos_pion_tab(clic, board);
+							
+								//board_tab = choix_coup(board_tab, coord_tab);
 							clic = pos_pion_SDL(coord_tab, board);
-							printf("%d %d\n", coord_tab.abscisse, coord_tab.ordonnee);
-							printf("%d %d\n\n", clic.CoordX, clic.CoordY);
 							if (joueur_courant == joueur1)
 							{
 								board.posPionBleu.x = clic.CoordX;
@@ -136,6 +135,7 @@ int main (int argc, char * argv[])
 							}
 							
 							joueur_courant = changer_joueur(joueur_courant);
+							
 						}
 					}
 					

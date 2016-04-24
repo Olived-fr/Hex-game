@@ -5,8 +5,13 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+<<<<<<< Updated upstream
 #include "../Structure/plateau.h"
 #include "../Persistance/persistance.h"
+=======
+#include "./Structure/plateau.h"
+#include "./Persistance/persistance.h"
+>>>>>>> Stashed changes
 
 bool premier_joueur();
 Plateau nouvelle_partie();

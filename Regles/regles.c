@@ -182,9 +182,32 @@ bool coup_valide(Plateau p,Coordonnees_tab c)
 	return dans_plateau(c) && p[c.abscisse][c.ordonnee].coul==neutre;
 }
 
+<<<<<<< Updated upstream
 int main()
 {
 
     return 0;
 }
 
+=======
+
+
+Joueur changer_joueur(Joueur joueur_courant) 
+{
+	if (joueur_courant==joueur1)
+		return joueur2;
+	else
+		return joueur1;
+}
+
+
+Couleur couleur_joueur(Joueur j)
+{
+	if(j==joueur1)
+		return rouge;
+	else
+		return bleu;
+}
+
+
+>>>>>>> Stashed changes

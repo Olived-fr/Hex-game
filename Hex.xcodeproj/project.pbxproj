@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		094EAE031CCA8AE5006E796E /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 094EAE021CCA8AE5006E796E /* main.c */; };
-		094EAE041CCA8C65006E796E /* Interface.c in Sources */ = {isa = PBXBuildFile; fileRef = 096FDBB81CA0124F005754F0 /* Interface.c */; };
+		0922C3301CCD25EC00375706 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 0922C32F1CCD25EC00375706 /* main.c */; };
 		096FDBB51CA0123A005754F0 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096FDBB21CA0123A005754F0 /* SDL2_image.framework */; };
 		096FDBB61CA0123A005754F0 /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096FDBB31CA0123A005754F0 /* SDL2_ttf.framework */; };
 		096FDBB71CA0123A005754F0 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096FDBB41CA0123A005754F0 /* SDL2.framework */; };
@@ -27,13 +26,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		094EAE021CCA8AE5006E796E /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = SOURCE_ROOT; };
-		0950A5021C9FFF8900BF1207 /* Interface */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Interface; sourceTree = BUILT_PRODUCTS_DIR; };
+		0922C32F1CCD25EC00375706 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		0950A5021C9FFF8900BF1207 /* Hex */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Hex; sourceTree = BUILT_PRODUCTS_DIR; };
 		096FDBB21CA0123A005754F0 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 		096FDBB31CA0123A005754F0 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
 		096FDBB41CA0123A005754F0 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
-		096FDBB81CA0124F005754F0 /* Interface.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Interface.c; sourceTree = SOURCE_ROOT; };
-		096FDBBA1CA0125B005754F0 /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interface.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +50,7 @@
 		0950A4F91C9FFF8900BF1207 = {
 			isa = PBXGroup;
 			children = (
+				0922C32F1CCD25EC00375706 /* main.c */,
 				096FDBB21CA0123A005754F0 /* SDL2_image.framework */,
 				096FDBB31CA0123A005754F0 /* SDL2_ttf.framework */,
 				096FDBB41CA0123A005754F0 /* SDL2.framework */,
@@ -64,7 +62,7 @@
 		0950A5031C9FFF8900BF1207 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0950A5021C9FFF8900BF1207 /* Interface */,
+				0950A5021C9FFF8900BF1207 /* Hex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,9 +70,6 @@
 		0950A5041C9FFF8900BF1207 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				096FDBBA1CA0125B005754F0 /* Interface.h */,
-				096FDBB81CA0124F005754F0 /* Interface.c */,
-				094EAE021CCA8AE5006E796E /* main.c */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -82,9 +77,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0950A5011C9FFF8900BF1207 /* Interface */ = {
+		0950A5011C9FFF8900BF1207 /* Hex */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0950A5091C9FFF8900BF1207 /* Build configuration list for PBXNativeTarget "Interface" */;
+			buildConfigurationList = 0950A5091C9FFF8900BF1207 /* Build configuration list for PBXNativeTarget "Hex" */;
 			buildPhases = (
 				0950A4FE1C9FFF8900BF1207 /* Sources */,
 				0950A4FF1C9FFF8900BF1207 /* Frameworks */,
@@ -94,9 +89,9 @@
 			);
 			dependencies = (
 			);
-			name = Interface;
+			name = Hex;
 			productName = Interface;
-			productReference = 0950A5021C9FFF8900BF1207 /* Interface */;
+			productReference = 0950A5021C9FFF8900BF1207 /* Hex */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -112,7 +107,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0950A4FD1C9FFF8900BF1207 /* Build configuration list for PBXProject "Interface" */;
+			buildConfigurationList = 0950A4FD1C9FFF8900BF1207 /* Build configuration list for PBXProject "Hex" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -124,7 +119,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0950A5011C9FFF8900BF1207 /* Interface */,
+				0950A5011C9FFF8900BF1207 /* Hex */,
 			);
 		};
 /* End PBXProject section */
@@ -134,8 +129,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				094EAE041CCA8C65006E796E /* Interface.c in Sources */,
-				094EAE031CCA8AE5006E796E /* main.c in Sources */,
+				0922C3301CCD25EC00375706 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,7 +222,7 @@
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Hex;
 			};
 			name = Debug;
 		};
@@ -239,14 +233,14 @@
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Hex;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0950A4FD1C9FFF8900BF1207 /* Build configuration list for PBXProject "Interface" */ = {
+		0950A4FD1C9FFF8900BF1207 /* Build configuration list for PBXProject "Hex" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0950A5071C9FFF8900BF1207 /* Debug */,
@@ -255,7 +249,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0950A5091C9FFF8900BF1207 /* Build configuration list for PBXNativeTarget "Interface" */ = {
+		0950A5091C9FFF8900BF1207 /* Build configuration list for PBXNativeTarget "Hex" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0950A50A1C9FFF8900BF1207 /* Debug */,
