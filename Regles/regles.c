@@ -1,17 +1,11 @@
 #include "regles.h"
 
-bool premier_joueur(Joueur choix_premier)
-{
-	return choix_premier==joueur1;
-}
 
-Plateau nouvelle_partie()
+
+void nouvelle_partie(Plateau p)
 {
-	Plateau p;
 	initialiser_plateau(p);
 	creation_config();
-
-	return p;
 }
 
 bool bord(Type_Case c)
@@ -19,7 +13,7 @@ bool bord(Type_Case c)
 {
 	bool b=false;
 
-	if(c.coul=bleu)
+	if(c.coul==bleu)
 	/* Si la case est bleu alors si c'est un bord ses voisins NORD-OUEST et NORD-EST OU ses voisins SUD-OUEST et SUD-EST seront égal à NULL */
 	{
 		if((c.NO==NULL && c.NE==NULL) || (c.SO==NULL && c.SE==NULL))
@@ -154,13 +148,17 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 	}
 }
 
+
 Couleur changer_joueur(Couleur couleur_courante) 
 {
-	if (couleur_courante==joueur1)
+	if (couleur_courante==bleu)
 		return rouge;
 	else
 		return bleu;
 }
+
+
+
 
 int choix_coup(Plateau p,Coordonnees_tab c,Couleur couleur_courante)
 {

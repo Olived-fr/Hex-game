@@ -1,7 +1,7 @@
 /********************************************** Jeu HEX ***********************************/
-#include "./Interface/interface.h"
-#include "./Structure/plateau.h"
-#include "./Regles/regles.h"
+#include "Interface/interface.h"
+#include "Structure/plateau.h"
+#include "Regles/regles.h"
 
 
 int main (int argc, char * argv[])
@@ -37,8 +37,8 @@ int main (int argc, char * argv[])
 	int choix;
 	menu.actualMenu = menu.mainMenu;
 	SDL_Event event;
-	Joueur joueur_courant = joueur1;
-	
+	Couleur joueur_courant = bleu;
+
 	
 	while (!quit)
 	{
@@ -101,7 +101,7 @@ int main (int argc, char * argv[])
 					{
 						if (choix == 0)
 						{
-							board_tab = nouvelle_partie();
+							nouvelle_partie(board_tab);
 						}
 						if (choix == 1)
 						{
@@ -119,22 +119,24 @@ int main (int argc, char * argv[])
 						if (dans_plateau(coord_tab))
 						{
 							
-								//board_tab = choix_coup(board_tab, coord_tab);
-							clic = pos_pion_SDL(coord_tab, board);
-							if (joueur_courant == joueur1)
+							if (choix_coup(board_tab, coord_tab, joueur_courant) == 0)
 							{
-								board.posPionBleu.x = clic.CoordX;
-								board.posPionBleu.y = clic.CoordY;
-								SDL_BlitSurface(board.pionBleu,NULL,interface.screenSurface,&board.posPionBleu);
-							}
-							else
-							{
-								board.posPionRouge.x = clic.CoordX;
-								board.posPionRouge.y = clic.CoordY;
-								SDL_BlitSurface(board.pionRouge,NULL,interface.screenSurface,&board.posPionRouge);
-							}
+								clic = pos_pion_SDL(coord_tab, board);
+								if (joueur_courant == bleu)
+								{
+									board.posPionBleu.x = clic.CoordX;
+									board.posPionBleu.y = clic.CoordY;
+									SDL_BlitSurface(board.pionBleu,NULL,interface.screenSurface,&board.posPionBleu);
+								}
+								else
+								{
+									board.posPionRouge.x = clic.CoordX;
+									board.posPionRouge.y = clic.CoordY;
+									SDL_BlitSurface(board.pionRouge,NULL,interface.screenSurface,&board.posPionRouge);
+								}
 							
-							joueur_courant = changer_joueur(joueur_courant);
+								joueur_courant = changer_joueur(joueur_courant);
+							}
 							
 						}
 					}

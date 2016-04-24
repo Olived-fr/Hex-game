@@ -2,7 +2,6 @@
 
 void initialiser_plateau(Plateau p)
 {
-	int i;
 	int x,y;
 	for(x=0;x<LIGNE_MAX;x++)//parcourt de toutes les lignes
 	{
@@ -87,7 +86,6 @@ void initialiser_plateau(Plateau p)
 			}
 		}
 	}
-	return p;
 }
 
 

@@ -291,11 +291,3 @@ bool clic_on_board (Coord_SDL coord, s_Board board)
 }
 
 
-Joueur changer_joueur(Joueur joueur_courant)
-{
-	if (joueur_courant==joueur1)
-		return joueur2;
-	else
-		return joueur1;
-}
-
