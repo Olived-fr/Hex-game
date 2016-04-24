@@ -47,7 +47,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Users/Olivier/Dropbox/Documents/Universite&#x301;/Cours/L2/Projet Logiciel/Projet-Logiciel/Interface"
+      customWorkingDirectory = "/Users/Olivier/Dropbox/Documents/Universite&#x301;/Cours/L2/Projet Logiciel/Projet-Logiciel"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"

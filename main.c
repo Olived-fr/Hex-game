@@ -1,5 +1,5 @@
 /********************************************** Jeu HEX ***********************************/
-#include "./Interface/Interface.h"
+#include "./Interface/interface.h"
 #include "./Structure/plateau.h"
 #include "./Regles/regles.h"
 

@@ -26,7 +26,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0922C32F1CCD25EC00375706 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		0922C32F1CCD25EC00375706 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = SOURCE_ROOT; };
+		0922C3311CCD293400375706 /* Regles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Regles; sourceTree = "<group>"; };
+		0922C3321CCD294900375706 /* Structure */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Structure; sourceTree = "<group>"; };
+		0922C3331CCD295000375706 /* Interface */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Interface; sourceTree = "<group>"; };
 		0950A5021C9FFF8900BF1207 /* Hex */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Hex; sourceTree = BUILT_PRODUCTS_DIR; };
 		096FDBB21CA0123A005754F0 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 		096FDBB31CA0123A005754F0 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
@@ -51,6 +54,9 @@
 			isa = PBXGroup;
 			children = (
 				0922C32F1CCD25EC00375706 /* main.c */,
+				0922C3331CCD295000375706 /* Interface */,
+				0922C3321CCD294900375706 /* Structure */,
+				0922C3311CCD293400375706 /* Regles */,
 				096FDBB21CA0123A005754F0 /* SDL2_image.framework */,
 				096FDBB31CA0123A005754F0 /* SDL2_ttf.framework */,
 				096FDBB41CA0123A005754F0 /* SDL2.framework */,

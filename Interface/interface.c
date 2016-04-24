@@ -1,4 +1,4 @@
-#include "Interface.h"
+#include "interface.h"
 
 
 const int SCREEN_WIDTH = 1120;

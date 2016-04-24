@@ -13,8 +13,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
 #include <SDL2_ttf/SDL_ttf.h>
-#include "./Structure/plateau.h"
-#include "./Regles/regles.h"
+#include "../Structure/plateau.h"
+#include "../Regles/regles.h"
 
 /*************************************** Constantes de la SDL **************************/
 #define nbMenuChoice 4
