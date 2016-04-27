@@ -104,7 +104,7 @@ void historique(bool b, Coordonnees_tab cor)
 		/* On écrit les coordonnées du premier coup placé dans le fichier */
 		fprintf(fichier,"\\play %d %d\n",cor.abscisse,cor.ordonnee);
 
-		// ceci est un test : fprintf(fichier,"\\play R 1 3\n");
+		/* ceci est un test : fprintf(fichier,"\\play R 1 3\n"); */
 
 		fprintf(fichier,"\n\\endgame\n");
 
@@ -113,14 +113,14 @@ void historique(bool b, Coordonnees_tab cor)
 	else
 	{
 		/* Sinon on place le curseur juste après le dernier repère \play */
-		while(strcmp(cur,"\\play")!=0)
+		while(strcmp(cur,"\\endgame")!=0)
 		{
 			fscanf(fichier,"%s",cur);
 		}
 
-		fseek(fichier,sizeof(char)*7,SEEK_CUR);
+		fseek(fichier,-(sizeof(char)*9),SEEK_CUR);
 
-		// ceci est un test : fprintf(fichier,"\\play B 2 2\n");
+		/* ceci est un test : fprintf(fichier,"\\play B 2 3\n"); */
 
 		/* On écrit les coordonnées du dernier coup placé dans le fichier */
 		fprintf(fichier,"\\play %d %d\n",cor.abscisse,cor.ordonnee);
@@ -133,3 +133,42 @@ void historique(bool b, Coordonnees_tab cor)
 
 	fclose(fichier);
 }
+
+void dernier_coup(int *abscisse, int *ordonnee)
+{
+	char cur[10];
+	FILE *config;
+	config=fopen("config.txt","r");
+
+	/* Recherche du dernier coup joué */
+	fscanf(config,"%s",cur);
+
+	while(strcmp(cur,"\\endgame")!=0)
+	{
+		fscanf(config,"%s",cur);
+	}
+	/* Décalage du curseur jusqu'aux dernières coordonnées avant le endgame */
+	fseek(config,-(sizeof(char)*13),SEEK_CUR);
+
+	fscanf(config,"%d %d",abscisse,ordonnee);
+
+	fclose(config);
+}
+
+int main()
+{
+	int absi,ordo;
+	creation_config();
+	board_save();
+	historique(0);
+
+	dernier_coup(&absi,&ordo);
+
+	printf("NIXAMER : %d %d\n",absi,ordo);
+
+	return 0;
+}
+
+
+
+
