@@ -76,11 +76,12 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 			case 0:
 				if(cur.SE==&prev || cur.SE->coul!=cur.coul || cur.SE==NULL)
 				{
+					i++;
 					tab[0]=1;
 				}
 				else if(tab[0]==1)
 				{
-					break;
+					i++;
 				}
 				else if(bord_oppose(deb,cur))
 				{
@@ -95,11 +96,12 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 			case 1:
 				if(cur.SO==&prev || cur.SO->coul!=cur.coul || cur.SO==NULL)
 				{
+					i++;
 					tab[1]=1;
 				}
 				else if(tab[1]==1)
 				{
-					break;
+					i++;
 				}
 				else if(bord_oppose(deb,cur))
 				{
@@ -114,11 +116,12 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 			case 2:
 				if(cur.O==&prev || cur.O->coul!=cur.coul || cur.O==NULL)
 				{
+					i++;
 					tab[2]=1;
 				}
 				else if(tab[2]==1)
 				{
-					break;
+					i++;
 				}
 				else if(bord_oppose(deb,cur))
 				{
@@ -133,11 +136,12 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 			case 3:
 				if(cur.NO==&prev || cur.NO->coul!=cur.coul || cur.NO==NULL)
 				{
+					i++;
 					tab[3]=1;
 				}
 				else if(tab[3]==1)
 				{
-					break;
+					i++;
 				}
 				else if(bord_oppose(deb,cur))
 				{
@@ -152,11 +156,12 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 			case 4:
 				if(cur.NE==&prev || cur.NE->coul!=cur.coul || cur.NE==NULL)
 				{
+					i++;
 					tab[4]=1;
 				}
 				else if(tab[4]==1)
 				{
-					break;
+					i++;
 				}
 				else if(bord_oppose(deb,cur))
 				{
@@ -171,11 +176,12 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 			default:
 				if(cur.E==&prev || cur.E->coul!=cur.coul || cur.E==NULL)
 				{
+					i++;
 					tab[5]=1;
 				}
 				else if(tab[5]==1)
 				{
-					break;
+					i++;
 				}
 				else if(bord_oppose(deb,cur))
 				{
