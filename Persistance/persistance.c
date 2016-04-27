@@ -49,9 +49,9 @@ void board_save(Plateau p)
 	fseek(fichier,sizeof(char)*2,SEEK_CUR);
 
 	/* On copie la description du plateau de jeu */
-	for(i=9; i<11; i++)
+	for(i=0; i<11; i++)
 	{
-		for(j=9; j<11; j++)
+		for(j=0; j<11; j++)
 		{
 			if(p[i][j].coul==rouge)
 			/* Si la case contient un pion rouge on écrit ses coordonnées et le repère 'R' dans le fichier */
