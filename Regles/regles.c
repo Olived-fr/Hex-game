@@ -35,30 +35,42 @@ bool bord(Type_Case c)
 bool bord_oppose(Type_Case deb, Type_Case comp)
 /* Retourne vrai si la case comp (comparaison) est le bord opposé de la case deb (début) */
 {
+	bool b=false;
+
 	if(deb.NE==NULL && deb.E==NULL)
 	/* Compare case bord droit à case bord gauche */
 	{
-		return (comp.O==NULL && comp.SO==NULL);
+		if(comp.O==NULL && comp.SO==NULL)
+		{
+			b=true;
+		}
 	}
 	else if(deb.O==NULL && deb.SO==NULL)
 	/* Compare case bord gauche à case bord droit */
 	{
-		return (comp.NE==NULL && comp.E==NULL);
+		if(comp.NE==NULL && comp.E==NULL)
+		{
+			b=true;
+		}
 	}
 	else if(deb.NO==NULL && deb.NE==NULL)
 	/* Compare case bord haut à case bord bas */
 	{
-		return (comp.SO==NULL && comp.SE==NULL);
+		if(comp.SO==NULL && comp.SE==NULL)
+		{
+			b=true;
+		}
 	}
 	else if(deb.SO==NULL && deb.SE==NULL)
 	/* Compare case bord bas à case bord haut */
 	{
-		return (comp.NO==NULL && comp.NE==NULL);
+		if(comp.NO==NULL && comp.NE==NULL)
+		{
+			b=true;
+		}
 	}
-	else
-	{
-		return false;
-	}
+	
+	return b;
 }
 
 bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
@@ -74,7 +86,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 		switch (i)
 		{
 			case 0:
-				if(cur.SE==&prev || cur.SE->coul!=cur.coul || cur.SE==NULL)
+				if(cur.SE==NULL || cur.SE==&prev || cur.SE->coul!=cur.coul)
 				{
 					i++;
 					tab[0]=1;
@@ -94,7 +106,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 			break;
 
 			case 1:
-				if(cur.SO==&prev || cur.SO->coul!=cur.coul || cur.SO==NULL)
+				if(cur.SO==NULL || cur.SO==&prev || cur.SO->coul!=cur.coul)
 				{
 					i++;
 					tab[1]=1;
@@ -114,7 +126,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 			break;
 
 			case 2:
-				if(cur.O==&prev || cur.O->coul!=cur.coul || cur.O==NULL)
+				if(cur.O==NULL || cur.O==&prev || cur.O->coul!=cur.coul)
 				{
 					i++;
 					tab[2]=1;
@@ -134,7 +146,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 			break;
 
 			case 3:
-				if(cur.NO==&prev || cur.NO->coul!=cur.coul || cur.NO==NULL)
+				if(cur.NO==NULL || cur.NO==&prev || cur.NO->coul!=cur.coul)
 				{
 					i++;
 					tab[3]=1;
@@ -154,7 +166,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 			break;
 
 			case 4:
-				if(cur.NE==&prev || cur.NE->coul!=cur.coul || cur.NE==NULL)
+				if(cur.NE==NULL || cur.NE==&prev || cur.NE->coul!=cur.coul)
 				{
 					i++;
 					tab[4]=1;
@@ -174,7 +186,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 			break;
 
 			default:
-				if(cur.E==&prev || cur.E->coul!=cur.coul || cur.E==NULL)
+				if(cur.E==NULL || cur.E==&prev || cur.E->coul!=cur.coul)
 				{
 					i++;
 					tab[5]=1;
@@ -195,15 +207,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 		}
 	}
 
-	if(i==6)
-	/* Si la boucle s'est arrêté en ayant incrémenté i jusqu'à 6 alors elle n'a pas détecté de bord */
-	{
-		return false;
-	}
-	else
-	{
-		return true;
-	}
+	return b;
 }
 
 
