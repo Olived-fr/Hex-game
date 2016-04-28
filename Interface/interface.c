@@ -145,9 +145,10 @@ void MaJ_Menu (s_Menu menu, s_Interface interface, int nbChoice)
 void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant)
 {
 	char *infos[3];
-	char infosA[6];
-	char infosO[6];
+	char infosA[7];
+	char infosO[7];
 	char infosJ[10];
+	char infosJ2[10];
 	int abscisse, ordonnee;
 	char couleur[1];
 	
@@ -155,6 +156,11 @@ void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant)
 	sprintf(infosA, "(%d ,", abscisse);
 	sprintf(infosO, " %d)", ordonnee);
 	sprintf(infosJ, "%c",couleur[0]);
+	
+	if (joueur_courant == bleu)
+		sprintf(infosJ2, "Rouge");
+	else
+		sprintf(infosJ2, "Bleu");
 	
 	infos[0] = infosJ;
 	infos[1] = infosA;
@@ -169,9 +175,16 @@ void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant)
 	{
 	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, infos[i] , Black);
 	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfos);
-	menu.posInfos.x += 25;
+	menu.posInfos.x += 30;
 	}
-
+	menu.posInfos.x -= 220;
+	menu.posInfos.y += 50;
+	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, "Prochain joueur: " , Black);
+	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfos);
+	menu.posInfos.x += 160;
+	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, infosJ2 , Black);
+	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfos);
+	
 }
 
 
