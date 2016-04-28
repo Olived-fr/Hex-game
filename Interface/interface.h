@@ -73,7 +73,7 @@ Coordonnees_tab pos_pion_tab (Coord_SDL coord, s_Board board);
 bool clic_on_board (Coord_SDL coord, s_Board board);
 void MaJ_Menu (s_Menu menu, s_Interface interface, int nbChoice);
 s_Board placer_pion (s_Board board, Coordonnees_tab coord_tab, Couleur joueur_courant, s_Interface interface, Plateau board_tab);
-void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant, Coordonnees_tab coord_tab);
+void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant);
 
 
 

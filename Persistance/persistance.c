@@ -169,9 +169,7 @@ void dernier_coup(char couleur[], int *abscisse, int *ordonnee)
 	fclose(config);
 }
 
-<<<<<<< Updated upstream
 
-=======
 /*int main()
 {
 	int absi,ordo;
@@ -186,7 +184,6 @@ void dernier_coup(char couleur[], int *abscisse, int *ordonnee)
 
 	return 0;
 }*/
->>>>>>> Stashed changes
 
 
 

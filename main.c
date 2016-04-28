@@ -149,17 +149,12 @@ int main (int argc, char * argv[])
 								placer_pion(board, coord_tab, joueur_courant, interface, board_tab);
 								
 								if (joueur_courant == bleu)
-								{
 									dernier_coup_bleu = coord_tab;
-									historique(premier_coup, coord_tab);
-								}
 								else
-								{
 									dernier_coup_rouge = coord_tab;
-									historique(premier_coup, coord_tab);
-								}
-								
-								//MaJ_Infos(menu, interface, joueur_courant, dernier_coup_bleu);
+
+								historique(premier_coup, coord_tab, joueur_courant);
+								MaJ_Infos(menu, interface, joueur_courant);
 								premier_coup = false;
 								joueur_courant = changer_joueur(joueur_courant);
 								

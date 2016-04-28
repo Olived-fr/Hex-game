@@ -142,22 +142,19 @@ void MaJ_Menu (s_Menu menu, s_Interface interface, int nbChoice)
 }
 
 
-void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant, Coordonnees_tab coord_tab)
+void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant)
 {
 	char *infos[3];
-	char infosA[4];
-	char infosO[4];
+	char infosA[6];
+	char infosO[6];
 	char infosJ[10];
-	int *abscisse, *ordonnee;
+	int abscisse, ordonnee;
+	char couleur[1];
 	
-	dernier_coup(abscisse, ordonnee);
-	sprintf(infosA, "(%d,", *abscisse);
-	sprintf(infosO, "%d)", *ordonnee);
-	
-	if (joueur_courant == bleu)
-		strcpy(infosJ,"Bleu");
-	else
-		strcpy(infosJ,"Rouge");
+	dernier_coup(couleur, &abscisse, &ordonnee);
+	sprintf(infosA, "(%d ,", abscisse);
+	sprintf(infosO, " %d)", ordonnee);
+	sprintf(infosJ, "%c",couleur[0]);
 	
 	infos[0] = infosJ;
 	infos[1] = infosA;
@@ -167,12 +164,12 @@ void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant, Coor
 	SDL_BlitSurface(menu.InfosSurface,NULL,interface.screenSurface,&menu.posInfos);
 	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, "Dernier coup: " , Black);
 	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfos);
-	menu.posInfos.x += 120;
-	for (int i = 0; i < 2; i++)
+	menu.posInfos.x += 130;
+	for (int i = 0; i < 3; i++)
 	{
 	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, infos[i] , Black);
 	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfos);
-	menu.posInfos.x += 15;
+	menu.posInfos.x += 25;
 	}
 
 }
