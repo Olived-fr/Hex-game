@@ -6,6 +6,7 @@ void nouvelle_partie(Plateau p)
 {
 	initialiser_plateau(p);
 	creation_config();
+	board_save(p);
 }
 
 bool bord(Type_Case c)
@@ -219,16 +220,12 @@ Couleur changer_joueur(Couleur couleur_courante)
 		return bleu;
 }
 
-int choix_coup(Plateau p,Coordonnees_tab c,Couleur couleur_courante)
+
+void choix_coup(Plateau p,Coordonnees_tab c,Couleur couleur_courante)
 {
-	if(coup_valide(p,c))
-	{
 		p[c.abscisse][c.ordonnee].coul=couleur_courante;
-		return 0;
-	}
-	else 
-		return -1;
 }
+
 
 bool coup_valide(Plateau p,Coordonnees_tab c)
 {

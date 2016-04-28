@@ -148,9 +148,11 @@ void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant, Coor
 	char infosA[4];
 	char infosO[4];
 	char infosJ[10];
+	int *abscisse, *ordonnee;
 	
-	sprintf(infosA, "(%d,", coord_tab.abscisse);
-	sprintf(infosO, "%d)", coord_tab.ordonnee);
+	dernier_coup(abscisse, ordonnee);
+	sprintf(infosA, "(%d,", *abscisse);
+	sprintf(infosO, "%d)", *ordonnee);
 	
 	if (joueur_courant == bleu)
 		strcpy(infosJ,"Bleu");
@@ -172,6 +174,7 @@ void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant, Coor
 	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfos);
 	menu.posInfos.x += 15;
 	}
+
 }
 
 
@@ -341,21 +344,20 @@ s_Board placer_pion (s_Board board, Coordonnees_tab coord_tab, Couleur joueur_co
 {
 	Coord_SDL clic;
 	
-	if (choix_coup(board_tab, coord_tab, joueur_courant) == 0)
+	choix_coup(board_tab, coord_tab, joueur_courant);
+	
+	clic = pos_pion_SDL(coord_tab, board);
+	if (joueur_courant == bleu)
 	{
-		clic = pos_pion_SDL(coord_tab, board);
-		if (joueur_courant == bleu)
-		{
-			board.posPionBleu.x = clic.CoordX;
-			board.posPionBleu.y = clic.CoordY;
-			SDL_BlitSurface(board.pionBleu,NULL,interface.screenSurface,&board.posPionBleu);
-		}
-		else
-		{
-			board.posPionRouge.x = clic.CoordX;
-			board.posPionRouge.y = clic.CoordY;
-			SDL_BlitSurface(board.pionRouge,NULL,interface.screenSurface,&board.posPionRouge);
-		}
+		board.posPionBleu.x = clic.CoordX;
+		board.posPionBleu.y = clic.CoordY;
+		SDL_BlitSurface(board.pionBleu,NULL,interface.screenSurface,&board.posPionBleu);
+	}
+	else
+	{
+		board.posPionRouge.x = clic.CoordX;
+		board.posPionRouge.y = clic.CoordY;
+		SDL_BlitSurface(board.pionRouge,NULL,interface.screenSurface,&board.posPionRouge);
 	}
 	
 	return board;

@@ -15,8 +15,7 @@ bool bord(Type_Case c);
 bool bord_oppose(Type_Case deb, Type_Case comp);
 bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb);
 Couleur changer_joueur(Couleur joueur_courant); //renvoie "joueur1" si joueur_courant==joueur2 et renvoie "joueur2" si joueur_courant==joueur1
-int choix_coup(Plateau,Coordonnees_tab,Couleur);/* Mets à jour un tableau en fonction d'un coup c après avoir vérifie la validité de ce dernier*/
-int choix_coup(Plateau p,Coordonnees_tab c,Couleur couleur_courante);/* Mets à jour un tableau en fonction d'un coup c après avoir vérifie la validité de ce dernier*/
+void choix_coup(Plateau,Coordonnees_tab,Couleur);/* Mets à jour un tableau en fonction d'un coup c */
 bool coup_valide(Plateau p,Coordonnees_tab c); // renvoie true si la case de coordonnees c est libre et est dans le plateau
 
 

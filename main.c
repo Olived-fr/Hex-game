@@ -44,6 +44,7 @@ int main (int argc, char * argv[])
 	menu.actualMenu = menu.mainMenu;
 	bool quit = false;
 	int choix;
+	bool premier_coup = true;
 	
 	while (!quit)
 	{
@@ -150,14 +151,16 @@ int main (int argc, char * argv[])
 								if (joueur_courant == bleu)
 								{
 									dernier_coup_bleu = coord_tab;
-									MaJ_Infos(menu, interface, joueur_courant, dernier_coup_bleu);
+									historique(premier_coup, coord_tab);
 								}
 								else
 								{
 									dernier_coup_rouge = coord_tab;
-									MaJ_Infos(menu, interface, joueur_courant, dernier_coup_rouge);
+									historique(premier_coup, coord_tab);
 								}
-							
+								
+								//MaJ_Infos(menu, interface, joueur_courant, dernier_coup_bleu);
+								premier_coup = false;
 								joueur_courant = changer_joueur(joueur_courant);
 								
 								if (bord(board_tab[coord_tab.abscisse][coord_tab.ordonnee]))
