@@ -47,14 +47,14 @@ void initialiser_plateau(Plateau p)
 							p[x][y].SO=&p[x-1][y+1];
 							break;
 						case LIGNE_MAX-1 : //si la case courante est à l'extrémité sud
-							p[x][y].SE=&p[x][y+1];
-							p[x][y].NO=&p[x][y-1];
-							p[x][y].SO=&p[x-1][y+1];;
-							break;
-						default :
 							p[x][y].SE=NULL;//on ne lui affecte pas de voisin sud est
 							p[x][y].NO=&p[x][y-1];
 							p[x][y].SO=NULL;//on ne lui affecte pas de voisin sud ouest
+							break;	
+						default :
+							p[x][y].SE=&p[x][y+1];
+							p[x][y].NO=&p[x][y-1];
+							p[x][y].SO=&p[x-1][y+1];;
 							break;
 					}
 					break;
