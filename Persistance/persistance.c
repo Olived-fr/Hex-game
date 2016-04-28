@@ -76,7 +76,7 @@ void board_save(Plateau p)
 	fclose(fichier);
 }
 
-void historique(bool b, Coordonnees_tab cor)
+void historique(bool b, Coordonnees_tab cor, Couleur co)
 {
 	if(!verif_file("config.txt"))
 	{
@@ -102,7 +102,14 @@ void historique(bool b, Coordonnees_tab cor)
 		fprintf(fichier,"\\game\n\n");
 
 		/* On écrit les coordonnées du premier coup placé dans le fichier */
-		fprintf(fichier,"\\play %d %d\n",cor.abscisse,cor.ordonnee);
+		if(co==rouge)
+		{
+			fprintf(fichier,"\\play R %d %d\n",cor.abscisse,cor.ordonnee);
+		}
+		else
+		{
+			fprintf(fichier,"\\play B %d %d\n",cor.abscisse,cor.ordonnee);
+		}
 
 		/* ceci est un test : fprintf(fichier,"\\play R 1 3\n"); */
 
@@ -123,7 +130,14 @@ void historique(bool b, Coordonnees_tab cor)
 		/* ceci est un test : fprintf(fichier,"\\play B 2 3\n"); */
 
 		/* On écrit les coordonnées du dernier coup placé dans le fichier */
-		fprintf(fichier,"\\play %d %d\n",cor.abscisse,cor.ordonnee);
+		if(co==rouge)
+		{
+			fprintf(fichier,"\\play R %d %d\n",cor.abscisse,cor.ordonnee);
+		}
+		else
+		{
+			fprintf(fichier,"\\play B %d %d\n",cor.abscisse,cor.ordonnee);
+		}
 
 		/* Comme l'écriture dans le fichier écrase les anciennes données, on ré-écrit \endgame et \endhex */
 		fprintf(fichier,"\n\\endgame\n");
@@ -134,7 +148,7 @@ void historique(bool b, Coordonnees_tab cor)
 	fclose(fichier);
 }
 
-void dernier_coup(int *abscisse, int *ordonnee)
+void dernier_coup(char couleur[], int *abscisse, int *ordonnee)
 {
 	char cur[10];
 	FILE *config;
@@ -148,14 +162,31 @@ void dernier_coup(int *abscisse, int *ordonnee)
 		fscanf(config,"%s",cur);
 	}
 	/* Décalage du curseur jusqu'aux dernières coordonnées avant le endgame */
-	fseek(config,-(sizeof(char)*13),SEEK_CUR);
+	fseek(config,-(sizeof(char)*15),SEEK_CUR);
 
-	fscanf(config,"%d %d",abscisse,ordonnee);
+	fscanf(config,"%c %d %d",couleur,abscisse,ordonnee);
 
 	fclose(config);
 }
 
+<<<<<<< Updated upstream
 
+=======
+/*int main()
+{
+	int absi,ordo;
+	char lel[1];
+	creation_config();
+	board_save();
+	historique(0);
+
+	dernier_coup(lel,&absi,&ordo);
+
+	printf("NIXAMER : %s %d %d\n",lel,absi,ordo);
+
+	return 0;
+}*/
+>>>>>>> Stashed changes
 
 
 
