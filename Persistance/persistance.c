@@ -155,19 +155,7 @@ void dernier_coup(int *abscisse, int *ordonnee)
 	fclose(config);
 }
 
-int main()
-{
-	int absi,ordo;
-	creation_config();
-	board_save();
-	historique(0);
 
-	dernier_coup(&absi,&ordo);
-
-	printf("NIXAMER : %d %d\n",absi,ordo);
-
-	return 0;
-}
 
 
 

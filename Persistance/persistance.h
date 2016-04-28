@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include "../Structure/plateau.h"
 
 bool verif_file(char *name);
 void creation_config();

@@ -5,6 +5,7 @@
 #ifndef interface_h
 #define interface_h
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -20,6 +21,7 @@
 #define nbMenuChoice 4
 #define nbPlayMenuChoice 4
 #define nbinGameMenuChoice 4
+#define nbfirstPlayerMenu 3
 #define MenuOptionHeight 80
 
 
@@ -46,8 +48,9 @@ struct s_Menu
 	char *mainMenu[nbMenuChoice];
 	char *playMenu[nbPlayMenuChoice];
 	char *inGameMenu[nbinGameMenuChoice];
-	SDL_Rect posMenu, posText, posCopyright;
-	SDL_Surface *menuSurface, *menuText, *copyrightSurface, *copyrightText;
+	char *firstPlayerMenu [nbfirstPlayerMenu];
+	SDL_Rect posMenu, posText, posCopyright, posInfos;
+	SDL_Surface *menuSurface, *menuText, *copyrightSurface, *copyrightText, *InfosSurface, *InfosText;
 	TTF_Font *fontMenu;
 };
 
@@ -69,5 +72,9 @@ Coord_SDL pos_pion_SDL (Coordonnees_tab coord_tab, s_Board board);
 Coordonnees_tab pos_pion_tab (Coord_SDL coord, s_Board board);
 bool clic_on_board (Coord_SDL coord, s_Board board);
 void MaJ_Menu (s_Menu menu, s_Interface interface, int nbChoice);
+s_Board placer_pion (s_Board board, Coordonnees_tab coord_tab, Couleur joueur_courant, s_Interface interface, Plateau board_tab);
+void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant, Coordonnees_tab coord_tab);
+
+
 
 #endif

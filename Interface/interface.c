@@ -5,6 +5,7 @@ const int SCREEN_WIDTH = 1120;
 const int SCREEN_HEIGHT = 720;
 const SDL_Color Black = {0,0,0};
 
+
 /*********************************************** Initialisations ***********************************************/
 
 s_Interface Init ()
@@ -72,10 +73,14 @@ s_Menu loadMenu (s_Interface interface)
 	
 	menu.inGameMenu[0] = "Sauver";
 	menu.inGameMenu[1] = "Charger";
-	menu.inGameMenu[2] = "Historique";
+	menu.inGameMenu[2] = "Annuler";
 	menu.inGameMenu[3] = "Quitter";
+	
+	menu.firstPlayerMenu[0] = "Premier joueur: ";
+	menu.firstPlayerMenu[1] = "Bleu";
+	menu.firstPlayerMenu[2] = "Rouge";
 
-	menu.fontMenu = TTF_OpenFont("Font/System San Francisco Display Regular.ttf",20);
+	menu.fontMenu = TTF_OpenFont("Interface/Font/System San Francisco Display Regular.ttf",20);
 	if (menu.fontMenu == NULL)
 	{
 		fprintf(stderr, "Impossible de charger la police de caractère");
@@ -83,7 +88,7 @@ s_Menu loadMenu (s_Interface interface)
 	}
 
 		//Surface du menu principal
-	menu.menuSurface = IMG_Load("Images/Menu.png");
+	menu.menuSurface = IMG_Load("Interface/Images/Menu.png");
 	menu.posMenu.x = 5;
 	menu.posMenu.y = 200;
 	SDL_BlitSurface(menu.menuSurface,NULL,interface.screenSurface,&menu.posMenu);
@@ -102,12 +107,19 @@ s_Menu loadMenu (s_Interface interface)
 		//Copyright
 	menu.copyrightSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, 550, 40, 32, 0, 0, 0, 0);
 	SDL_FillRect(menu.copyrightSurface, NULL, SDL_MapRGB(interface.screenSurface->format, 27, 142, 202));
-	menu.posCopyright.x = 260,
+	menu.posCopyright.x = 270,
 	menu.posCopyright.y = 2;
 	SDL_BlitSurface(menu.copyrightSurface,NULL,interface.screenSurface,&menu.posCopyright);
 	menu.copyrightText = TTF_RenderText_Blended(menu.fontMenu, " Arnaud SOLER, Olivier DUFOUR, Rialy ANDRIAMISEZA - 2016" , Black);
 	SDL_BlitSurface(menu.copyrightText,NULL,interface.screenSurface,&menu.posCopyright);
-
+	
+		//Infos
+	menu.InfosSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, 700, 100, 32, 0, 0, 0, 0);
+	SDL_FillRect(menu.InfosSurface, NULL, SDL_MapRGB(interface.screenSurface->format, 27, 142, 202));
+	menu.posInfos.x = 220,
+	menu.posInfos.y = 620;
+	SDL_BlitSurface(menu.InfosSurface,NULL,interface.screenSurface,&menu.posInfos);
+	
 
 	return menu;
 }
@@ -130,6 +142,39 @@ void MaJ_Menu (s_Menu menu, s_Interface interface, int nbChoice)
 }
 
 
+void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant, Coordonnees_tab coord_tab)
+{
+	char *infos[3];
+	char infosA[4];
+	char infosO[4];
+	char infosJ[10];
+	
+	sprintf(infosA, "(%d,", coord_tab.abscisse);
+	sprintf(infosO, "%d)", coord_tab.ordonnee);
+	
+	if (joueur_courant == bleu)
+		strcpy(infosJ,"Bleu");
+	else
+		strcpy(infosJ,"Rouge");
+	
+	infos[0] = infosJ;
+	infos[1] = infosA;
+	infos[2] = infosO;
+	
+
+	SDL_BlitSurface(menu.InfosSurface,NULL,interface.screenSurface,&menu.posInfos);
+	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, "Dernier coup: " , Black);
+	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfos);
+	menu.posInfos.x += 120;
+	for (int i = 0; i < 2; i++)
+	{
+	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, infos[i] , Black);
+	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfos);
+	menu.posInfos.x += 15;
+	}
+}
+
+
 /******************************************** Chargement du plateau ******************************************/
 
 s_Board loadBoard (s_Interface interface)
@@ -137,13 +182,13 @@ s_Board loadBoard (s_Interface interface)
 	s_Board board;
 
 		//Chargement et position de l'image du plateau
-	board.boardSurface = IMG_Load("Images/hexBoard.png");
+	board.boardSurface = IMG_Load("Interface/Images/hexBoard.png");
 	board.posBoard.x = 300;
 	board.posBoard.y = 120;
 
 		//Chargement des pions
-	board.pionBleu = IMG_Load("Images/HexBlue.png");
-	board.pionRouge = IMG_Load("Images/HexRed.png");
+	board.pionBleu = IMG_Load("Interface/Images/HexBlue.png");
+	board.pionRouge = IMG_Load("Interface/Images/HexRed.png");
 
 	if (board.boardSurface == NULL || board.pionBleu == NULL || board.pionRouge == NULL)
 	{
@@ -220,45 +265,45 @@ Coord_SDL pos_pion_SDL (Coordonnees_tab coord_tab, s_Board board)
 }
 
 
-Coordonnees_tab pos_pion_tab (Coord_SDL co, s_Board board)
+Coordonnees_tab pos_pion_tab (Coord_SDL coord, s_Board board)
 {
-	Coordonnees_tab c;
-	int sectX = co.CoordX - board.posBoard.x-6;
-	int sectY = co.CoordY - board.posBoard.y-10;
+	Coordonnees_tab coord_tab;
+	int sectX = coord.CoordX - board.posBoard.x - 6;
+	int sectY = coord.CoordY - board.posBoard.y - 10;
 	if (sectY < 0 || sectX < 0)
 	{
-		c.abscisse = -1;
-		c.ordonnee = -1;
-		return c;
+		coord_tab.abscisse = -1;
+		coord_tab.ordonnee = -1;
+		return coord_tab;
 	}
 	
 	int y = 1;
 	int x = 1;
-	c.abscisse = 0;
-	c.ordonnee = 0;
+	coord_tab.abscisse = 0;
+	coord_tab.ordonnee = 0;
 	
-	while ((y + 50 < sectY || x + 44 < sectX) && c.ordonnee != 11 )
+	while ((y + 50 < sectY || x + 44 < sectX) && coord_tab.ordonnee != 11 )
 	{
-		c.abscisse += 1;
+		coord_tab.abscisse += 1;
 		x += 45;
-		if (c.abscisse == 11)
+		if (coord_tab.abscisse == 11)
 		{
-			c.abscisse = 0;
-			c.ordonnee += 1;
+			coord_tab.abscisse = 0;
+			coord_tab.ordonnee += 1;
 			y += 40;
-			x = c.ordonnee * 23;
+			x = coord_tab.ordonnee * 23;
 		}
 	}
-	if (c.ordonnee != 11)
+	if (coord_tab.ordonnee != 11)
 	{
 		int i,j;
 		i = sectX - x;
 		j = sectY - y;
 		if (i < 0 || j < 0)
 		{
-			c.abscisse = -1;
-			c.ordonnee = -1;
-			return c;
+			coord_tab.abscisse = -1;
+			coord_tab.ordonnee = -1;
+			return coord_tab;
 		}
 		if (j > 37)
 		{
@@ -266,19 +311,19 @@ Coordonnees_tab pos_pion_tab (Coord_SDL co, s_Board board)
 			{
 				if (j > (((i+1)/2) + 37))
 				{
-					c.abscisse -= 1;
-					c.ordonnee += 1;
+					coord_tab.abscisse -= 1;
+					coord_tab.ordonnee += 1;
 				}
 			}
 			else if (i > 23)
 			{
 				if (j > ((-(i+1)/2) + 39))
-					c.ordonnee += 1;
+					coord_tab.ordonnee += 1;
 			}
 		}
 	}
 
-	return c;
+	return coord_tab;
 }
 
 
@@ -291,3 +336,30 @@ bool clic_on_board (Coord_SDL coord, s_Board board)
 }
 
 
+
+s_Board placer_pion (s_Board board, Coordonnees_tab coord_tab, Couleur joueur_courant, s_Interface interface, Plateau board_tab)
+{
+	Coord_SDL clic;
+	
+	if (choix_coup(board_tab, coord_tab, joueur_courant) == 0)
+	{
+		clic = pos_pion_SDL(coord_tab, board);
+		if (joueur_courant == bleu)
+		{
+			board.posPionBleu.x = clic.CoordX;
+			board.posPionBleu.y = clic.CoordY;
+			SDL_BlitSurface(board.pionBleu,NULL,interface.screenSurface,&board.posPionBleu);
+		}
+		else
+		{
+			board.posPionRouge.x = clic.CoordX;
+			board.posPionRouge.y = clic.CoordY;
+			SDL_BlitSurface(board.pionRouge,NULL,interface.screenSurface,&board.posPionRouge);
+		}
+	}
+	
+	return board;
+}
+
+
+/*************************************************************************************************************/
