@@ -161,9 +161,14 @@ void dernier_coup(char couleur[], int *abscisse, int *ordonnee)
 	{
 		fscanf(config,"%s",cur);
 	}
-	/* Décalage du curseur jusqu'aux dernières coordonnées avant le endgame */
-	fseek(config,-(sizeof(char)*15),SEEK_CUR);
+	/* Décalage du curseur jusqu'au dernier \play avant le endgame */
+	fseek(config,-(sizeof(char)*19),SEEK_CUR);
 
+	fscanf(config,"%s",cur);
+	/* Décalage du curseur pour ne pas récupérer l'espace après le \play */
+	fseek(config,(sizeof(char)*1),SEEK_CUR);
+
+	/* On récupère la couleur et les coordonnées */
 	fscanf(config,"%c %d %d",couleur,abscisse,ordonnee);
 
 	fclose(config);
