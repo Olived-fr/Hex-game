@@ -36,10 +36,12 @@ struct Type_Case
 
 typedef Type_Case Plateau[LIGNE_MAX][COLONNE_MAX]; //Le plateau est un tableau à deux dimensions de cases
 
-int distance_bord_ouest(Plateau p,Type_Case c,Couleur cou);
-int distance_bord_est(Plateau p,Type_Case c,Couleur cou);
-int distance_bord_nord(Plateau p,Type_Case c,Couleur cou);
-int distance_bord_sud(Plateau p,Type_Case c,Couleur cou);
+void initialiser_verif(bool verif[LIGNE_MAX][COLONNE_MAX]);
+
+int distance_bord_ouest(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Couleur cou);
+int distance_bord_est(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Couleur cou);
+int distance_bord_nord(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Couleur cou);
+int distance_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Couleur cou);
 
 Type_Case* voisin_NO(Type_Case c);
 Type_Case* voisin_NE(Type_Case c);
