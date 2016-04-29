@@ -88,12 +88,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 
 	while(!b && i!=6)
 	/* On continue tant que tous les voisins n'ont pas été checkés et tant que le bord opposé n'a pas été trouvé */
-	{
-		if(tab[5]==1)
-		{
-			i=6;
-		}
-		
+	{	
 		if(bord_oppose(deb,cur))
 		{
 			b=true;
@@ -106,7 +101,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 				{
 					i++;
 				} 
-				else*/ if(cur.SE==NULL || cur.SE==&prev || cur.SE->coul!=cur.coul)
+				else*/ if(cur.SE==NULL || cur.SE->coul==prev.coul || cur.SE->coul!=cur.coul)
 				{
 					i++;
 					tab[0]=1;
@@ -123,7 +118,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 				{
 					i++;
 				}
-				else*/ if(cur.SO==NULL || cur.SO==&prev || cur.SO->coul!=cur.coul)
+				else*/ if(cur.SO==NULL || cur.SO->coul==prev.coul || cur.SO->coul!=cur.coul)
 				{
 					i++;
 					tab[1]=1;
@@ -140,7 +135,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 				{
 					i++;
 				}
-				else*/ if(cur.O==NULL || cur.O==&prev || cur.O->coul!=cur.coul)
+				else*/ if(cur.O==NULL || cur.O->coul==prev.coul || cur.O->coul!=cur.coul)
 				{
 					i++;
 					tab[2]=1;
@@ -157,7 +152,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 				{
 					i++;
 				} 
-				else*/ if(cur.NO==NULL || cur.NO==&prev || cur.NO->coul!=cur.coul)
+				else*/ if(cur.NO==NULL || cur.NO->coul==prev.coul || cur.NO->coul!=cur.coul)
 				{
 					i++;
 					tab[3]=1;
@@ -174,7 +169,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 				{
 					i++;
 				}
-				else*/ if(cur.NE==NULL || cur.NE==&prev || cur.NE->coul!=cur.coul)
+				else*/ if(cur.NE==NULL || cur.NE->coul==prev.coul || cur.NE->coul!=cur.coul)
 				{
 					i++;
 					tab[4]=1;
@@ -191,7 +186,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 				{
 					i++;
 				}
-				else*/ if(cur.E==NULL || cur.E==&prev || cur.E->coul!=cur.coul)
+				else*/ if(cur.E==NULL || cur.E->coul==prev.coul || cur.E->coul!=cur.coul)
 				{
 					i++;
 					tab[5]=1;
