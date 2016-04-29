@@ -10,13 +10,13 @@ void initialiser_plateau(Plateau p)
 			p[x][y].co.abscisse=x;
 			p[x][y].co.ordonnee=y;
 			p[x][y].coul=neutre;//initialisation de toutes les cases avec la couleur 'neutre'
-			switch(y)
+			switch(x)
 			{
 				case 0 : //si la case courante est à l'extrémité ouest
 					p[x][y].SO=NULL;//on ne lui affecte pas de voisin sud ouest
 					p[x][y].O=NULL;//on ne lui affecte pas de voisin ouest
 					p[x][y].E=&p[x+1][y];//elle a forcément un voisin est
-					switch(x)
+					switch(y)
 					{
 						case 0 : //si la case courante est à l'extrémité nord
 							p[x][y].NO=NULL;//on ne lui affecte pas de voisin nord est
@@ -39,7 +39,7 @@ void initialiser_plateau(Plateau p)
 					p[x][y].E=NULL;//on ne lui affecte pas de voisin est
 					p[x][y].NE=NULL;//on ne lui affecte pas de voisin nord est
 					p[x][y].O=&p[x-1][y];//elle a forcément un voisin ouest
-					switch(x)
+					switch(y)
 					{
 						case 0 : //si la case courante est à l'extrémité nord
 							p[x][y].SE=&p[x][y+1];
@@ -61,7 +61,7 @@ void initialiser_plateau(Plateau p)
 				default : //sinon
 					p[x][y].E=&p[x+1][y];
 					p[x][y].O=&p[x-1][y];
-					switch(x)
+					switch(y)
 					{
 						case 0 : //si la case courante est à l'extrémité nord
 							p[x][y].NO=NULL;//on ne lui affecte pas de voisin nord ouest
