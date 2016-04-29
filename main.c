@@ -161,7 +161,7 @@ int main (int argc, char * argv[])
 								if (bord(board_tab[coord_tab.abscisse][coord_tab.ordonnee]))
 								{
 									if (verify_win(board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab[coord_tab.abscisse][coord_tab.ordonnee]))
-										printf("win");
+										quit = true;
 								}
 							}
 							

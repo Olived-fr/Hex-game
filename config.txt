@@ -128,33 +128,29 @@
 
 \game
 
-\play B 10 4
-\play R 9 5
-\play B 9 4
-\play R 8 6
-\play B 9 3
-\play R 8 5
-\play B 8 2
-\play R 7 5
-\play B 9 2
-\play R 6 5
-\play B 7 2
-\play R 8 4
-\play B 6 3
-\play R 7 3
-\play B 5 3
-\play R 6 6
-\play B 4 4
-\play R 5 5
-\play B 3 5
-\play R 4 6
-\play B 2 6
-\play R 3 7
-\play B 2 7
-\play R 3 8
-\play B 1 8
+\play R 0 10
+\play B 2 8
 \play R 1 9
-\play B 0 8
+\play B 2 9
+\play R 1 8
+\play B 3 8
+\play R 2 7
+\play B 4 8
+\play R 3 6
+\play B 4 7
+\play R 3 5
+\play B 5 6
+\play R 4 5
+\play B 6 6
+\play R 4 4
+\play B 7 5
+\play R 4 3
+\play B 7 4
+\play R 4 2
+\play B 7 3
+\play R 4 1
+\play B 7 2
+\play R 5 0
 
 \endgame
 
