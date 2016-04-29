@@ -79,7 +79,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 {
 	int i=0;
 	bool b=false;
-	bool tab[6];
+	bool tab[6]={0,0,0,0,0,0};
 
 	if(!bord(deb))
 	{
