@@ -81,127 +81,119 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 	bool b=false;
 	bool tab[6];
 
+	if(!bord(deb))
+	{
+		i=6;
+	}
+
 	while(!b && i!=6)
 	/* On continue tant que tous les voisins n'ont pas été checkés et tant que le bord opposé n'a pas été trouvé */
 	{
+		if(bord_oppose(deb,cur))
+		{
+			b=true;
+		}
+
 		switch (i)
 		{
 			case 0:
-				if(cur.SE==NULL || cur.SE==&prev || cur.SE->coul!=cur.coul)
+				if(tab[0]==1)
+				{
+					i++;
+				}
+				else if(cur.SE==NULL || cur.SE==&prev || cur.SE->coul!=cur.coul)
 				{
 					i++;
 					tab[0]=1;
 				}
-				else if(tab[0]==1)
-				{
-					i++;
-				}
-				else if(bord_oppose(deb,cur))
-				{
-					b=true;
-				}
 				else
 				{
+					tab[0]=1;
 					b=verify_win(*cur.SE,cur,deb);
 				}
 			break;
 
 			case 1:
-				if(cur.SO==NULL || cur.SO==&prev || cur.SO->coul!=cur.coul)
+				if(tab[1]==1)
+				{
+					i++;
+				}
+				else if(cur.SO==NULL || cur.SO==&prev || cur.SO->coul!=cur.coul)
 				{
 					i++;
 					tab[1]=1;
 				}
-				else if(tab[1]==1)
-				{
-					i++;
-				}
-				else if(bord_oppose(deb,cur))
-				{
-					b=true;
-				}
 				else
 				{
+					tab[0]=1;
 					b=verify_win(*cur.SO,cur,deb);
 				}
 			break;
 
 			case 2:
-				if(cur.O==NULL || cur.O==&prev || cur.O->coul!=cur.coul)
+				if(tab[2]==1)
+				{
+					i++;
+				}
+				else if(cur.O==NULL || cur.O==&prev || cur.O->coul!=cur.coul)
 				{
 					i++;
 					tab[2]=1;
 				}
-				else if(tab[2]==1)
-				{
-					i++;
-				}
-				else if(bord_oppose(deb,cur))
-				{
-					b=true;
-				}
 				else
 				{
+					tab[2]=1;
 					b=verify_win(*cur.O,cur,deb);
 				}
 			break;
 
 			case 3:
-				if(cur.NO==NULL || cur.NO==&prev || cur.NO->coul!=cur.coul)
+				if(tab[3]==1)
+				{
+					i++;
+				}
+				else if(cur.NO==NULL || cur.NO==&prev || cur.NO->coul!=cur.coul)
 				{
 					i++;
 					tab[3]=1;
 				}
-				else if(tab[3]==1)
-				{
-					i++;
-				}
-				else if(bord_oppose(deb,cur))
-				{
-					b=true;
-				}
 				else
 				{
+					tab[3]=1;
 					b=verify_win(*cur.NO,cur,deb);
 				}
 			break;
 
 			case 4:
-				if(cur.NE==NULL || cur.NE==&prev || cur.NE->coul!=cur.coul)
+				if(tab[4]==1)
+				{
+					i++;
+				}
+				else if(cur.NE==NULL || cur.NE==&prev || cur.NE->coul!=cur.coul)
 				{
 					i++;
 					tab[4]=1;
 				}
-				else if(tab[4]==1)
-				{
-					i++;
-				}
-				else if(bord_oppose(deb,cur))
-				{
-					b=true;
-				}
 				else
 				{
+					tab[4]=1;
 					b=verify_win(*cur.NE,cur,deb);
 				}
 			break;
 
 			default:
-				if(cur.E==NULL || cur.E==&prev || cur.E->coul!=cur.coul)
+				if(tab[5]==1)
+				{
+					i++;
+				}
+				else if(cur.E==NULL || cur.E==&prev || cur.E->coul!=cur.coul)
 				{
 					i++;
 					tab[5]=1;
 				}
-				else if(tab[5]==1)
-				{
-					i++;
-				}
-				else if(bord_oppose(deb,cur))
-				{
-					b=true;
-				}
 				else
 				{
+					tab[5]=1;
 					b=verify_win(*cur.E,cur,deb);
 				}
 			break;
