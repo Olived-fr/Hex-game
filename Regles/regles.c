@@ -125,7 +125,7 @@ bool verify_win(Type_Case cur, Type_Case prev, Type_Case deb)
 				}
 				else
 				{
-					tab[0]=1;
+					tab[1]=1;
 					b=verify_win(*cur.SO,cur,deb);
 				}
 			break;
