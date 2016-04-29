@@ -14,8 +14,8 @@ bool bord(Type_Case c)
 {
 	bool b=false;
 
-	if(c.coul==bleu)
-	/* Si la case est bleu alors si c'est un bord ses voisins NORD-OUEST et NORD-EST OU ses voisins SUD-OUEST et SUD-EST seront égal à NULL */
+	if(c.coul==rouge)
+	/* Si la case est rouge alors si c'est un bord ses voisins NORD-OUEST et NORD-EST OU ses voisins SUD-OUEST et SUD-EST seront égal à NULL */
 	{
 		if((c.NO==NULL && c.NE==NULL) || (c.SO==NULL && c.SE==NULL))
 		{
@@ -23,7 +23,7 @@ bool bord(Type_Case c)
 		}
 	}
 	else
-	/* Sinon la case est rouge, si c'est un bord ses voisins OUEST et SUD-OUEST OU ses voisins NORD-EST et EST seront égal à NULL */
+	/* Sinon la case est bleue, si c'est un bord ses voisins OUEST et SUD-OUEST OU ses voisins NORD-EST et EST seront égal à NULL */
 	{
 		if((c.O==NULL && c.SE==NULL) || (c.NE==NULL && c.E==NULL))
 		{
