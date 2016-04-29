@@ -25,7 +25,7 @@ bool bord(Type_Case c)
 	else
 	/* Sinon la case est bleue, si c'est un bord ses voisins OUEST et SUD-OUEST OU ses voisins NORD-EST et EST seront égal à NULL */
 	{
-		if((c.O==NULL && c.SE==NULL) || (c.NE==NULL && c.E==NULL))
+		if((c.O==NULL && c.SO==NULL) || (c.NE==NULL && c.E==NULL))
 		{
 			b=true;
 		}
