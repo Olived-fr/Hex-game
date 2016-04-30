@@ -177,7 +177,7 @@ void dernier_coup(char couleur[], int *abscisse, int *ordonnee)
 void chargement(Plateau *p)
 {
 	char cur[10];
-	char couleur[1];
+	char couleur[2];
 	FILE *config;
 	int i,j,absci,ordo;
 
@@ -204,7 +204,7 @@ void chargement(Plateau *p)
 	{
 		for(j=0; j<11; j++)
 		{
-			fscanf(config,"%d %d %c",absci,ordo,couleur);
+			fscanf(config,"%d %d %c",&absci,&ordo,couleur);
 
 			if(strcmp(couleur,"R")==0)
 			/* Si le caractère 'couleur' est égal à 'R' on affecte à la case de coordonnée (i,j) la couleur rouge */
