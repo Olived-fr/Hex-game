@@ -158,11 +158,9 @@ int main (int argc, char * argv[])
 								premier_coup = false;
 								joueur_courant = changer_joueur(joueur_courant);
 								
-								if (bord(board_tab[coord_tab.abscisse][coord_tab.ordonnee]))
-								{
-									if (verify_win(board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab[coord_tab.abscisse][coord_tab.ordonnee]))
-										quit = true;
-								}
+                                if (verify_win(board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab[coord_tab.abscisse][coord_tab.ordonnee]))
+                                    quit = true;
+								
 							}
 							
 						}

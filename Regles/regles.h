@@ -11,10 +11,12 @@
 
 bool premier_joueur();
 void nouvelle_partie(Plateau p);
+bool bord(Type_Case c);
 bool bord_bleu(Type_Case c);
 bool bord_rouge(Type_Case c);
 bool bord_oppose_bleu(Type_Case deb, Type_Case comp);
 bool bord_oppose_rouge(Type_Case deb, Type_Case comp);
+bool est_voisin(Type_Case comp, Type_Case prev);
 bool verify_bord(Type_Case cur, Type_Case prev, Type_Case *ret);
 bool verify_bord_oppose(Type_Case cur, Type_Case prev, Type_Case deb);
 bool verify_win(Type_Case cur, Type_Case prev);
