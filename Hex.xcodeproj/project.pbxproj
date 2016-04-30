@@ -72,7 +72,6 @@
 				096FDBB21CA0123A005754F0 /* SDL2_image.framework */,
 				096FDBB31CA0123A005754F0 /* SDL2_ttf.framework */,
 				096FDBB41CA0123A005754F0 /* SDL2.framework */,
-				0950A5041C9FFF8900BF1207 /* Interface */,
 				0950A5031C9FFF8900BF1207 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -83,13 +82,6 @@
 				0950A5021C9FFF8900BF1207 /* Hex */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		0950A5041C9FFF8900BF1207 /* Interface */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Interface;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

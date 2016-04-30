@@ -222,10 +222,15 @@ void Quit (s_Board board, s_Interface interface, s_Menu menu)
 		//Supprime les surfaces (texte, image ...)
 	SDL_FreeSurface(board.boardSurface);
 	SDL_FreeSurface(interface.screenSurface);
+	SDL_FreeSurface(menu.copyrightSurface);
+	SDL_FreeSurface(menu.copyrightText);
+	SDL_FreeSurface(menu.InfosSurface);
+	SDL_FreeSurface(menu.InfosText);
+	SDL_FreeSurface(menu.menuSurface);
 	SDL_FreeSurface(menu.menuText);
 	SDL_FreeSurface(board.pionBleu);
 	SDL_FreeSurface(board.pionRouge);
-
+	
 		//Supprime la fenêtre
 	SDL_DestroyWindow(interface.window);
 	TTF_CloseFont(menu.fontMenu);

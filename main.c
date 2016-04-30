@@ -156,11 +156,12 @@ int main (int argc, char * argv[])
 								historique(premier_coup, coord_tab, joueur_courant);
 								MaJ_Infos(menu, interface, joueur_courant);
 								premier_coup = false;
-								joueur_courant = changer_joueur(joueur_courant);
 								
                                 if (verify_win(board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab[coord_tab.abscisse][coord_tab.ordonnee]))
                                     quit = true;
 								
+								joueur_courant = changer_joueur(joueur_courant);
+
 							}
 							
 						}

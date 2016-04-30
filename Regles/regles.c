@@ -246,7 +246,9 @@ bool verify_bord_oppose(Type_Case cur, Type_Case prev, Type_Case deb)
 				{
 					i++;
 				} 
+
 				else if(cur.SE==NULL || (cur.SE->co.abscisse==prev.co.abscisse && cur.SE->co.ordonnee==prev.co.ordonnee) || cur.SE->coul!=cur.coul || est_voisin(*cur.SE,prev))
+
 				{
 					i++;
 					tab[0]=1;
@@ -263,7 +265,9 @@ bool verify_bord_oppose(Type_Case cur, Type_Case prev, Type_Case deb)
 				{
 					i++;
 				}
+
 				else if(cur.SO==NULL || (cur.SO->co.abscisse==prev.co.abscisse && cur.SO->co.ordonnee==prev.co.ordonnee) || cur.SO->coul!=cur.coul || est_voisin(*cur.SO,prev))
+
 				{
 					i++;
 					tab[1]=1;
@@ -281,6 +285,7 @@ bool verify_bord_oppose(Type_Case cur, Type_Case prev, Type_Case deb)
 					i++;
 				}
 				else if(cur.O==NULL || (cur.O->co.abscisse==prev.co.abscisse && cur.O->co.ordonnee==prev.co.ordonnee) || cur.O->coul!=cur.coul || est_voisin(*cur.O,prev))
+
 				{
 					i++;
 					tab[2]=1;
@@ -297,7 +302,9 @@ bool verify_bord_oppose(Type_Case cur, Type_Case prev, Type_Case deb)
 				{
 					i++;
 				} 
+
 				else if(cur.NO==NULL || (cur.NO->co.abscisse==prev.co.abscisse && cur.NO->co.ordonnee==prev.co.ordonnee) || cur.NO->coul!=cur.coul || est_voisin(*cur.NO,prev))
+
 				{
 					i++;
 					tab[3]=1;
@@ -315,6 +322,7 @@ bool verify_bord_oppose(Type_Case cur, Type_Case prev, Type_Case deb)
 					i++;
 				}
 				else if(cur.NE==NULL || (cur.NE->co.abscisse==prev.co.abscisse && cur.NE->co.ordonnee==prev.co.ordonnee) || cur.NE->coul!=cur.coul || est_voisin(*cur.NE,prev))
+
 				{
 					i++;
 					tab[4]=1;
@@ -332,6 +340,7 @@ bool verify_bord_oppose(Type_Case cur, Type_Case prev, Type_Case deb)
 					i++;
 				}
 				else if(cur.E==NULL || (cur.E->co.abscisse==prev.co.abscisse && cur.E->co.ordonnee==prev.co.ordonnee) || cur.E->coul!=cur.coul || est_voisin(*cur.E,prev))
+
 				{
 					i++;
 					tab[5]=1;
