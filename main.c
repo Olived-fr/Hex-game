@@ -13,8 +13,8 @@ int main (int argc, char * argv[])
 	s_Board board;
 	
 	interface = Init();
-	board = loadBoard(interface);
-	menu = loadMenu(interface);
+	board = load_Board(interface);
+	menu = load_Menu(interface);
 	
 	menu.mainMenu[0] = "Menu";
 	menu.mainMenu[1] = "Jouer";
@@ -62,7 +62,7 @@ int main (int argc, char * argv[])
 					clic.CoordX = event.motion.x;
 					clic.CoordY = event.motion.y;
 					
-					choix = choixMenu(clic, menu);
+					choix = choix_Menu(clic, menu);
 					
 					if (menu.actualMenu == menu.mainMenu)
 					{
@@ -74,7 +74,7 @@ int main (int argc, char * argv[])
 						}
 						if (choix == 2)
 						{
-							;
+							chargement(board_tab);
 						}
 						if (choix == 3)
 						{
@@ -129,7 +129,8 @@ int main (int argc, char * argv[])
 						}
 						if (choix == 1)
 						{
-							;
+							chargement(board_tab);
+							MaJ_Board(board, interface, board_tab);
 						}
 						if (choix == 2)
 						{
@@ -155,11 +156,11 @@ int main (int argc, char * argv[])
 
 								historique(premier_coup, coord_tab, joueur_courant);
 								MaJ_Infos(menu, interface, joueur_courant);
-								premier_coup = false;
 								
                                 if (verify_win(board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab[coord_tab.abscisse][coord_tab.ordonnee]))
                                     quit = true;
 								
+								premier_coup = false;
 								joueur_courant = changer_joueur(joueur_courant);
 
 							}

@@ -56,7 +56,7 @@ s_Interface Init ()
 
 /****************************************** Chargement du menu principal ***************************************/
 
-s_Menu loadMenu (s_Interface interface)
+s_Menu load_Menu (s_Interface interface)
 {
 
 	s_Menu menu;
@@ -190,7 +190,7 @@ void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant)
 
 /******************************************** Chargement du plateau ******************************************/
 
-s_Board loadBoard (s_Interface interface)
+s_Board load_Board (s_Interface interface)
 {
 	s_Board board;
 
@@ -214,6 +214,38 @@ s_Board loadBoard (s_Interface interface)
 }
 
 
+void MaJ_Board (s_Board board, s_Interface interface, Plateau p)
+{
+	Coordonnees_tab coord_tab;
+	Coord_SDL coord;
+	
+	SDL_BlitSurface(board.boardSurface, NULL, interface.screenSurface, &board.posBoard);
+	
+	for(int i = 0; i < 11; i++)
+	{
+		for(int j = 0; j < 11; j++)
+		{
+			if( p[i][j].coul == rouge)
+			{
+				coord_tab.abscisse = i;
+				coord_tab.ordonnee = j;
+				coord = pos_pion_SDL(coord_tab, board);
+				board.posPionRouge.x = coord.CoordX;
+				board.posPionRouge.y = coord.CoordY;
+				SDL_BlitSurface(board.pionRouge,NULL,interface.screenSurface,&board.posPionRouge);
+			}
+			else if(p[i][j].coul == bleu)
+			{
+				coord_tab.abscisse = i;
+				coord_tab.ordonnee = j;
+				coord = pos_pion_SDL(coord_tab, board);
+				board.posPionBleu.x = coord.CoordX;
+				board.posPionBleu.y = coord.CoordY;
+				SDL_BlitSurface(board.pionBleu,NULL,interface.screenSurface,&board.posPionBleu);
+			}
+		}
+	}
+}
 
 /********************************************** Fermeture de la SDL *****************************************/
 
@@ -246,7 +278,7 @@ void Quit (s_Board board, s_Interface interface, s_Menu menu)
 
 /***************************************** Choix de l'option du menu *************************************/
 
-int choixMenu (Coord_SDL clic, s_Menu menu)
+int choix_Menu (Coord_SDL clic, s_Menu menu)
 {
 
 	if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 200 && clic.CoordY < 280)

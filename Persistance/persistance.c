@@ -174,7 +174,7 @@ void dernier_coup(char couleur[], int *abscisse, int *ordonnee)
 	fclose(config);
 }
 
-void chargement(Plateau *p)
+void chargement(Plateau p)
 {
 	char cur[10];
 	char couleur[2];
@@ -203,23 +203,24 @@ void chargement(Plateau *p)
 			if(strcmp(couleur,"R")==0)
 			/* Si le caractère 'couleur' est égal à 'R' on affecte à la case de coordonnée (i,j) la couleur rouge */
 			{
-				p[i][j]->coul=rouge;
+				p[i][j].coul=rouge;
 			}
 			else if(strcmp(couleur,"B")==0)
 			/* Si le caractère 'couleur' est égal à 'B' on affecte à la case de coordonnée (i,j) la couleur bleu */
 			{
-				p[i][j]->coul=bleu;
+				p[i][j].coul=bleu;
 			} 
 			else if(strcmp(couleur,".")==0)
 			/* Si le caractère 'couleur' est égal à '.' on affecte à la case de coordonnée (i,j) la couleur neutre */
 			{ 
-				p[i][j]->coul=neutre;
+				p[i][j].coul=neutre;
 			}
 		}
 	}
 
 	fclose(config);
 }
+
 
 
 /*int main()
