@@ -12,5 +12,6 @@ void creation_config();
 void board_save(Plateau p);
 void historique(bool b, Coordonnees_tab cor, Couleur co);
 void dernier_coup(char couleur[], int *abscisse, int *ordonnee);
+void chargement();
 
 #endif
