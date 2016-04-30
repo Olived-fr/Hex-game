@@ -1,5 +1,16 @@
 #include "persistance.h"
 
+bool verif_file(char *name)
+/* Fonction de vérification de la validité de l'existence du fichier */
+{
+	FILE *config;
+	config=fopen(name,"r");
+	
+	return config;
+	
+	fclose(config);
+}
+
 void creation_config()
 /* Fonction de création du fichier config avec le repère /hex */
 {
