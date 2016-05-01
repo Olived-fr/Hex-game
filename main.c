@@ -40,9 +40,8 @@ int main (int argc, char * argv[])
 	Coordonnees_tab coord_tab;
 	Couleur joueur_courant = bleu, dernier_joueur = bleu;
 	menu.actualMenu = menu.mainMenu;
-	bool quit = false;
+	bool quit = false, premier_coup = true;
 	int choix;
-	bool premier_coup = true;
 	
 	while (!quit)
 	{
@@ -93,11 +92,11 @@ int main (int argc, char * argv[])
 						}
 						if (choix == 1)
 						{
-							nouvelle_partie(board_tab);
+							;
 						}
 						if (choix == 2)
 						{
-							nouvelle_partie(board_tab);
+							;
 						}
 						if (choix == 3)
 						{
@@ -109,19 +108,15 @@ int main (int argc, char * argv[])
 					else if (menu.actualMenu == menu.firstPlayerMenu)
 					{
 						if (choix == 1)
-						{
 							joueur_courant = bleu;
-							menu.actualMenu = menu.inGameMenu;
-							MaJ_Menu(menu, interface, nbinGameMenuChoice);
-							nouvelle_partie(board_tab);
-						}
-						if (choix == 2)
-						{
+						else if (choix == 2)
 							joueur_courant = rouge;
-							menu.actualMenu = menu.inGameMenu;
-							MaJ_Menu(menu, interface, nbinGameMenuChoice);
-							nouvelle_partie(board_tab);
-						}
+						
+						menu.actualMenu = menu.inGameMenu;
+						MaJ_Menu(menu, interface, nbinGameMenuChoice);
+						nouvelle_partie(board_tab);
+						MaJ_Board(board, interface, board_tab);
+						premier_coup = true;
 					}
 					
 					else if (menu.actualMenu == menu.inGameMenu)
@@ -168,7 +163,9 @@ int main (int argc, char * argv[])
 								
                                 if (verify_win(board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab[coord_tab.abscisse][coord_tab.ordonnee]))
 								{
-									quit = true;
+									affiche_vainqueur(menu, interface, joueur_courant);
+									menu.actualMenu = menu.mainMenu;
+									MaJ_Menu(menu, interface, nbMenuChoice);
 								}
 								
 								premier_coup = false;
@@ -194,7 +191,6 @@ int main (int argc, char * argv[])
 			//Met à jour l'écran
 		SDL_UpdateWindowSurface(interface.window);
 	}
-		//SDL_Delay(10000);
 	
 	return 0;
 }

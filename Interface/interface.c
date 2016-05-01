@@ -189,6 +189,24 @@ void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant)
 }
 
 
+void affiche_vainqueur (s_Menu menu, s_Interface interface, Couleur joueur_courant)
+{
+	char infos[100];
+	char vainqueur[10];
+	
+	if (joueur_courant == bleu)
+		sprintf(vainqueur, "Bleu");
+	else
+		sprintf(vainqueur, "Rouge");
+	
+	sprintf(infos, "Le joueur %s gagne !", vainqueur);
+	SDL_BlitSurface(menu.InfosSurface,NULL,interface.screenSurface,&menu.posInfos);
+	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, infos , Black);
+	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfos);
+
+}
+
+
 /******************************************** Chargement du plateau ******************************************/
 
 s_Board load_Board (s_Interface interface)
