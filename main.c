@@ -38,9 +38,7 @@ int main (int argc, char * argv[])
 	SDL_Event event;
 	Plateau board_tab;
 	Coordonnees_tab coord_tab;
-	Coordonnees_tab dernier_coup_bleu;
-	Coordonnees_tab dernier_coup_rouge;
-	Couleur joueur_courant = bleu;
+	Couleur joueur_courant = bleu, dernier_joueur = bleu;
 	menu.actualMenu = menu.mainMenu;
 	bool quit = false;
 	int choix;
@@ -74,7 +72,11 @@ int main (int argc, char * argv[])
 						}
 						if (choix == 2)
 						{
+							initialiser_plateau(board_tab);
 							chargement(board_tab);
+							MaJ_Board(board, interface, board_tab);
+							menu.actualMenu = menu.inGameMenu;
+							MaJ_Menu(menu, interface, nbinGameMenuChoice);
 						}
 						if (choix == 3)
 						{
@@ -121,6 +123,7 @@ int main (int argc, char * argv[])
 							nouvelle_partie(board_tab);
 						}
 					}
+					
 					else if (menu.actualMenu == menu.inGameMenu)
 					{
 						if (choix == 0)
@@ -134,7 +137,13 @@ int main (int argc, char * argv[])
 						}
 						if (choix == 2)
 						{
-							;
+							if (joueur_courant != dernier_joueur)
+							{
+								annuler(board_tab);
+								MaJ_Board(board, interface, board_tab);
+								MaJ_Infos(menu, interface, joueur_courant);
+								joueur_courant = changer_joueur(joueur_courant);
+							}
 						}
 						if (choix == 3)
 						{
@@ -150,21 +159,22 @@ int main (int argc, char * argv[])
 								placer_pion(board, coord_tab, joueur_courant, interface, board_tab);
 								
 								if (joueur_courant == bleu)
-									dernier_coup_bleu = coord_tab;
+									dernier_joueur = bleu;
 								else
-									dernier_coup_rouge = coord_tab;
+									dernier_joueur = rouge;
 
 								historique(premier_coup, coord_tab, joueur_courant);
 								MaJ_Infos(menu, interface, joueur_courant);
 								
                                 if (verify_win(board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab[coord_tab.abscisse][coord_tab.ordonnee]))
-                                    quit = true;
+								{
+									quit = true;
+								}
 								
 								premier_coup = false;
 								joueur_courant = changer_joueur(joueur_courant);
 
 							}
-							
 						}
 					}
 					
@@ -184,6 +194,7 @@ int main (int argc, char * argv[])
 			//Met à jour l'écran
 		SDL_UpdateWindowSurface(interface.window);
 	}
+		//SDL_Delay(10000);
 	
 	return 0;
 }

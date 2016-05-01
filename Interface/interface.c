@@ -44,6 +44,7 @@ s_Interface Init ()
         exit(EXIT_FAILURE);
     }
 
+	
 		//Surface de la fenêtre
 	interface.screenSurface = SDL_GetWindowSurface(interface.window);
 	SDL_FillRect(interface.screenSurface, NULL, SDL_MapRGB( interface.screenSurface->format, 255, 255, 255 ));
@@ -251,7 +252,7 @@ void MaJ_Board (s_Board board, s_Interface interface, Plateau p)
 
 void Quit (s_Board board, s_Interface interface, s_Menu menu)
 {
-		//Supprime les surfaces (texte, image ...)
+		//Libère les surfaces (texte, image, musique ...)
 	SDL_FreeSurface(board.boardSurface);
 	SDL_FreeSurface(interface.screenSurface);
 	SDL_FreeSurface(menu.copyrightSurface);
@@ -289,11 +290,11 @@ int choix_Menu (Coord_SDL clic, s_Menu menu)
 	{
 		return 1;
 	}
-	if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 360 && clic.CoordY < 420)
+	if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 360 && clic.CoordY < 440)
 	{
 		return 2;
 	}
-	if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 420 && clic.CoordY < 500)
+	if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 440 && clic.CoordY < 520)
 	{
 		return 3;
 	}

@@ -227,7 +227,7 @@ void chargement(Plateau p)
 	fclose(config);
 }
 
-void annuler()
+void annuler(Plateau p)
 {
 	char couleur1[2];
 	char couleur2[2];
@@ -257,7 +257,7 @@ void annuler()
 
 	while(b)
 	{
-		if(strcmp(couleur1,couleur2)==0 && abscisse1==abscisse2 && ordonnee1==ordonnee2)
+		if(abscisse1==abscisse2 && ordonnee1==ordonnee2)
 		/* Si la couleur et les coordonnées sont les mêmes que celles du dernier coup alors on ne le copie pas */
 		{
 			b=false;
@@ -280,6 +280,8 @@ void annuler()
 
 	remove("config.txt");
 	rename("temp.txt","config.txt");
+	
+	p[abscisse1][ordonnee1].coul = neutre;
 
 }
 
