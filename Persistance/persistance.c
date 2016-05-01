@@ -3,12 +3,18 @@
 bool verif_file(char *name)
 /* Fonction de vérification de la validité de l'existence du fichier */
 {
-	FILE *config;
+	FILE *config=NULL;
+    bool b=true;
 	config=fopen(name,"r");
 	
-	return config;
-	
+	if(config==NULL)
+    {
+        b=false;
+    }
+
 	fclose(config);
+    
+    return b;
 }
 
 void creation_config()
@@ -221,23 +227,61 @@ void chargement(Plateau p)
 	fclose(config);
 }
 
-
-
-/*int main()
+void annuler()
 {
-	int absi,ordo;
-	char lel[1];
-	creation_config();
-	board_save();
-	historique(0);
+	char couleur1[2];
+	char couleur2[2];
+	char ligne[14];
+	int abscisse1,ordonnee1,abscisse2,ordonnee2,i;
+	bool b=true;
 
-	dernier_coup(lel,&absi,&ordo);
+	/* Ici on prend le dernier coup pour le mettre dans la chaine de caractère : comparaison */
+	dernier_coup(couleur1,&abscisse1,&ordonnee1);
 
-	printf("NIXAMER : %s %d %d\n",lel,absi,ordo);
+	
+	FILE *config;
+	FILE *tmp;
+	config=fopen("config.txt","r");
+	tmp=fopen("temp.txt","w+");
 
-	return 0;
-}*/
+	for(i=0; i<130; i++)
+	{
+		fgets(ligne,14,config);
+		fprintf(tmp,"%s",ligne);
+	}
 
+	/* Décalage du curseur pour ne pas récupérer l'espace après le \play */
+	fseek(config,(sizeof(char)*6),SEEK_CUR);
+	/* On récupère la couleur et les coordonnées de la ligne en cours de traitement */
+	fscanf(config,"%c %d %d",couleur2,&abscisse2,&ordonnee2);
+
+	while(b)
+	{
+		if(strcmp(couleur1,couleur2)==0 && abscisse1==abscisse2 && ordonnee1==ordonnee2)
+		/* Si la couleur et les coordonnées sont les mêmes que celles du dernier coup alors on ne le copie pas */
+		{
+			b=false;
+		}
+		else
+		{
+			fscanf(config,"%s",ligne);
+			/* Décalage du curseur pour ne pas récupérer l'espace après le \play */
+			fseek(config,(sizeof(char)*1),SEEK_CUR);
+			/* Ajout de la ligne dans le fichier temporaire */
+			fprintf(tmp,"\\play %s %d %d\n",couleur2,abscisse2,ordonnee2);
+			fscanf(config,"%c %d %d",couleur2,&abscisse2,&ordonnee2);
+		}
+	}
+
+	fprintf(tmp,"\n\\endgame\n\n\\endhex\n");
+
+	fclose(config);
+	fclose(tmp);
+
+	remove("config.txt");
+	rename("temp.txt","config.txt");
+
+}
 
 
 
