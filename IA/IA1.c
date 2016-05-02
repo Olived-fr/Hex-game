@@ -2,13 +2,13 @@
 
 Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 {	
-	int x,y,d1,d2,distance_choisie;
+	int x,y,d1,d2;
 	int distance_min=LIGNE_MAX+1;
 	//afin de s'assurer que la première itération génerera une distance min
-	int(*distance_extremite1)(Plateau,Type_Case*,bool verif1[LIGNE_MAX][COLONNE_MAX],Couleur);
-	int(*distance_extremite2)(Plateau,Type_Case*,bool verif2[LIGNE_MAX][COLONNE_MAX],Couleur);
-	int(*distance_choisie)(Plateau,Type_Case*,Type_Case prev,Couleur);
-	Type_Case*(voisin_elu)(Type_Case);
+	int(*distance_extremite1)(Plateau,Type_Case,bool verif1[LIGNE_MAX][COLONNE_MAX],Couleur);
+	int(*distance_extremite2)(Plateau,Type_Case,bool verif2[LIGNE_MAX][COLONNE_MAX],Couleur);
+	int(*distance_choisie)(Plateau,Type_Case,bool verif2[LIGNE_MAX][COLONNE_MAX],Couleur);
+	Type_Case*(*voisin_elu)(Type_Case);
 	Type_Case case_courante;
 	Type_Case case_proche;
 	bool verif1[LIGNE_MAX][COLONNE_MAX];
@@ -26,18 +26,17 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 		distance_extremite2=&distance_bord_sud;
 	}
 	//si le plateau est de taille 11 par exemple la distance maximale qu'une case peut avoir à un bord est égal à 10
-	bool horizontal=(couleur_courante==bleu)
+	bool horizontal=(couleur_courante==bleu);
 	if(horizontal)
 		distance_min=LIGNE_MAX-1;
 	else
 		distance_min=COLONNE_MAX-2;
 	//Note : cette instruction conditionnelle est facultative car on admet que LIGNE_MAX est toujours égal à COLONNE_MAX
-	Coordonnees_tab coordonnees_courantes;
 	for(x=0;x<LIGNE_MAX;x++)
 	{
 		for(y=0;y<COLONNE_MAX;y++)
 		{
-			case_courante=&p[x][y];
+			case_courante=p[x][y];
 			if(case_courante.coul==couleur_courante)
 			{
 				initialiser_verif(verif1);
@@ -65,30 +64,31 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	le plus proche du bord concerné*/
 	
 	int distance_courante;
-	distance_courante=distance_choisie(p,case_proche.NO);
+	initialiser_verif(verif1);
+	distance_courante=distance_choisie(p,*case_proche.NO,verif1,couleur_courante);
 	if(distance_courante < distance_min && case_proche.NO->coul==neutre)
 		voisin_elu=&voisin_NO;
-	
-	distance_courante=distance_choisie(p,case_proche.NE);
+	initialiser_verif(verif1);
+	distance_courante=distance_choisie(p,*case_proche.NE,verif1,couleur_courante);
 	if(distance_courante < distance_min && case_proche.NE->coul==neutre)
 		voisin_elu=&voisin_NE;
-	
-	distance_courante=distance_choisie(p,case_proche.O);
+	initialiser_verif(verif1);
+	distance_courante=distance_choisie(p,*case_proche.O,verif1,couleur_courante);
 	if(distance_courante < distance_min && case_proche.O->coul==neutre)
 		voisin_elu=&voisin_O;
-	
-	distance_courante=distance_choisie(p,case_proche.SO);
+	initialiser_verif(verif1);
+	distance_courante=distance_choisie(p,*case_proche.SO,verif1,couleur_courante);
 	if(distance_courante < distance_min && case_proche.SO->coul==neutre)
 		voisin_elu=&voisin_SO;
-	
-	distance_courante=distance_choisie(p,case_proche.SE);
+	initialiser_verif(verif1);
+	distance_courante=distance_choisie(p,*case_proche.SE,verif1,couleur_courante);
 	if(distance_courante < distance_min && case_proche.SE->coul==neutre)
 		voisin_elu=&voisin_SE;
-	
-	distance_courante=distance_choisie(p,case_proche.E);
+	initialiser_verif(verif1);
+	distance_courante=distance_choisie(p,*case_proche.E,verif1,couleur_courante);
 	if(distance_courante < distance_min && case_proche.E->coul==neutre)
 		voisin_elu=&voisin_E;
-	
+	initialiser_verif(verif1);
 	Type_Case* case_choisie=voisin_elu(case_proche);
 	/*et on pose le pion à cet endroit là*/
 	return case_choisie->co;
@@ -102,7 +102,7 @@ void initialiser_verif(bool verif[LIGNE_MAX][COLONNE_MAX])
 			verif[x][y]=false;
 }
 
-bool impasse(Type_Case c,Couleur cou,bool verif[LIGNE_MAX][COLONNE_MAX],)
+bool impasse(Type_Case c,Couleur cou,bool verif[LIGNE_MAX][COLONNE_MAX])
 {
 	bool NE,NO,O,E,SO,SE; //chaque booleen indique true si la case concernée est libre
 	/* une case est dite libre si elle n'a pas déjà été vérifiée et si elle n'est pas de la couleur de l'adversaire */
