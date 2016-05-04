@@ -7,8 +7,8 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	//afin de s'assurer que la première itération génerera une distance min
 	int(*distance_extremite1)(Plateau,Type_Case,bool verif1[LIGNE_MAX][COLONNE_MAX],Couleur);
 	int(*distance_extremite2)(Plateau,Type_Case,bool verif2[LIGNE_MAX][COLONNE_MAX],Couleur);
-	int(*distance_choisie)(Plateau,Type_Case,bool verif2[LIGNE_MAX][COLONNE_MAX],Couleur);
-	Type_Case*(*voisin_elu)(Type_Case);
+	int(*distance_choisie)(Plateau,Type_Case,bool verif2[LIGNE_MAX][COLONNE_MAX],Couleur)=&distance_bord_ouest;
+	Type_Case*(*voisin_elu)(Type_Case)=&voisin_NO;
 	Type_Case* case_choisie=&p[5][5];
 	if(case_choisie->coul==changer_joueur(couleur_courante))case_choisie=case_choisie->O;
 	Type_Case case_courante;

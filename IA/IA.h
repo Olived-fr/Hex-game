@@ -2,6 +2,7 @@
 #define IA_h
 
 #include "../Structure/plateau.h"
+#include "../Regles/regles.h"
 
 Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante);
 
