@@ -3,6 +3,8 @@
 
 #include "../Structure/plateau.h"
 
+Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante);
+
 int distance_bord_ouest(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Couleur cou);
 int distance_bord_est(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Couleur cou);
 int distance_bord_nord(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Couleur cou);
