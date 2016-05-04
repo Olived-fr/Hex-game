@@ -2,6 +2,8 @@
 #include "Interface/interface.h"
 #include "Structure/plateau.h"
 #include "Regles/regles.h"
+#include "Persistance/persistance.h"
+#include "IA/IA.h"
 
 
 int main (int argc, char * argv[])
@@ -40,13 +42,19 @@ int main (int argc, char * argv[])
 	Coordonnees_tab coord_tab;
 	Couleur joueur_courant = bleu, dernier_joueur = bleu;
 	menu.actualMenu = menu.mainMenu;
-	bool quit = false, premier_coup = true;
+	bool quit = false, premier_coup = true, IA = false;
 	int choix;
 	
 	while (!quit)
 	{
 		SDL_WaitEvent(&event);
 		
+		if (IA)
+			if (joueur_courant == rouge)
+			{
+				event.button.button = SDL_BUTTON_LEFT;
+				event.type = SDL_MOUSEBUTTONDOWN;
+			}
 		switch (event.type)
 		{
 			case SDL_QUIT:
@@ -76,6 +84,7 @@ int main (int argc, char * argv[])
 							MaJ_Board(board, interface, board_tab);
 							menu.actualMenu = menu.inGameMenu;
 							MaJ_Menu(menu, interface, nbinGameMenuChoice);
+							premier_coup = false;
 						}
 						if (choix == 3)
 						{
@@ -87,36 +96,36 @@ int main (int argc, char * argv[])
 					{
 						if (choix == 0)
 						{
-							menu.actualMenu = menu.firstPlayerMenu;
-							MaJ_Menu(menu, interface, nbfirstPlayerMenu);
+							menu.actualMenu = menu.inGameMenu;
+							MaJ_Menu(menu, interface, nbinGameMenuChoice);
+							nouvelle_partie(board_tab);
+							MaJ_Board(board, interface, board_tab);
+							premier_coup = true;
+
 						}
 						if (choix == 1)
 						{
-							;
+							menu.actualMenu = menu.inGameMenu;
+							MaJ_Menu(menu, interface, nbinGameMenuChoice);
+							nouvelle_partie(board_tab);
+							MaJ_Board(board, interface, board_tab);
+							premier_coup = true;
+							IA = true;
 						}
 						if (choix == 2)
 						{
-							;
+							menu.actualMenu = menu.inGameMenu;
+							MaJ_Menu(menu, interface, nbinGameMenuChoice);
+							nouvelle_partie(board_tab);
+							MaJ_Board(board, interface, board_tab);
+							
+							IA = true;
 						}
 						if (choix == 3)
 						{
 							menu.actualMenu = menu.mainMenu;
 							MaJ_Menu(menu, interface, nbMenuChoice);
 						}
-					}
-					
-					else if (menu.actualMenu == menu.firstPlayerMenu)
-					{
-						if (choix == 1)
-							joueur_courant = bleu;
-						else if (choix == 2)
-							joueur_courant = rouge;
-						
-						menu.actualMenu = menu.inGameMenu;
-						MaJ_Menu(menu, interface, nbinGameMenuChoice);
-						nouvelle_partie(board_tab);
-						MaJ_Board(board, interface, board_tab);
-						premier_coup = true;
 					}
 					
 					else if (menu.actualMenu == menu.inGameMenu)
@@ -145,38 +154,73 @@ int main (int argc, char * argv[])
 							quit = true;
 						}
 						
-						if (clic_on_board(clic, board))
+						if (!IA)
 						{
-							
-							coord_tab = pos_pion_tab(clic, board);
-							if (coup_valide(board_tab, coord_tab))
+							if (clic_on_board(clic, board))
 							{
-								placer_pion(board, coord_tab, joueur_courant, interface, board_tab);
-								
-								if (joueur_courant == bleu)
-									dernier_joueur = bleu;
-								else
-									dernier_joueur = rouge;
-
-								historique(premier_coup, coord_tab, joueur_courant);
-								MaJ_Infos(menu, interface, joueur_courant);
-								
-                                if (verify_win(board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab[coord_tab.abscisse][coord_tab.ordonnee]))
+								coord_tab = pos_pion_tab(clic, board);
+								if (coup_valide(board_tab, coord_tab))
 								{
-									affiche_vainqueur(menu, interface, joueur_courant);
-									menu.actualMenu = menu.mainMenu;
-									MaJ_Menu(menu, interface, nbMenuChoice);
-								}
+									placer_pion(board, coord_tab, joueur_courant, interface, board_tab);
 								
-								premier_coup = false;
-								joueur_courant = changer_joueur(joueur_courant);
+									if (joueur_courant == bleu)
+										dernier_joueur = bleu;
+									else
+										dernier_joueur = rouge;
 
+									historique(premier_coup, coord_tab, joueur_courant);
+									MaJ_Infos(menu, interface, joueur_courant);
+								
+									if (verify_win(board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab[coord_tab.abscisse][coord_tab.ordonnee]))
+									{
+										affiche_vainqueur(menu, interface, joueur_courant);
+										menu.actualMenu = menu.mainMenu;
+										MaJ_Menu(menu, interface, nbMenuChoice);
+									}
+								
+									premier_coup = false;
+									joueur_courant = changer_joueur(joueur_courant);
+								}
 							}
+						}
+						
+						else if (IA)
+						{
+							if (joueur_courant == bleu)
+							{
+								if (clic_on_board(clic, board))
+								{
+									coord_tab = pos_pion_tab(clic, board);
+									if (coup_valide(board_tab, coord_tab))
+									{
+										placer_pion(board, coord_tab, joueur_courant, interface, board_tab);
+									}
+								}
+							}
+							else
+							{
+								coord_tab = coup_IA1 (board_tab, joueur_courant);
+								placer_pion(board, coord_tab, joueur_courant, interface, board_tab);
+							}
+							
+							historique(premier_coup, coord_tab, joueur_courant);
+							MaJ_Infos(menu, interface, joueur_courant);
+							
+							if (verify_win(board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab[coord_tab.abscisse][coord_tab.ordonnee]))
+							{
+								affiche_vainqueur(menu, interface, joueur_courant);
+								menu.actualMenu = menu.mainMenu;
+								MaJ_Menu(menu, interface, nbMenuChoice);
+							}
+							
+							premier_coup = false;
+							joueur_courant = changer_joueur(joueur_courant);
 						}
 					}
 					
 				}
 				break;
+				
 				
 			case SDL_KEYDOWN:
 				switch (event.key.keysym.sym)

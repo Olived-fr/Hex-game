@@ -49,6 +49,9 @@ s_Interface Init ()
 	interface.screenSurface = SDL_GetWindowSurface(interface.window);
 	SDL_FillRect(interface.screenSurface, NULL, SDL_MapRGB( interface.screenSurface->format, 255, 255, 255 ));
 
+		//interface.background = IMG_Load("Interface/Images/background.png");
+		//SDL_BlitSurface(interface.background,NULL,interface.screenSurface,NULL);
+	
 
 	return interface;
 }
@@ -107,7 +110,7 @@ s_Menu load_Menu (s_Interface interface)
 
 		//Copyright
 	menu.copyrightSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, 550, 40, 32, 0, 0, 0, 0);
-	SDL_FillRect(menu.copyrightSurface, NULL, SDL_MapRGB(interface.screenSurface->format, 27, 142, 202));
+	SDL_FillRect(menu.copyrightSurface, NULL, SDL_MapRGB(interface.screenSurface->format, 49, 56, 84));
 	menu.posCopyright.x = 270,
 	menu.posCopyright.y = 2;
 	SDL_BlitSurface(menu.copyrightSurface,NULL,interface.screenSurface,&menu.posCopyright);
@@ -115,7 +118,7 @@ s_Menu load_Menu (s_Interface interface)
 	SDL_BlitSurface(menu.copyrightText,NULL,interface.screenSurface,&menu.posCopyright);
 	
 		//Infos
-	menu.InfosSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, 700, 100, 32, 0, 0, 0, 0);
+	menu.InfosSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, 700, 75, 32, 0, 0, 0, 0);
 	SDL_FillRect(menu.InfosSurface, NULL, SDL_MapRGB(interface.screenSurface->format, 27, 142, 202));
 	menu.posInfos.x = 220,
 	menu.posInfos.y = 620;
@@ -214,7 +217,7 @@ s_Board load_Board (s_Interface interface)
 	s_Board board;
 
 		//Chargement et position de l'image du plateau
-	board.boardSurface = IMG_Load("Interface/Images/hexBoard.png");
+	board.boardSurface = IMG_Load("Interface/Images/hexBoard3.png");
 	board.posBoard.x = 300;
 	board.posBoard.y = 120;
 
