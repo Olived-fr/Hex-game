@@ -9,6 +9,8 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	int(*distance_extremite2)(Plateau,Type_Case,bool verif2[LIGNE_MAX][COLONNE_MAX],Couleur);
 	int(*distance_choisie)(Plateau,Type_Case,bool verif2[LIGNE_MAX][COLONNE_MAX],Couleur);
 	Type_Case*(*voisin_elu)(Type_Case);
+	Type_Case* case_choisie=&p[5][5];
+	if(case_choisie->coul==joueur_adverse(couleur_courante))case_choisie=case_choisie->O;
 	Type_Case case_courante;
 	Type_Case case_proche;
 	bool verif1[LIGNE_MAX][COLONNE_MAX];
@@ -89,7 +91,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	if(distance_courante < distance_min && case_proche.E->coul==neutre)
 		voisin_elu=&voisin_E;
 	initialiser_verif(verif1);
-	Type_Case* case_choisie=voisin_elu(case_proche);
+	case_choisie=voisin_elu(case_proche);
 	/*et on pose le pion à cet endroit là*/
 	return case_choisie->co;
 }
