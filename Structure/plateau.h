@@ -26,6 +26,7 @@ struct Type_Case
 {
 	Couleur coul;
 	Coordonnees_tab co;
+	bool check;
 	Type_Case* NE;
 	Type_Case* NO;
 	Type_Case* E;

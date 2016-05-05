@@ -171,7 +171,7 @@ int main (int argc, char * argv[])
 									historique(premier_coup, coord_tab, joueur_courant);
 									MaJ_Infos(menu, interface, joueur_courant);
 								
-									if (verify_win(board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab[coord_tab.abscisse][coord_tab.ordonnee]))
+									if (verify_win(board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab))
 									{
 										affiche_vainqueur(menu, interface, joueur_courant);
 										menu.actualMenu = menu.mainMenu;
@@ -206,7 +206,7 @@ int main (int argc, char * argv[])
 							historique(premier_coup, coord_tab, joueur_courant);
 							MaJ_Infos(menu, interface, joueur_courant);
 							
-							if (verify_win(board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab[coord_tab.abscisse][coord_tab.ordonnee]))
+							if (verify_win(board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab))
 							{
 								affiche_vainqueur(menu, interface, joueur_courant);
 								menu.actualMenu = menu.mainMenu;
