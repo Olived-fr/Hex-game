@@ -21,7 +21,6 @@
 #define nbMenuChoice 4
 #define nbPlayMenuChoice 4
 #define nbinGameMenuChoice 4
-#define nbfirstPlayerMenu 3
 #define MenuOptionHeight 80
 
 
@@ -49,8 +48,7 @@ struct s_Menu
 	char *mainMenu[nbMenuChoice];
 	char *playMenu[nbPlayMenuChoice];
 	char *inGameMenu[nbinGameMenuChoice];
-	char *firstPlayerMenu [nbfirstPlayerMenu];
-	SDL_Rect posMenu, posText, posCopyright, posInfos;
+	SDL_Rect posMenu, posText, posCopyright, posInfos, posInfosText;
 	SDL_Surface *menuSurface, *menuText, *copyrightSurface, *copyrightText, *InfosSurface, *InfosText;
 	TTF_Font *fontMenu;
 };

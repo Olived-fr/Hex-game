@@ -28,14 +28,11 @@ int main (int argc, char * argv[])
 	menu.playMenu[2] = "    Humain vs IA2";
 	menu.playMenu[3] = "          Retour";
 	
-	menu.inGameMenu[0] = "Sauver";
-	menu.inGameMenu[1] = "Charger";
+	menu.inGameMenu[0] = "Jouer";
+	menu.inGameMenu[1] = "Sauver";
 	menu.inGameMenu[2] = "Annuler";
 	menu.inGameMenu[3] = "Quitter";
 	
-	menu.firstPlayerMenu[0] = "Premier joueur: ";
-	menu.firstPlayerMenu[1] = "Bleu";
-	menu.firstPlayerMenu[2] = "Rouge";
 	
 	SDL_Event event;
 	Plateau board_tab;
@@ -132,12 +129,12 @@ int main (int argc, char * argv[])
 					{
 						if (choix == 0)
 						{
-							board_save(board_tab);
+							menu.actualMenu = menu.playMenu;
+							MaJ_Menu(menu, interface, nbPlayMenuChoice);
 						}
 						if (choix == 1)
 						{
-							chargement(board_tab);
-							MaJ_Board(board, interface, board_tab);
+							board_save(board_tab);
 						}
 						if (choix == 2)
 						{

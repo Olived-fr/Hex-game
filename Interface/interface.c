@@ -3,7 +3,7 @@
 
 const int SCREEN_WIDTH = 1120;
 const int SCREEN_HEIGHT = 720;
-const SDL_Color Black = {0,0,0};
+const SDL_Color Black = {0,0,0}, White = {255,255,255};
 
 
 /*********************************************** Initialisations ***********************************************/
@@ -75,14 +75,11 @@ s_Menu load_Menu (s_Interface interface)
 	menu.playMenu[2] = "    Humain vs IA2";
 	menu.playMenu[3] = "          Retour";
 	
-	menu.inGameMenu[0] = "Sauver";
-	menu.inGameMenu[1] = "Charger";
+	menu.inGameMenu[0] = "Jouer";
+	menu.inGameMenu[1] = "Sauver";
 	menu.inGameMenu[2] = "Annuler";
 	menu.inGameMenu[3] = "Quitter";
 	
-	menu.firstPlayerMenu[0] = "Premier joueur: ";
-	menu.firstPlayerMenu[1] = "Bleu";
-	menu.firstPlayerMenu[2] = "Rouge";
 
 	menu.fontMenu = TTF_OpenFont("Interface/Font/System San Francisco Display Regular.ttf",20);
 	if (menu.fontMenu == NULL)
@@ -92,7 +89,7 @@ s_Menu load_Menu (s_Interface interface)
 	}
 
 		//Surface du menu principal
-	menu.menuSurface = IMG_Load("Interface/Images/Menu.png");
+	menu.menuSurface = IMG_Load("Interface/Images/menu1.png");
 	menu.posMenu.x = 5;
 	menu.posMenu.y = 200;
 	SDL_BlitSurface(menu.menuSurface,NULL,interface.screenSurface,&menu.posMenu);
@@ -103,23 +100,23 @@ s_Menu load_Menu (s_Interface interface)
 	menu.posText.y = menu.posMenu.y + 30;
 	for(int i = 0; i < nbMenuChoice; i++)
 	{
-		menu.menuText = TTF_RenderText_Blended(menu.fontMenu,menu.mainMenu[i],Black);
+		menu.menuText = TTF_RenderText_Blended(menu.fontMenu,menu.mainMenu[i],White);
 		SDL_BlitSurface(menu.menuText,NULL,interface.screenSurface,&menu.posText);
 		menu.posText.y += MenuOptionHeight;
 	}
-
+	
 		//Copyright
-	menu.copyrightSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, 550, 40, 32, 0, 0, 0, 0);
+	menu.copyrightSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, 200,150, 32, 0, 0, 0, 0);
 	SDL_FillRect(menu.copyrightSurface, NULL, SDL_MapRGB(interface.screenSurface->format, 49, 56, 84));
-	menu.posCopyright.x = 270,
-	menu.posCopyright.y = 2;
+	menu.posCopyright.x = 2,
+	menu.posCopyright.y = 640;
 	SDL_BlitSurface(menu.copyrightSurface,NULL,interface.screenSurface,&menu.posCopyright);
-	menu.copyrightText = TTF_RenderText_Blended(menu.fontMenu, " Arnaud SOLER, Olivier DUFOUR, Rialy ANDRIAMISEZA - 2016" , Black);
+	menu.copyrightText = TTF_RenderText_Blended_Wrapped(menu.fontMenu, "Arnaud SOLER       Olivier DUFOUR      Rialy ANDRIAMISEZA", White,200);
+
 	SDL_BlitSurface(menu.copyrightText,NULL,interface.screenSurface,&menu.posCopyright);
 	
 		//Infos
-	menu.InfosSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, 700, 75, 32, 0, 0, 0, 0);
-	SDL_FillRect(menu.InfosSurface, NULL, SDL_MapRGB(interface.screenSurface->format, 27, 142, 202));
+	menu.InfosSurface = IMG_Load("Interface/Images/Infos.png");
 	menu.posInfos.x = 220,
 	menu.posInfos.y = 620;
 	SDL_BlitSurface(menu.InfosSurface,NULL,interface.screenSurface,&menu.posInfos);
@@ -139,7 +136,7 @@ void MaJ_Menu (s_Menu menu, s_Interface interface, int nbChoice)
 	menu.posText.y = menu.posMenu.y + 30;
 	for (int i = 0; i < nbChoice; i++)
 	{
-		menu.menuText = TTF_RenderText_Blended(menu.fontMenu,menu.actualMenu[i],Black);
+		menu.menuText = TTF_RenderText_Blended(menu.fontMenu,menu.actualMenu[i],White);
 		SDL_BlitSurface(menu.menuText,NULL,interface.screenSurface,&menu.posText);
 		menu.posText.y += MenuOptionHeight;
 	}
@@ -170,24 +167,25 @@ void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant)
 	infos[1] = infosA;
 	infos[2] = infosO;
 	
-
+	menu.posInfosText.x = menu.posInfos.x +260 ;
+	menu.posInfosText.y = menu.posInfos.y;
 	SDL_BlitSurface(menu.InfosSurface,NULL,interface.screenSurface,&menu.posInfos);
-	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, "Dernier coup: " , Black);
-	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfos);
-	menu.posInfos.x += 130;
+	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, "Dernier coup: " , White);
+	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
+	menu.posInfosText.x += 130;
 	for (int i = 0; i < 3; i++)
 	{
-	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, infos[i] , Black);
-	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfos);
-	menu.posInfos.x += 30;
+	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, infos[i] , White);
+	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
+	menu.posInfosText.x += 30;
 	}
-	menu.posInfos.x -= 220;
-	menu.posInfos.y += 50;
-	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, "Prochain joueur: " , Black);
-	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfos);
-	menu.posInfos.x += 160;
-	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, infosJ2 , Black);
-	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfos);
+	menu.posInfosText.x -= 220;
+	menu.posInfosText.y += 50;
+	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, "Prochain joueur: " , White);
+	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
+	menu.posInfosText.x += 160;
+	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, infosJ2 , White);
+	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
 	
 }
 
@@ -204,7 +202,7 @@ void affiche_vainqueur (s_Menu menu, s_Interface interface, Couleur joueur_coura
 	
 	sprintf(infos, "Le joueur %s gagne !", vainqueur);
 	SDL_BlitSurface(menu.InfosSurface,NULL,interface.screenSurface,&menu.posInfos);
-	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, infos , Black);
+	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, infos , White);
 	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfos);
 
 }
@@ -217,13 +215,13 @@ s_Board load_Board (s_Interface interface)
 	s_Board board;
 
 		//Chargement et position de l'image du plateau
-	board.boardSurface = IMG_Load("Interface/Images/hexBoard3.png");
+	board.boardSurface = IMG_Load("Interface/Images/board.png");
 	board.posBoard.x = 300;
 	board.posBoard.y = 120;
 
 		//Chargement des pions
-	board.pionBleu = IMG_Load("Interface/Images/HexBlue.png");
-	board.pionRouge = IMG_Load("Interface/Images/HexRed.png");
+	board.pionBleu = IMG_Load("Interface/Images/PionBleu.png");
+	board.pionRouge = IMG_Load("Interface/Images/PionRouge.png");
 
 	if (board.boardSurface == NULL || board.pionBleu == NULL || board.pionRouge == NULL)
 	{
@@ -284,6 +282,7 @@ void Quit (s_Board board, s_Interface interface, s_Menu menu)
 	SDL_FreeSurface(menu.menuText);
 	SDL_FreeSurface(board.pionBleu);
 	SDL_FreeSurface(board.pionRouge);
+	SDL_FreeSurface(interface.background);
 	
 		//Supprime la fenêtre
 	SDL_DestroyWindow(interface.window);
@@ -330,9 +329,18 @@ int choix_Menu (Coord_SDL clic, s_Menu menu)
 Coord_SDL pos_pion_SDL (Coordonnees_tab coord_tab, s_Board board)
 {
 	Coord_SDL coord;
-
-	coord.CoordX = coord_tab.abscisse * 44 + coord_tab.abscisse + coord_tab.ordonnee * 23 + board.posBoard.x + 6;
-	coord.CoordY = coord_tab.ordonnee * 50 + coord_tab.ordonnee - coord_tab.ordonnee * 12 + board.posBoard.y + 10;
+	if (coord_tab.ordonnee == 0)
+		coord.CoordX = coord_tab.abscisse * 44 + coord_tab.abscisse + coord_tab.ordonnee * 23.4 + board.posBoard.x + 8.9;
+	if (coord_tab.ordonnee == 1)
+		coord.CoordX = coord_tab.abscisse * 44 + coord_tab.abscisse + coord_tab.ordonnee * 23.4 + board.posBoard.x + 8.5;
+	if (coord_tab.ordonnee == 2)
+		coord.CoordX = coord_tab.abscisse * 44 + coord_tab.abscisse + coord_tab.ordonnee * 23.2+ board.posBoard.x + 6;
+	if (coord_tab.ordonnee >= 3 && coord_tab.ordonnee <= 4)
+		coord.CoordX = coord_tab.abscisse * 44 + coord_tab.abscisse + coord_tab.ordonnee * 22.9 + board.posBoard.x + 6.5;
+	if (coord_tab.ordonnee >= 5 && coord_tab.ordonnee <= 11)
+		coord.CoordX = coord_tab.abscisse * 44 + coord_tab.abscisse + coord_tab.ordonnee * 22.5 + board.posBoard.x + 8.6;
+	
+	coord.CoordY = coord_tab.ordonnee * 50 + coord_tab.ordonnee - coord_tab.ordonnee * 12 + board.posBoard.y + 10.9;
 	return coord;
 }
 
