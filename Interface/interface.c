@@ -65,7 +65,7 @@ s_Menu load_Menu (s_Interface interface)
 
 	s_Menu menu;
 
-	menu.mainMenu[0] = "Menu";
+	menu.mainMenu[0] = "        Menu";
 	menu.mainMenu[1] = "Jouer";
 	menu.mainMenu[2] = "Charger";
 	menu.mainMenu[3] = "Quitter";
@@ -100,8 +100,11 @@ s_Menu load_Menu (s_Interface interface)
 	menu.posText.y = menu.posMenu.y + 30;
 	for(int i = 0; i < nbMenuChoice; i++)
 	{
+		if (strcmp(menu.mainMenu[i],"        Menu")==0)
+			TTF_SetFontStyle(menu.fontMenu, TTF_STYLE_BOLD);
 		menu.menuText = TTF_RenderText_Blended(menu.fontMenu,menu.mainMenu[i],White);
 		SDL_BlitSurface(menu.menuText,NULL,interface.screenSurface,&menu.posText);
+		TTF_SetFontStyle(menu.fontMenu, TTF_STYLE_NORMAL);
 		menu.posText.y += MenuOptionHeight;
 	}
 	
@@ -119,6 +122,8 @@ s_Menu load_Menu (s_Interface interface)
 	menu.InfosSurface = IMG_Load("Interface/Images/Infos.png");
 	menu.posInfos.x = 220,
 	menu.posInfos.y = 620;
+	menu.posInfosText.x = menu.posInfos.x +260 ;
+	menu.posInfosText.y = menu.posInfos.y;
 	SDL_BlitSurface(menu.InfosSurface,NULL,interface.screenSurface,&menu.posInfos);
 	
 
@@ -136,8 +141,11 @@ void MaJ_Menu (s_Menu menu, s_Interface interface, int nbChoice)
 	menu.posText.y = menu.posMenu.y + 30;
 	for (int i = 0; i < nbChoice; i++)
 	{
+		if (strcmp(menu.actualMenu[i],"        Menu")==0)
+			TTF_SetFontStyle(menu.fontMenu, TTF_STYLE_BOLD);
 		menu.menuText = TTF_RenderText_Blended(menu.fontMenu,menu.actualMenu[i],White);
 		SDL_BlitSurface(menu.menuText,NULL,interface.screenSurface,&menu.posText);
+		TTF_SetFontStyle(menu.fontMenu, TTF_STYLE_NORMAL);
 		menu.posText.y += MenuOptionHeight;
 	}
 }
@@ -167,8 +175,7 @@ void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant)
 	infos[1] = infosA;
 	infos[2] = infosO;
 	
-	menu.posInfosText.x = menu.posInfos.x +260 ;
-	menu.posInfosText.y = menu.posInfos.y;
+
 	SDL_BlitSurface(menu.InfosSurface,NULL,interface.screenSurface,&menu.posInfos);
 	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, "Dernier coup: " , White);
 	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
@@ -203,7 +210,7 @@ void affiche_vainqueur (s_Menu menu, s_Interface interface, Couleur joueur_coura
 	sprintf(infos, "Le joueur %s gagne !", vainqueur);
 	SDL_BlitSurface(menu.InfosSurface,NULL,interface.screenSurface,&menu.posInfos);
 	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, infos , White);
-	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfos);
+	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
 
 }
 

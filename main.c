@@ -18,22 +18,6 @@ int main (int argc, char * argv[])
 	board = load_Board(interface);
 	menu = load_Menu(interface);
 	
-	menu.mainMenu[0] = "Menu";
-	menu.mainMenu[1] = "Jouer";
-	menu.mainMenu[2] = "Charger";
-	menu.mainMenu[3] = "Quitter";
-	
-	menu.playMenu[0] = " Humain vs Humain";
-	menu.playMenu[1] = "    Humain vs IA1";
-	menu.playMenu[2] = "    Humain vs IA2";
-	menu.playMenu[3] = "          Retour";
-	
-	menu.inGameMenu[0] = "Jouer";
-	menu.inGameMenu[1] = "Sauver";
-	menu.inGameMenu[2] = "Annuler";
-	menu.inGameMenu[3] = "Quitter";
-	
-	
 	SDL_Event event;
 	Plateau board_tab;
 	Coordonnees_tab coord_tab;
