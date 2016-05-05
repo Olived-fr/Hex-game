@@ -67,27 +67,6 @@ bool bord_oppose_rouge(Type_Case deb, Type_Case comp)
 	return false;
 }
 
-//bool est_voisin(Type_Case comp, Type_Case prev)
-/* Fonction qui renvoit vrai si la case comp est voisine avec prev */
-/* Cette fonction va permettre de regarder dans le verify_bord et verify_bord_oppose si la case dans laquelle on veut aller est un voisin
-	de la case précédente de l'actuelle, ce qui permet d'éviter de tourner en boucle et de lancer la récursivité à l'infini */
-/*{
-    if(bord(prev) || bord(comp))
-    {
-        return false;
-    }
-    else
-    {
-        return ((comp.SE->co.abscisse==prev.co.abscisse && comp.SE->co.ordonnee==prev.co.ordonnee)
-        || (comp.SO->co.abscisse==prev.co.abscisse && comp.SO->co.ordonnee==prev.co.ordonnee)
-        || (comp.O->co.abscisse==prev.co.abscisse && comp.O->co.ordonnee==prev.co.ordonnee)
-        || (comp.NO->co.abscisse==prev.co.abscisse && comp.NO->co.ordonnee==prev.co.ordonnee)
-        || (comp.NE->co.abscisse==prev.co.abscisse && comp.NE->co.ordonnee==prev.co.ordonnee)
-            || (comp.E->co.abscisse==prev.co.abscisse && comp.E->co.ordonnee==prev.co.ordonnee));
-    }
-
-}*/
-
 bool verify_bord(Type_Case *cur, Type_Case *ret)
 /* Vérification si en partant d'une case posée on peut atteindre un bord */
 {

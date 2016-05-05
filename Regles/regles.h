@@ -9,14 +9,12 @@
 #include "../Persistance/persistance.h"
 
 
-bool premier_joueur();
 void nouvelle_partie(Plateau p);
 void reinitialise_case_checked(Plateau p);
 bool bord_bleu(Type_Case c);
 bool bord_rouge(Type_Case c);
 bool bord_oppose_bleu(Type_Case deb, Type_Case comp);
 bool bord_oppose_rouge(Type_Case deb, Type_Case comp);
-bool est_voisin(Type_Case comp, Type_Case prev);
 bool verify_bord(Type_Case *cur, Type_Case *ret);
 bool verify_bord_oppose(Type_Case *cur, Type_Case deb);
 bool verify_win(Type_Case cur, Plateau p);
