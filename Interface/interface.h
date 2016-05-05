@@ -32,6 +32,7 @@ struct s_Interface
 {
 	SDL_Window *window;
 	SDL_Surface *screenSurface;
+	SDL_Surface *background;
 };
 
 typedef struct s_Coord Coord_SDL;

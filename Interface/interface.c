@@ -49,8 +49,8 @@ s_Interface Init ()
 	interface.screenSurface = SDL_GetWindowSurface(interface.window);
 	SDL_FillRect(interface.screenSurface, NULL, SDL_MapRGB( interface.screenSurface->format, 255, 255, 255 ));
 
-		//interface.background = IMG_Load("Interface/Images/background.png");
-		//SDL_BlitSurface(interface.background,NULL,interface.screenSurface,NULL);
+	interface.background = IMG_Load("Interface/Images/background.png");
+	SDL_BlitSurface(interface.background,NULL,interface.screenSurface,NULL);
 	
 
 	return interface;
