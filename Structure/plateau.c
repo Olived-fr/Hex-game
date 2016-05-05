@@ -8,6 +8,7 @@ void initialiser_plateau(Plateau p)
 		for(y=0;y<COLONNE_MAX;y++)//et de toutes les colonnes
 		{
 			p[x][y].co.abscisse=x;
+			p[x][y].check=false;
 			p[x][y].co.ordonnee=y;
 			p[x][y].coul=neutre;//initialisation de toutes les cases avec la couleur 'neutre'
 			switch(x)

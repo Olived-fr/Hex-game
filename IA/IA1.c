@@ -126,12 +126,30 @@ bool impasse(Type_Case c,Couleur cou,bool verif[LIGNE_MAX][COLONNE_MAX])
 {
 	bool NE,NO,O,E,SO,SE; //chaque booleen indique true si la case concernée est libre
 	/* une case est dite libre si elle n'a pas déjà été vérifiée et si elle n'est pas de la couleur de l'adversaire */
-	NE=(c.NE->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee-1]);
-	NO=(c.NO->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee-1]);
-	E=(c.E->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee]);
-	O=(c.O->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee]);
-	SE=(c.SE->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee+1]);
-	SO=(c.SO->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee+1]);
+	if(c.NE!=NULL)
+		NE=(c.NE->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee-1]);
+	else
+		NE=true;
+	if(c.NO!=NULL)
+		NO=(c.NO->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee-1]);
+	else
+		NO=true;
+	if(c.E!=NULL)
+		E=(c.E->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee]);
+	else
+		E=true;
+	if(c.O!=NULL)
+		O=(c.O->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee]);
+	else
+		O=true;
+	if(c.SE!=NULL)
+		SE=(c.SE->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee+1]);
+	else
+		SE=true;
+	if(c.SO!=NULL)
+		SO=(c.SO->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee+1]);
+	else
+		SO=true;
 	return (NE && NO && E && O && SE && SO);
 }
 
