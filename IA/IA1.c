@@ -12,7 +12,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	Type_Case* case_choisie=&p[5][5];
 	if(case_choisie->coul==changer_joueur(couleur_courante))case_choisie=case_choisie->O;
 	Type_Case case_courante;
-	Type_Case case_proche;
+	Type_Case case_proche=&p[5][5];
 	bool verif1[LIGNE_MAX][COLONNE_MAX];
 	bool verif2[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif1);
