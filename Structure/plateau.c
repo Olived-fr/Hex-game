@@ -16,7 +16,7 @@ void initialiser_plateau(Plateau p)
 				case 0 : //si la case courante est à l'extrémité ouest
 					p[x][y].SO=NULL;//on ne lui affecte pas de voisin sud ouest
 					p[x][y].O=NULL;//on ne lui affecte pas de voisin ouest
-					p[x][y].E=p[x+1][y];//elle a forcément un voisin est
+					p[x][y].E=&p[x+1][y];//elle a forcément un voisin est
 					switch(y)
 					{
 						case 0 : //si la case courante est à l'extrémité nord

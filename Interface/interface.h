@@ -48,8 +48,8 @@ struct s_Menu
 	char *mainMenu[nbMenuChoice];
 	char *playMenu[nbPlayMenuChoice];
 	char *inGameMenu[nbinGameMenuChoice];
-	SDL_Rect posMenu, posText, posCopyright, posInfos, posInfosText;
-	SDL_Surface *menuSurface, *menuText, *copyrightSurface, *copyrightText, *InfosSurface, *InfosText;
+	SDL_Rect posMenu, posText, posCopyright, posInfos, posInfosText, posTitle;
+	SDL_Surface *menuSurface, *menuText, *copyrightSurface, *copyrightText, *InfosSurface, *InfosText, *titleSurface;
 	TTF_Font *fontMenu;
 };
 

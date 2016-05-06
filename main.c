@@ -26,6 +26,8 @@ int main (int argc, char * argv[])
 	bool quit = false, premier_coup = true, IA = false;
 	int choix;
 	
+	coord_tab.abscisse = 0;
+	coord_tab.ordonnee = 0;
 	while (!quit)
 	{
 		SDL_WaitEvent(&event);

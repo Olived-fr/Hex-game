@@ -65,15 +65,15 @@ s_Menu load_Menu (s_Interface interface)
 
 	s_Menu menu;
 
-	menu.mainMenu[0] = "        Menu";
+	menu.mainMenu[0] = "      Menu";
 	menu.mainMenu[1] = "Jouer";
 	menu.mainMenu[2] = "Charger";
 	menu.mainMenu[3] = "Quitter";
 
-	menu.playMenu[0] = " Humain vs Humain";
-	menu.playMenu[1] = "    Humain vs IA1";
-	menu.playMenu[2] = "    Humain vs IA2";
-	menu.playMenu[3] = "          Retour";
+	menu.playMenu[0] = "Humain vs Humain";
+	menu.playMenu[1] = " Humain vs IA1";
+	menu.playMenu[2] = " Humain vs IA2";
+	menu.playMenu[3] = "     Retour";
 	
 	menu.inGameMenu[0] = "Jouer";
 	menu.inGameMenu[1] = "Sauver";
@@ -81,7 +81,7 @@ s_Menu load_Menu (s_Interface interface)
 	menu.inGameMenu[3] = "Quitter";
 	
 
-	menu.fontMenu = TTF_OpenFont("Interface/Font/System San Francisco Display Regular.ttf",20);
+	menu.fontMenu = TTF_OpenFont("Interface/Font/TELE2.ttf",14);
 	if (menu.fontMenu == NULL)
 	{
 		fprintf(stderr, "Impossible de charger la police de caractère");
@@ -89,8 +89,8 @@ s_Menu load_Menu (s_Interface interface)
 	}
 
 		//Surface du menu principal
-	menu.menuSurface = IMG_Load("Interface/Images/menu1.png");
-	menu.posMenu.x = 5;
+	menu.menuSurface = IMG_Load("Interface/Images/menu.png");
+	menu.posMenu.x = 2;
 	menu.posMenu.y = 200;
 	SDL_BlitSurface(menu.menuSurface,NULL,interface.screenSurface,&menu.posMenu);
 
@@ -100,7 +100,7 @@ s_Menu load_Menu (s_Interface interface)
 	menu.posText.y = menu.posMenu.y + 30;
 	for(int i = 0; i < nbMenuChoice; i++)
 	{
-		if (strcmp(menu.mainMenu[i],"        Menu")==0)
+		if (strcmp(menu.mainMenu[i],"      Menu")==0)
 			TTF_SetFontStyle(menu.fontMenu, TTF_STYLE_BOLD);
 		menu.menuText = TTF_RenderText_Blended(menu.fontMenu,menu.mainMenu[i],White);
 		SDL_BlitSurface(menu.menuText,NULL,interface.screenSurface,&menu.posText);
@@ -108,13 +108,18 @@ s_Menu load_Menu (s_Interface interface)
 		menu.posText.y += MenuOptionHeight;
 	}
 	
+	menu.titleSurface = IMG_Load("Interface/Images/title.png");
+	menu.posTitle.x = 460;
+	menu.posTitle.y = 2;
+	SDL_BlitSurface(menu.titleSurface,NULL,interface.screenSurface,&menu.posTitle);
+
 		//Copyright
 	menu.copyrightSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, 200,150, 32, 0, 0, 0, 0);
 	SDL_FillRect(menu.copyrightSurface, NULL, SDL_MapRGB(interface.screenSurface->format, 49, 56, 84));
 	menu.posCopyright.x = 2,
-	menu.posCopyright.y = 640;
+	menu.posCopyright.y = 650;
 	SDL_BlitSurface(menu.copyrightSurface,NULL,interface.screenSurface,&menu.posCopyright);
-	menu.copyrightText = TTF_RenderText_Blended_Wrapped(menu.fontMenu, "Arnaud SOLER       Olivier DUFOUR      Rialy ANDRIAMISEZA", White,200);
+	menu.copyrightText = TTF_RenderText_Blended_Wrapped(menu.fontMenu, "Arnaud SOLER Olivier DUFOUR Rialy ANDRIAMISEZA", White,210);
 
 	SDL_BlitSurface(menu.copyrightText,NULL,interface.screenSurface,&menu.posCopyright);
 	
@@ -141,7 +146,7 @@ void MaJ_Menu (s_Menu menu, s_Interface interface, int nbChoice)
 	menu.posText.y = menu.posMenu.y + 30;
 	for (int i = 0; i < nbChoice; i++)
 	{
-		if (strcmp(menu.actualMenu[i],"        Menu")==0)
+		if (strcmp(menu.actualMenu[i],"      Menu")==0)
 			TTF_SetFontStyle(menu.fontMenu, TTF_STYLE_BOLD);
 		menu.menuText = TTF_RenderText_Blended(menu.fontMenu,menu.actualMenu[i],White);
 		SDL_BlitSurface(menu.menuText,NULL,interface.screenSurface,&menu.posText);
@@ -163,7 +168,7 @@ void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant)
 	
 	dernier_coup(couleur, &abscisse, &ordonnee);
 	sprintf(infosA, "(%d ,", abscisse);
-	sprintf(infosO, " %d)", ordonnee);
+	sprintf(infosO, "%d)", ordonnee);
 	sprintf(infosJ, "%c",couleur[0]);
 	
 	if (joueur_courant == bleu)
@@ -179,18 +184,18 @@ void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant)
 	SDL_BlitSurface(menu.InfosSurface,NULL,interface.screenSurface,&menu.posInfos);
 	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, "Dernier coup: " , White);
 	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
-	menu.posInfosText.x += 130;
+	menu.posInfosText.x += 170;
 	for (int i = 0; i < 3; i++)
 	{
 	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, infos[i] , White);
 	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
-	menu.posInfosText.x += 30;
+	menu.posInfosText.x += 50;
 	}
-	menu.posInfosText.x -= 220;
+	menu.posInfosText.x -= 320;
 	menu.posInfosText.y += 50;
 	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, "Prochain joueur: " , White);
 	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
-	menu.posInfosText.x += 160;
+	menu.posInfosText.x += 220;
 	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, infosJ2 , White);
 	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
 	
@@ -227,8 +232,8 @@ s_Board load_Board (s_Interface interface)
 	board.posBoard.y = 120;
 
 		//Chargement des pions
-	board.pionBleu = IMG_Load("Interface/Images/PionBleu.png");
-	board.pionRouge = IMG_Load("Interface/Images/PionRouge.png");
+	board.pionBleu = IMG_Load("Interface/Images/PionB.png");
+	board.pionRouge = IMG_Load("Interface/Images/PionR.png");
 
 	if (board.boardSurface == NULL || board.pionBleu == NULL || board.pionRouge == NULL)
 	{
@@ -309,19 +314,19 @@ void Quit (s_Board board, s_Interface interface, s_Menu menu)
 int choix_Menu (Coord_SDL clic, s_Menu menu)
 {
 
-	if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 200 && clic.CoordY < 280)
+	if (clic.CoordX > 2 && clic.CoordX < 205 && clic.CoordY > 200 && clic.CoordY < 280)
 	{
 		return 0;
 	}
-	if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 280 && clic.CoordY < 360)
+	if (clic.CoordX > 2 && clic.CoordX < 205 && clic.CoordY > 280 && clic.CoordY < 360)
 	{
 		return 1;
 	}
-	if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 360 && clic.CoordY < 440)
+	if (clic.CoordX > 2 && clic.CoordX < 205 && clic.CoordY > 360 && clic.CoordY < 440)
 	{
 		return 2;
 	}
-	if (clic.CoordX > 5 && clic.CoordX < 205 && clic.CoordY > 440 && clic.CoordY < 520)
+	if (clic.CoordX > 2 && clic.CoordX < 205 && clic.CoordY > 440 && clic.CoordY < 520)
 	{
 		return 3;
 	}
@@ -337,17 +342,17 @@ Coord_SDL pos_pion_SDL (Coordonnees_tab coord_tab, s_Board board)
 {
 	Coord_SDL coord;
 	if (coord_tab.ordonnee == 0)
-		coord.CoordX = coord_tab.abscisse * 44 + coord_tab.abscisse + coord_tab.ordonnee * 23.4 + board.posBoard.x + 8.9;
+		coord.CoordX = coord_tab.abscisse * 44 + coord_tab.abscisse + coord_tab.ordonnee * 23.4 + board.posBoard.x + 9;
 	if (coord_tab.ordonnee == 1)
 		coord.CoordX = coord_tab.abscisse * 44 + coord_tab.abscisse + coord_tab.ordonnee * 23.4 + board.posBoard.x + 8.5;
 	if (coord_tab.ordonnee == 2)
-		coord.CoordX = coord_tab.abscisse * 44 + coord_tab.abscisse + coord_tab.ordonnee * 23.2+ board.posBoard.x + 6;
+		coord.CoordX = coord_tab.abscisse * 44.3 + coord_tab.abscisse + coord_tab.ordonnee * 23.2+ board.posBoard.x + 6.3;
 	if (coord_tab.ordonnee >= 3 && coord_tab.ordonnee <= 4)
-		coord.CoordX = coord_tab.abscisse * 44 + coord_tab.abscisse + coord_tab.ordonnee * 22.9 + board.posBoard.x + 6.5;
+		coord.CoordX = coord_tab.abscisse * 44.2 + coord_tab.abscisse + coord_tab.ordonnee * 22.9 + board.posBoard.x + 6.8;
 	if (coord_tab.ordonnee >= 5 && coord_tab.ordonnee <= 11)
-		coord.CoordX = coord_tab.abscisse * 44 + coord_tab.abscisse + coord_tab.ordonnee * 22.5 + board.posBoard.x + 8.6;
+		coord.CoordX = coord_tab.abscisse * 44.2 + coord_tab.abscisse + coord_tab.ordonnee * 22.5 + board.posBoard.x + 9;
 	
-	coord.CoordY = coord_tab.ordonnee * 50 + coord_tab.ordonnee - coord_tab.ordonnee * 12 + board.posBoard.y + 10.9;
+	coord.CoordY = coord_tab.ordonnee * 50 + coord_tab.ordonnee - coord_tab.ordonnee * 12 + board.posBoard.y + 9.9;
 	return coord;
 }
 
