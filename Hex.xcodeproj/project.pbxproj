@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		090991A31CDCD44C00E864BF /* IA1.c in Sources */ = {isa = PBXBuildFile; fileRef = 090991A21CDCD44C00E864BF /* IA1.c */; };
 		0922C3301CCD25EC00375706 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 0922C32F1CCD25EC00375706 /* main.c */; };
 		0922C3351CCD2B5F00375706 /* regles.c in Sources */ = {isa = PBXBuildFile; fileRef = 0922C3341CCD2B5F00375706 /* regles.c */; };
 		0922C3371CCD2B8B00375706 /* plateau.c in Sources */ = {isa = PBXBuildFile; fileRef = 0922C3361CCD2B8B00375706 /* plateau.c */; };
@@ -30,6 +31,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		090991A21CDCD44C00E864BF /* IA1.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = IA1.c; path = IA/IA1.c; sourceTree = "<group>"; };
 		0922C32F1CCD25EC00375706 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = SOURCE_ROOT; };
 		0922C3311CCD293400375706 /* Regles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Regles; sourceTree = "<group>"; };
 		0922C3321CCD294900375706 /* Structure */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Structure; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 		0950A4F91C9FFF8900BF1207 = {
 			isa = PBXGroup;
 			children = (
+				090991A21CDCD44C00E864BF /* IA1.c */,
 				0922C33A1CCD47B000375706 /* persistance.c */,
 				0922C3381CCD2BA300375706 /* interface.c */,
 				0922C3361CCD2B8B00375706 /* plateau.c */,
@@ -139,6 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				090991A31CDCD44C00E864BF /* IA1.c in Sources */,
 				0922C33B1CCD47B000375706 /* persistance.c in Sources */,
 				0922C3391CCD2BA300375706 /* interface.c in Sources */,
 				0922C3371CCD2B8B00375706 /* plateau.c in Sources */,

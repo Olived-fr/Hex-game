@@ -108,8 +108,9 @@ s_Menu load_Menu (s_Interface interface)
 		menu.posText.y += MenuOptionHeight;
 	}
 	
+		//Titre
 	menu.titleSurface = IMG_Load("Interface/Images/title.png");
-	menu.posTitle.x = 460;
+	menu.posTitle.x = 470;
 	menu.posTitle.y = 2;
 	SDL_BlitSurface(menu.titleSurface,NULL,interface.screenSurface,&menu.posTitle);
 
