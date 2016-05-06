@@ -26,7 +26,7 @@ Coordonnees_tab coup_IA1(Plateau p)
 				initialiser_verif(verif1);
 				d1=distance_bord_nord(p,case_courante,verif1,couleur_courante);
 				initialiser_sud(verif2);
-				d2=distance_extremite2(p,case_courante,verif2,couleur_courante);
+				d2=distance_bord_sud(p,case_courante,verif2,couleur_courante);
 				/*le troisième argument n'a aucun interêt ici, il n'est utile que dans le cas d'un appel récursif pour éviter de tourner en rond*/
 				if(d1 < distance_min && d1!=0)
 				{
@@ -101,7 +101,7 @@ int distance_bord_nord(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],
 	int distance=0;
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	if(relie_bord_nord(p,c,verif,cou))return LIGNE_MAX+1;
+	if(relie_bord_nord(p,c,verif))return LIGNE_MAX+1;
 	if(c.NO==NULL)
 		return 0;
 	else
@@ -147,7 +147,7 @@ int distance_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],C
 	int distance=0;
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	if(relie_bord_sud(p,c,verif,cou))return LIGNE_MAX+1;
+	if(relie_bord_sud(p,c,verif))return LIGNE_MAX+1;
 	if(c.SE==NULL)
 		return 0;
 	else
@@ -248,7 +248,7 @@ bool impasse_bord(Type_Case c,Couleur cou,bool verif[LIGNE_MAX][COLONNE_MAX])
 	return (NE && NO && E && O && SE && SO);
 }
 
-bool relie_bord_nord(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Couleur cou)
+bool relie_bord_nord(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
 {
 	verif[c.co.abscisse][c.co.ordonnee]=true;
 	bool relie=true;
@@ -289,7 +289,7 @@ bool relie_bord_nord(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Co
 	return relie;
 }
 
-bool relie_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Couleur cou)
+bool relie_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
 {
 	verif[c.co.abscisse][c.co.ordonnee]=true;
 	bool relie=true;
