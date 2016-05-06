@@ -111,13 +111,20 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	initialiser_verif(verif1);
 	case_choisie=voisin_elu(case_proche); 
 	/*et on pose le pion à cet endroit là*/
-/*
 	if(!horizontal)
 	{
 		while(p[case_choisie->co.abscisse][case_choisie->co.ordonnee].coul!=neutre && case_choisie!=NULL)
+		{	
 			case_choisie=case_choisie->SE;
+			if(case_choisie==NULL)
+				break;
+		}
 		while(p[case_choisie->co.abscisse][case_choisie->co.ordonnee].coul!=neutre && case_choisie!=NULL)
+		{	
 			case_choisie=case_choisie->NO;
+			if(case_choisie==NULL)
+				break;
+		}
 	}
 	else
 	{
@@ -126,7 +133,6 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 		while(p[case_choisie->co.abscisse][case_choisie->co.ordonnee].coul!=neutre && case_choisie!=NULL)
 			case_choisie=case_choisie->E;
 	}
-*/
 	return case_choisie->co;
 }
 
