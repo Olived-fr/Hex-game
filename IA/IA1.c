@@ -1,14 +1,12 @@
 #include "IA.h"
 
-Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
+Coordonnees_tab coup_IA1(Plateau p)
 {	
 	int x,y,d1,d2;
 	int distance_min=LIGNE_MAX+2;
 	//afin de s'assurer que la première itération génerera une distance min
-	int(*distance_extremite1)(Plateau,Type_Case,bool verif1[LIGNE_MAX][COLONNE_MAX],Couleur);
-	int(*distance_extremite2)(Plateau,Type_Case,bool verif2[LIGNE_MAX][COLONNE_MAX],Couleur);
-	int(*distance_choisie)(Plateau,Type_Case,bool verif2[LIGNE_MAX][COLONNE_MAX],Couleur)=&distance_bord_ouest;
-	Type_Case*(*voisin_elu)(Type_Case)=&voisin_NO;
+	int(*distance_choisie)(Plateau,Type_Case,bool verif2[LIGNE_MAX][COLONNE_MAX],Couleur)=&distance_bord_sud;
+	//Type_Case*(*voisin_elu)(Type_Case)=&voisin_NO;
 	Type_Case* case_choisie=&p[5][5];
 	if(case_choisie->coul==changer_joueur(couleur_courante))case_choisie=case_choisie->O;
 	Type_Case case_courante;
@@ -17,23 +15,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	bool verif2[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif1);
 	initialiser_verif(verif2);
-	if(couleur_courante==bleu)
-	{
-		distance_extremite1=&distance_bord_ouest;
-		distance_extremite2=&distance_bord_est;
-	}
-	else
-	{
-		distance_extremite1=&distance_bord_nord;
-		distance_extremite2=&distance_bord_sud;
-	}
 	//si le plateau est de taille 11 par exemple la distance maximale qu'une case peut avoir à un bord est égal à 10
-	bool horizontal=(couleur_courante==bleu);
-	if(horizontal)
-		distance_min=LIGNE_MAX-1;
-	else
-		distance_min=COLONNE_MAX-2;
-	//Note : cette instruction conditionnelle est facultative car on admet que LIGNE_MAX est toujours égal à COLONNE_MAX
 	for(x=0;x<LIGNE_MAX;x++)
 	{
 		for(y=0;y<COLONNE_MAX;y++)
@@ -42,22 +24,22 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 			if(case_courante.coul==couleur_courante)
 			{
 				initialiser_verif(verif1);
-				d1=distance_extremite1(p,case_courante,verif1,couleur_courante);
-				initialiser_verif(verif2);
+				d1=distance_bord_nord(p,case_courante,verif1,couleur_courante);
+				initialiser_sud(verif2);
 				d2=distance_extremite2(p,case_courante,verif2,couleur_courante);
 				/*le troisième argument n'a aucun interêt ici, il n'est utile que dans le cas d'un appel récursif pour éviter de tourner en rond*/
 				if(d1 < distance_min && d1!=0)
 				{
 					case_proche=case_courante;
 					initialiser_verif(verif1);
-					distance_choisie=distance_extremite1;
+					distance_choisie=&distance_bord_nord;
 					distance_min=d1;
 				}
 				if(d2 < distance_min && d2!=0)
 				{
 					case_proche=case_courante;
 					initialiser_verif(verif2);
-					distance_choisie=distance_extremite2;
+					distance_choisie=distance_bord_sud;
 					distance_min=d2;
 				}
 				/*Ainsi, on retient la distance la plus courte et on retient également la direction la plus courte avec la variable "distance_choisie"*/
@@ -66,72 +48,11 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	}
 	/* case_proche contient la case la plus proche d'un bord parmi ses voisins neutres on regarde celui qui est
 	le plus proche du bord concerné*/
-	/*
-	int distance_courante;
-	initialiser_verif(verif1);
-	if(case_proche.NO!=NULL && case_proche.NO->coul==neutre)
-	{
-		distance_courante=distance_choisie(p,*case_proche.NO,verif1,couleur_courante);
-		if(distance_courante < distance_min && case_proche.NO->coul==neutre)
-		{
-			distance_min=distance_courante;
-			voisin_elu=&voisin_NO;
-		}
-	}
-	initialiser_verif(verif1);
-	if(case_proche.NE!=NULL && case_proche.NE->coul==neutre)
-	{
-		distance_courante=distance_choisie(p,*case_proche.NE,verif1,couleur_courante);
-		if(distance_courante < distance_min && case_proche.NE->coul==neutre)
-		{
-			distance_min=distance_courante;
-			voisin_elu=&voisin_NE;
-		}
-	}
-	initialiser_verif(verif1);
-	if(case_proche.O!=NULL && case_proche.O->coul==neutre)
-	{
-		distance_courante=distance_choisie(p,*case_proche.O,verif1,couleur_courante);
-		if(distance_courante < distance_min && case_proche.O->coul==neutre)
-		{
-			distance_min=distance_courante;
-			voisin_elu=&voisin_O;
-		}
-	}
-	initialiser_verif(verif1);
-	if(case_proche.SO!=NULL && case_proche.SO->coul==neutre)
-	{
-		distance_courante=distance_choisie(p,*case_proche.SO,verif1,couleur_courante);
-		if(distance_courante < distance_min && case_proche.SO->coul==neutre)
-		{
-			distance_min=distance_courante;
-			voisin_elu=&voisin_SO;
-		}
-	}
-	initialiser_verif(verif1);
-	if(case_proche.SE!=NULL && case_proche.SE->coul==neutre)
-	{
-		distance_courante=distance_choisie(p,*case_proche.SE,verif1,couleur_courante);
-		if(distance_courante < distance_min && case_proche.SE->coul==neutre)
-		{
-			distance_min=distance_courante;
-			voisin_elu=&voisin_SE;
-		}
-	}
-	initialiser_verif(verif1);
-	if(case_proche.E!=NULL && case_proche.E->coul==neutre)
-	{
-		distance_courante=distance_choisie(p,*case_proche.E,verif1,couleur_courante);
-		if(distance_courante < distance_min && case_proche.E->coul==neutre)
-		{
-			distance_min=distance_courante;
-			voisin_elu=&voisin_E;
-		}
-	}
-	initialiser_verif(verif1);
-	case_choisie=voisin_elu(case_proche); */
-	/*et on pose le pion à cet endroit là*/
-	case_choisie=contourner(case_proche,case_proche->SE,horizontal,couleur_courante);
+	
+	if(distance_choisie==distance_bord_nord)
+		case_proche=contourner(case_proche,case_proche->NO);
+	else
+		case_proche=contourner(case_proche,case_proche->SE);
 	return case_choisie->co;
 }
 
@@ -173,98 +94,6 @@ bool impasse(Type_Case c,Couleur cou,bool verif[LIGNE_MAX][COLONNE_MAX])
 		SO=true;
 	return (NE && NO && E && O && SE && SO);
 }
-
-int distance_bord_ouest(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Couleur cou)
-{
-	verif[c.co.abscisse][c.co.ordonnee]=true;
-	int distance=0;
-	bool verif_b[LIGNE_MAX][COLONNE_MAX];
-	initialiser_verif(verif_b);
-	if(relie_bord_ouest(p,c,verif,cou))return LIGNE_MAX+1;
-	if(c.O==NULL)
-		return 0;
-	else
-	{
-		if(impasse(c,cou,verif))return LIGNE_MAX+1;
-		else
-		{
-			if(c.O->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee])
-				distance=1+distance_bord_ouest(p,*(c.O),verif,cou);
-			else
-			{
-				if(c.NO!=NULL && c.NO->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee-1])
-					distance=1+distance_bord_ouest(p,*(c.NO),verif,cou);
-				else 
-				{
-					if(c.NE!=NULL && c.NE->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee-1])
-						distance=1+distance_bord_ouest(p,*(c.NE),verif,cou);
-					else
-					{
-						if(c.E!=NULL && c.E->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee])
-							distance=1+distance_bord_ouest(p,*(c.E),verif,cou);
-						else
-						{
-							if(c.SE!=NULL && c.SE->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee+1])
-								distance=1+distance_bord_ouest(p,*(c.SE),verif,cou);
-							else
-							{
-								if(c.SO!=NULL && c.SO->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee+1])
-									distance=1+distance_bord_ouest(p,*(c.SO),verif,cou);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	return distance;
-}	
-
-int distance_bord_est(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Couleur cou)
-{
-	verif[c.co.abscisse][c.co.ordonnee]=true;
-	int distance=0;
-	bool verif_b[LIGNE_MAX][COLONNE_MAX];
-	initialiser_verif(verif_b);
-	if(relie_bord_est(p,c,verif,cou))return LIGNE_MAX+1;
-	if(c.E==NULL)
-		return 0;
-	else
-	{
-		if(impasse(c,cou,verif))return LIGNE_MAX+1;
-		else
-		{
-			if(c.E->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee])
-				distance=1+distance_bord_est(p,*(c.E),verif,cou);
-			else
-			{
-				if(c.SE!=NULL && c.SE->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee+1])
-					distance=1+distance_bord_est(p,*(c.SE),verif,cou);
-				else 
-				{
-					if(c.SO!=NULL && c.SO->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee+1])
-						distance=1+distance_bord_est(p,*(c.SO),verif,cou);
-					else
-					{
-						if(c.O!=NULL && c.O->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee])
-							distance=1+distance_bord_est(p,*(c.O),verif,cou);
-						else
-						{
-							if(c.NO!=NULL && c.NO->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee-1])
-								distance=1+distance_bord_est(p,*(c.NO),verif,cou);
-							else
-							{
-								if(c.NE!=NULL && c.NE->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee-1])
-									distance=1+distance_bord_est(p,*(c.NE),verif,cou);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	return distance;
-}	
 
 int distance_bord_nord(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Couleur cou)
 {
@@ -419,88 +248,6 @@ bool impasse_bord(Type_Case c,Couleur cou,bool verif[LIGNE_MAX][COLONNE_MAX])
 	return (NE && NO && E && O && SE && SO);
 }
 
-bool relie_bord_ouest(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Couleur cou)
-{
-	verif[c.co.abscisse][c.co.ordonnee]=true;
-	bool relie=true;
-	if(c.O==NULL)
-		return relie;
-	else
-	{
-		if(c.O->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee] && !impasse_bord(*c.O,cou,verif))
-			relie=relie_bord_ouest(p,*(c.O),verif,cou);
-		else
-		{
-			if(c.NO!=NULL && c.NO->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee-1] && !impasse_bord(*c.NO,cou,verif))
-				relie=relie_bord_ouest(p,*(c.NO),verif,cou);
-			else 
-			{
-				if(c.NE!=NULL && c.NE->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee-1] && !impasse_bord(*c.NE,cou,verif))
-					relie=relie_bord_ouest(p,*(c.NE),verif,cou);
-				else
-				{
-					if(c.E!=NULL && c.E->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee] && !impasse_bord(*c.E,cou,verif))
-						relie=relie_bord_ouest(p,*(c.E),verif,cou);
-					else
-					{
-						if(c.SE!=NULL && c.SE->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee+1] && !impasse_bord(*c.SE,cou,verif))
-							relie=relie_bord_ouest(p,*(c.SE),verif,cou);
-						else
-						{
-							if(c.SO!=NULL && c.SO->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee+1] && !impasse_bord(*c.SO,cou,verif))
-								relie=relie_bord_ouest(p,*(c.SO),verif,cou);
-							else
-								return false;
-						}
-					}
-				}
-			}
-		}
-	}
-	return relie;
-}	
-
-bool relie_bord_est(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Couleur cou)
-{
-	verif[c.co.abscisse][c.co.ordonnee]=true;
-	bool relie=true;
-	if(c.E==NULL)
-		return relie;
-	else
-	{
-		if(c.E->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee] && impasse_bord(c,cou,verif) && !impasse_bord(*c.O,cou,verif))
-			relie=relie_bord_est(p,*(c.E),verif,cou);
-		else
-		{
-			if(c.SE!=NULL && c.SE->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee+1] && !impasse_bord(*c.SE,cou,verif))
-				relie=relie_bord_est(p,*(c.SE),verif,cou);
-			else 
-			{
-				if(c.SO!=NULL && c.SO->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee+1] && !impasse_bord(*c.SO,cou,verif))
-					relie=relie_bord_est(p,*(c.SO),verif,cou);
-				else
-				{
-					if(c.O!=NULL && c.O->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee] && !impasse_bord(*c.O,cou,verif))
-						relie=relie_bord_est(p,*(c.O),verif,cou);
-					else
-					{
-						if(c.NO!=NULL && c.NO->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee-1 && !impasse_bord(*c.NO,cou,verif)])
-							relie=relie_bord_est(p,*(c.NO),verif,cou);
-						else
-						{
-							if(c.NE!=NULL && c.NE->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee-1] && !impasse_bord(*c.NE,cou,verif))
-								relie=relie_bord_est(p,*(c.NE),verif,cou);
-							else
-								return false;
-						}
-					}
-				}
-			}
-		}
-	}
-	return relie;
-}	
-
 bool relie_bord_nord(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Couleur cou)
 {
 	verif[c.co.abscisse][c.co.ordonnee]=true;
@@ -582,34 +329,18 @@ bool relie_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Cou
 	return relie;
 }
 
-Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin,bool horizontal,Couleur cou)
+Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin)
 {
-	if(!horizontal)
+	if(voisin!=NULL)
 	{
-		if(voisin!=NULL)
-		{
-			if(voisin->coul==cou)
-				return contourner(voisin,voisin->SE,!horizontal,cou);
-			if(voisin->coul==neutre)
-					return voisin;
-			if(voisin->coul==changer_joueur(cou))
-					return contourner(voisin,voisin_suivant(case_choisie,voisin),horizontal,cou);
-		}
-		return contourner(voisin,voisin_suivant(case_choisie,voisin),horizontal,cou);
+		if(voisin->coul==rouge)
+			return contourner(voisin,voisin->SE);
+		if(voisin->coul==neutre)
+				return voisin;
+		if(voisin->coul==bleu)
+				return contourner(voisin,voisin_suivant(case_choisie,voisin));
 	}
-	else
-	{
-		if(voisin!=NULL)
-		{
-			if(voisin->coul==cou)
-				return contourner(voisin,voisin->O,horizontal,cou);
-			if(voisin->coul==neutre)
-					return voisin;
-			if(voisin->coul==changer_joueur(cou))
-					return contourner(voisin,voisin_suivant(case_choisie,voisin),horizontal,cou);
-		}
-		return contourner(voisin,voisin_suivant(case_choisie,voisin),horizontal,cou);
-	}
+	return case_choisie;
 }
 
 Type_Case* voisin_suivant(Type_Case* depart,Type_Case* voisin)
