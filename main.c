@@ -90,7 +90,9 @@ int main (int argc, char * argv[])
 							MaJ_Menu(menu, interface, nbinGameMenuChoice);
 							nouvelle_partie(board_tab);
 							MaJ_Board(board, interface, board_tab);
+							joueur_courant = bleu;
 							premier_coup = true;
+							MaJ_Infos(menu, interface, joueur_courant, premier_coup);
 
 						}
 						if (choix == 1)
@@ -99,8 +101,10 @@ int main (int argc, char * argv[])
 							MaJ_Menu(menu, interface, nbinGameMenuChoice);
 							nouvelle_partie(board_tab);
 							MaJ_Board(board, interface, board_tab);
+							joueur_courant = bleu;
 							premier_coup = true;
 							IA = true;
+							
 						}
 						if (choix == 2)
 						{
@@ -108,8 +112,10 @@ int main (int argc, char * argv[])
 							MaJ_Menu(menu, interface, nbinGameMenuChoice);
 							nouvelle_partie(board_tab);
 							MaJ_Board(board, interface, board_tab);
-							
+							joueur_courant = bleu;
+							premier_coup = true;
 							IA = true;
+							MaJ_Infos(menu, interface, joueur_courant, premier_coup);
 						}
 						if (choix == 3)
 						{
@@ -136,7 +142,7 @@ int main (int argc, char * argv[])
 							{
 								annuler(board_tab);
 								MaJ_Board(board, interface, board_tab);
-								MaJ_Infos(menu, interface, joueur_courant);
+								MaJ_Infos(menu, interface, joueur_courant, premier_coup);
 								joueur_courant = changer_joueur(joueur_courant);
 							}
 						}
@@ -162,16 +168,16 @@ int main (int argc, char * argv[])
 									else
 										dernier_joueur = rouge;
 
-									historique(premier_coup, coord_tab, joueur_courant);
-									MaJ_Infos(menu, interface, joueur_courant);
-								
 									if (verify_win(board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab))
 									{
 										affiche_vainqueur(menu, interface, joueur_courant);
 										menu.actualMenu = menu.mainMenu;
 										MaJ_Menu(menu, interface, nbMenuChoice);
 									}
+									
+									historique(premier_coup, coord_tab, joueur_courant);
 									premier_coup = false;
+									MaJ_Infos(menu, interface, joueur_courant,premier_coup);
 									joueur_courant = changer_joueur(joueur_courant);
 								}
 							}
@@ -187,15 +193,15 @@ int main (int argc, char * argv[])
 							if (coup_valide(board_tab, coord_tab))
 							{
 								placer_pion(board, coord_tab, joueur_courant, interface, board_tab);
-								historique(premier_coup, coord_tab, joueur_courant);
-								MaJ_Infos(menu, interface, joueur_courant);
 								if (verify_win(board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab))
 								{
 									affiche_vainqueur(menu, interface, joueur_courant);
 									menu.actualMenu = menu.mainMenu;
 									MaJ_Menu(menu, interface, nbMenuChoice);
 								}
+								historique(premier_coup, coord_tab, joueur_courant);
 								premier_coup = false;
+								MaJ_Infos(menu, interface, joueur_courant,premier_coup);
 								joueur_courant = changer_joueur(joueur_courant);
 							}
 						}

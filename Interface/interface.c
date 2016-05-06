@@ -157,7 +157,7 @@ void MaJ_Menu (s_Menu menu, s_Interface interface, int nbChoice)
 }
 
 
-void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant)
+void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant, bool premier_coup)
 {
 	char *infos[3];
 	char infosA[7];
@@ -167,39 +167,57 @@ void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant)
 	int abscisse, ordonnee;
 	char couleur[1];
 	
-	dernier_coup(couleur, &abscisse, &ordonnee);
-	sprintf(infosA, "(%d ,", abscisse);
-	sprintf(infosO, "%d)", ordonnee);
-	sprintf(infosJ, "%c",couleur[0]);
 	
-	if (joueur_courant == bleu)
-		sprintf(infosJ2, "Rouge");
+	
+	if (premier_coup)
+	{
+		if (joueur_courant == bleu)
+			sprintf(infosJ2, "Bleu");
+		else
+			sprintf(infosJ2, "Rouge");
+		menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, "Prochain joueur: " , White);
+		SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
+		menu.posInfosText.x += 220;
+		menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, infosJ2 , White);
+		SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
+
+	}
 	else
-		sprintf(infosJ2, "Bleu");
+	{
+		if (joueur_courant == bleu)
+			sprintf(infosJ2, "Rouge");
+		else
+			sprintf(infosJ2, "Bleu");
+		dernier_coup(couleur, &abscisse, &ordonnee);
+		sprintf(infosA, "(%d ,", abscisse);
+		sprintf(infosO, "%d)", ordonnee);
+		sprintf(infosJ, "%c",couleur[0]);
 	
-	infos[0] = infosJ;
-	infos[1] = infosA;
-	infos[2] = infosO;
+	
+	
+		infos[0] = infosJ;
+		infos[1] = infosA;
+		infos[2] = infosO;
 	
 
-	SDL_BlitSurface(menu.InfosSurface,NULL,interface.screenSurface,&menu.posInfos);
-	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, "Dernier coup: " , White);
-	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
-	menu.posInfosText.x += 170;
-	for (int i = 0; i < 3; i++)
-	{
-	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, infos[i] , White);
-	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
-	menu.posInfosText.x += 50;
+		SDL_BlitSurface(menu.InfosSurface,NULL,interface.screenSurface,&menu.posInfos);
+		menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, "Dernier coup: " , White);
+		SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
+		menu.posInfosText.x += 170;
+		for (int i = 0; i < 3; i++)
+		{
+			menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, infos[i] , White);
+			SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
+			menu.posInfosText.x += 50;
+		}
+		menu.posInfosText.x -= 320;
+		menu.posInfosText.y += 50;
+		menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, "Prochain joueur: " , White);
+		SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
+		menu.posInfosText.x += 220;
+		menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, infosJ2 , White);
+		SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
 	}
-	menu.posInfosText.x -= 320;
-	menu.posInfosText.y += 50;
-	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, "Prochain joueur: " , White);
-	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
-	menu.posInfosText.x += 220;
-	menu.InfosText = TTF_RenderText_Blended(menu.fontMenu, infosJ2 , White);
-	SDL_BlitSurface(menu.InfosText,NULL,interface.screenSurface,&menu.posInfosText);
-	
 }
 
 
