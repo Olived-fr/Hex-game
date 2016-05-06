@@ -223,7 +223,7 @@ bool relie_bord_nord(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MA
 				return false;
 			else
 			{
-				nb_voisins_verifie=0;
+				nb_voisins_verifies=0;
 				do
 				{
 					nb_voisins_verifies++;
@@ -255,7 +255,7 @@ bool relie_bord_sud(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MAX
 				return false;
 			else
 			{
-				nb_voisins_verifie=0;
+				nb_voisins_verifies=0;
 				do
 				{
 					nb_voisins_verifies++;
