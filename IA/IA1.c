@@ -131,104 +131,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	initialiser_verif(verif1);
 	case_choisie=voisin_elu(case_proche); 
 	/*et on pose le pion à cet endroit là*/
-	if(!horizontal)
-	{
-		while(case_choisie!=NULL && case_choisie->coul!=neutre)
-		{
-			case_choisie=case_choisie->SE;
-			if(case_choisie==NULL || case_choisie->coul==bleu)
-			{
-				case_choisie=case_choisie->NO;
-				while(case_choisie!=NULL && case_choisie->coul!=neutre)
-				{
-					case_choisie=case_choisie->SO;
-					if(case_choisie==NULL || case_choisie->coul==bleu)
-					{
-						case_choisie=case_choisie->NE;
-						while(case_choisie!=NULL && case_choisie->coul!=neutre)
-						{
-							case_choisie=case_choisie->O;
-							if(case_choisie==NULL || case_choisie->coul==bleu)
-							{
-								case_choisie=case_choisie->E;
-								while(case_choisie!=NULL && case_choisie->coul!=neutre)
-								{
-									case_choisie=case_choisie->NO;
-									if(case_choisie==NULL || case_choisie->coul==bleu)
-									{
-										case_choisie=case_choisie->SE;
-										while(case_choisie!=NULL && case_choisie->coul!=neutre)
-										{
-											case_choisie=case_choisie->NE;
-											if(case_choisie==NULL || case_choisie->coul==bleu)
-											{
-												case_choisie=case_choisie->SO;
-												while(case_choisie!=NULL && case_choisie->coul!=neutre)
-												{
-													case_choisie=case_choisie->E;
-													if(case_choisie==NULL || case_choisie->coul!=bleu)
-														case_choisie=case_choisie->O;
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}										
-			}
-		}
-	}
-	else
-	{
-		while(case_choisie!=NULL && case_choisie->coul!=neutre)
-		{
-			case_choisie=case_choisie->O;
-			if(case_choisie==NULL || case_choisie->coul==bleu)
-			{
-				case_choisie=case_choisie->E;
-				while(case_choisie!=NULL && case_choisie->coul!=neutre)
-				{
-					case_choisie=case_choisie->SO;
-					if(case_choisie==NULL || case_choisie->coul==bleu)
-					{
-						case_choisie=case_choisie->NE;
-						while(case_choisie!=NULL && case_choisie->coul!=neutre)
-						{
-							case_choisie=case_choisie->SE;
-							if(case_choisie==NULL || case_choisie->coul==bleu)
-							{
-								case_choisie=case_choisie->NO;
-								while(case_choisie!=NULL && case_choisie->coul!=neutre)
-								{
-									case_choisie=case_choisie->E;
-									if(case_choisie==NULL || case_choisie->coul==bleu)
-									{
-										case_choisie=case_choisie->O;
-										while(case_choisie!=NULL && case_choisie->coul!=neutre)
-										{
-											case_choisie=case_choisie->NE;
-											if(case_choisie==NULL || case_choisie->coul==bleu)
-											{
-												case_choisie=case_choisie->SO;
-												while(case_choisie!=NULL && case_choisie->coul!=neutre)
-												{
-													case_choisie=case_choisie->NO;
-													if(case_choisie==NULL || case_choisie->coul!=bleu)
-														case_choisie=case_choisie->SE;
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}										
-			}
-		}
-	}
+	case_choisie=contourner(case_choisie,horizontal,cou);
 	return case_choisie->co;
 }
 
@@ -677,4 +580,166 @@ bool relie_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Cou
 		}
 	}
 	return relie;
+}
+
+Type_Case* contourner(Type_Case* case_choisie,bool horizontal,Couleur cou)
+{
+	if(horizontal)
+	{
+		if(case_choisie->SE!=NULL)
+		{
+			switch case_choisie->SE->coul
+			{
+				cou:
+					return contourner(case_choisie->SE);
+					break;
+				neutre:
+					return case_choisie->SE;
+					break;
+				default:
+					if(case_choisie->SO!=NULL)
+					{
+						switch case_choisie->SO->coul
+						{
+							cou:
+								return contourner(case_choisie->SO);
+								break;
+							neutre:
+								return case_choisie->SO;
+								break;
+							default:
+								if(case_choisie->O!=NULL){
+								switch case_choisie->O->coul
+								{
+									cou:
+									return contourner(case_choisie->O);
+									break;
+								neutre:
+									return case_choisie->O;
+									break;
+								default:
+								if(case_choisie->NO!=NULL){
+									switch case_choisie->NO->coul
+									{
+										cou:
+											return contourner(case_choisie->NO);
+											break;
+										neutre:
+											return case_choisie->NO;
+											break;
+										default:
+											if(case_choisie->NE!=NULL){
+											switch case_choisie->NE->coul
+											{
+												cou:
+													return contourner(case_choisie->NE);
+													break;
+												neutre:
+													return case_choisie->NE;
+													break;
+												default:
+													if(case_choisie->O!=NULL){
+													switch case_choisie->O->coul
+													{
+														cou:
+															return contourner(case_choisie->O);
+															break;
+														neutre:
+															return case_choisie->O;
+															break;
+														default:
+															return case_choisie;
+															break;
+													}}
+													break;
+											}}
+											break;
+								}}
+								break;
+								}}
+							break;
+					}
+					break;
+			}
+		}
+	}
+	else
+	{
+		if(case_choisie->O!=NULL)
+		{
+			switch case_choisie->O->coul
+			{
+				cou:
+					return contourner(case_choisie->O);
+					break;
+				neutre:
+					return case_choisie->O;
+					break;
+				default:
+					if(case_choisie->SO!=NULL)
+					{
+						switch case_choisie->SO->coul
+						{
+							cou:
+								return contourner(case_choisie->SO);
+								break;
+							neutre:
+								return case_choisie->SO;
+								break;
+							default:
+								if(case_choisie->SE!=NULL){
+								switch case_choisie->SE->coul
+								{
+									cou:
+									return contourner(case_choisie->SE);
+									break;
+								neutre:
+									return case_choisie->SE;
+									break;
+								default:
+								if(case_choisie->E!=NULL){
+									switch case_choisie->E->coul
+									{
+										cou:
+											return contourner(case_choisie->E);
+											break;
+										neutre:
+											return case_choisie->E;
+											break;
+										default:
+											if(case_choisie->NE!=NULL){
+											switch case_choisie->NE->coul
+											{
+												cou:
+													return contourner(case_choisie->NE);
+													break;
+												neutre:
+													return case_choisie->NE;
+													break;
+												default:
+													if(case_choisie->NO!=NULL){
+													switch case_choisie->NO->coul
+													{
+														cou:
+															return contourner(case_choisie->NO);
+															break;
+														neutre:
+															return case_choisie->NO;
+															break;
+														default:
+															return case_choisie;
+															break;
+													}}
+													break;
+											}}
+											break;
+								}}
+								break;
+								}}
+							break;
+					}
+					break;
+			}
+		}
+	}
 }
