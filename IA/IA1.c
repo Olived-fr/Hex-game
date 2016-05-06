@@ -51,12 +51,14 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 					case_proche=case_courante;
 					initialiser_verif(verif1);
 					distance_choisie=distance_extremite1;
+					distance_min=d1;
 				}
 				if(d2 < distance_min && d2!=0)
 				{
 					case_proche=case_courante;
 					initialiser_verif(verif2);
 					distance_choisie=distance_extremite2;
+					distance_min=d2;
 				}
 				/*Ainsi, on retient la distance la plus courte et on retient également la direction la plus courte avec la variable "distance_choisie"*/
 			}
@@ -71,42 +73,60 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	{
 		distance_courante=distance_choisie(p,*case_proche.NO,verif1,couleur_courante);
 		if(distance_courante < distance_min && case_proche.NO->coul==neutre)
+		{
+			distance_min=distance_courante;
 			voisin_elu=&voisin_NO;
+		}
 	}
 	initialiser_verif(verif1);
 	if(case_proche.NE!=NULL && case_proche.NE->coul==neutre)
 	{
 		distance_courante=distance_choisie(p,*case_proche.NE,verif1,couleur_courante);
 		if(distance_courante < distance_min && case_proche.NE->coul==neutre)
+		{
+			distance_min=distance_courante;
 			voisin_elu=&voisin_NE;
+		}
 	}
 	initialiser_verif(verif1);
 	if(case_proche.O!=NULL && case_proche.O->coul==neutre)
 	{
 		distance_courante=distance_choisie(p,*case_proche.O,verif1,couleur_courante);
 		if(distance_courante < distance_min && case_proche.O->coul==neutre)
+		{
+			distance_min=distance_courante;
 			voisin_elu=&voisin_O;
+		}
 	}
 	initialiser_verif(verif1);
 	if(case_proche.SO!=NULL && case_proche.SO->coul==neutre)
 	{
 		distance_courante=distance_choisie(p,*case_proche.SO,verif1,couleur_courante);
 		if(distance_courante < distance_min && case_proche.SO->coul==neutre)
+		{
+			distance_min=distance_courante;
 			voisin_elu=&voisin_SO;
+		}
 	}
 	initialiser_verif(verif1);
 	if(case_proche.SE!=NULL && case_proche.SE->coul==neutre)
 	{
 		distance_courante=distance_choisie(p,*case_proche.SE,verif1,couleur_courante);
 		if(distance_courante < distance_min && case_proche.SE->coul==neutre)
+		{
+			distance_min=distance_courante;
 			voisin_elu=&voisin_SE;
+		}
 	}
 	initialiser_verif(verif1);
 	if(case_proche.E!=NULL && case_proche.E->coul==neutre)
 	{
 		distance_courante=distance_choisie(p,*case_proche.E,verif1,couleur_courante);
 		if(distance_courante < distance_min && case_proche.E->coul==neutre)
+		{
+			distance_min=distance_courante;
 			voisin_elu=&voisin_E;
+		}
 	}
 	initialiser_verif(verif1);
 	case_choisie=voisin_elu(case_proche); 
