@@ -136,7 +136,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->SE;
-			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			if(case_choisie==NULL || case_choisie->coul!=neutre)
 			{
 				case_choisie=case_choisie->NO;
 				break;
@@ -145,7 +145,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->SO;
-			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			if(case_choisie==NULL || case_choisie->coul!=neutre)
 			{
 				case_choisie=case_choisie->NE;
 				break;
@@ -154,7 +154,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->O;
-			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			if(case_choisie==NULL || case_choisie->coul!=neutre)
 			{
 				case_choisie=case_choisie->E;
 				break;
@@ -163,7 +163,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->NO;
-			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			if(case_choisie==NULL || case_choisie->coul!=neutre)
 			{
 				case_choisie=case_choisie->SE;
 				break;
@@ -172,7 +172,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->NE;
-			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			if(case_choisie==NULL || case_choisie->coul!=neutre)
 			{
 				case_choisie=case_choisie->SO;
 				break;
@@ -181,7 +181,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->E;
-			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			if(case_choisie==NULL || case_choisie->coul!=neutre)
 			{
 				case_choisie=case_choisie->O;
 				break;
@@ -193,7 +193,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->O;
-			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			if(case_choisie==NULL || case_choisie->coul!=neutre)
 			{
 				case_choisie=case_choisie->E;
 				break;
@@ -202,7 +202,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->NO;
-			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			if(case_choisie==NULL || case_choisie->coul!=neutre)
 			{
 				case_choisie=case_choisie->SE;
 				break;
@@ -211,7 +211,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->NE;
-			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			if(case_choisie==NULL || case_choisie->coul!=neutre)
 			{
 				case_choisie=case_choisie->SO;
 				break;
@@ -220,7 +220,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->E;
-			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			if(case_choisie==NULL || case_choisie->coul!=neutre)
 			{
 				case_choisie=case_choisie->O;
 				break;
@@ -229,7 +229,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->SE;
-			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			if(case_choisie==NULL || case_choisie->coul!=neutre)
 			{
 				case_choisie=case_choisie->NO;
 				break;
@@ -238,7 +238,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->SO;
-			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			if(case_choisie==NULL || case_choisie->coul!=neutre)
 			{
 				case_choisie=case_choisie->NE;
 				break;
