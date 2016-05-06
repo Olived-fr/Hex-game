@@ -249,7 +249,7 @@ bool impasse_bord(Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
 	return (NE && NO && E && O && SE && SO);
 }
 
-bool relie_bord_nord(Plateau p,Type_Case c,Type_Case voisin,bool verif[LIGNE_MAX][COLONNE_MAX])
+bool relie_bord_nord(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MAX][COLONNE_MAX])
 {
 	verif[c.co.abscisse][c.co.ordonnee]=true;
 	bool relie=true;
@@ -268,7 +268,7 @@ bool relie_bord_nord(Plateau p,Type_Case c,Type_Case voisin,bool verif[LIGNE_MAX
 	return relie;
 }
 
-bool relie_bord_sud(Plateau p,Type_Case c,Type_Case voisin,bool verif[LIGNE_MAX][COLONNE_MAX])
+bool relie_bord_sud(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MAX][COLONNE_MAX])
 {
 	verif[c.co.abscisse][c.co.ordonnee]=true;
 	bool relie=true;
