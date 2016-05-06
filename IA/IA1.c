@@ -4,10 +4,12 @@ Coordonnees_tab coup_IA1(Plateau p)
 {	
 	int x,y,d1,d2;
 	int distance_min=LIGNE_MAX+2;
+	bool trouve=false;
 	//afin de s'assurer que la première itération génerera une distance min
 	int(*distance_choisie)(Plateau,Type_Case,bool verif2[LIGNE_MAX][COLONNE_MAX])=&distance_bord_sud;
 	Type_Case case_courante;
 	Type_Case* case_proche=&p[5][5];
+	if(case_proche->coul!=neutre)case_proche=case_proche->O;
 	bool verif1[LIGNE_MAX][COLONNE_MAX];
 	bool verif2[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif1);
@@ -20,6 +22,7 @@ Coordonnees_tab coup_IA1(Plateau p)
 			case_courante=p[x][y];
 			if(case_courante.coul==rouge)
 			{
+				trouve=true;
 				initialiser_verif(verif1);
 				d1=distance_bord_nord(p,case_courante,verif1);
 				initialiser_verif(verif2);
@@ -28,14 +31,12 @@ Coordonnees_tab coup_IA1(Plateau p)
 				if(d1 < distance_min && d1!=0)
 				{
 					case_proche=&case_courante;
-					initialiser_verif(verif1);
 					distance_choisie=&distance_bord_nord;
 					distance_min=d1;
 				}
 				if(d2 < distance_min && d2!=0)
 				{
 					case_proche=&case_courante;
-					initialiser_verif(verif2);
 					distance_choisie=distance_bord_sud;
 					distance_min=d2;
 				}
@@ -46,10 +47,13 @@ Coordonnees_tab coup_IA1(Plateau p)
 	/* case_proche contient la case la plus proche d'un bord parmi ses voisins neutres on regarde celui qui est
 	le plus proche du bord concerné*/
 	
-	if(distance_choisie==&distance_bord_nord)
-		case_proche=contourner(case_proche,case_proche->NO);
-	else
-		case_proche=contourner(case_proche,case_proche->SE);
+	if(trouve)
+	{
+		if(distance_choisie==&distance_bord_nord)
+			case_proche=contourner(case_proche,case_proche->NO);
+		else
+			case_proche=contourner(case_proche,case_proche->SE);
+	}
 	return case_proche->co;
 }
 
@@ -61,7 +65,7 @@ void initialiser_verif(bool verif[LIGNE_MAX][COLONNE_MAX])
 			verif[x][y]=false;
 }
 
-bool impasse(Type_Case c,Couleur cou,bool verif[LIGNE_MAX][COLONNE_MAX])
+bool impasse(Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
 {
 	bool NE,NO,O,E,SO,SE; //chaque booleen indique true si la case concernée est libre
 	/* une case est dite libre si elle n'a pas déjà été vérifiée et si elle n'est pas de la couleur de l'adversaire */
@@ -70,7 +74,7 @@ bool impasse(Type_Case c,Couleur cou,bool verif[LIGNE_MAX][COLONNE_MAX])
 	else
 		NE=true;
 	if(c.NO!=NULL)
-		NO=(c.NO->coul!=bleu && !verif[c.co.abscisse-1][c.co.ordonnee-1]);
+		NO=(c.NO->coul!=bleu && !verif[c.co.abscisse][c.co.ordonnee-1]);
 	else
 		NO=true;
 	if(c.E!=NULL)
@@ -82,7 +86,7 @@ bool impasse(Type_Case c,Couleur cou,bool verif[LIGNE_MAX][COLONNE_MAX])
 	else
 		O=true;
 	if(c.SE!=NULL)
-		SE=(c.SE->coul!=bleu && !verif[c.co.abscisse+1][c.co.ordonnee+1]);
+		SE=(c.SE->coul!=bleu && !verif[c.co.abscisse][c.co.ordonnee+1]);
 	else
 		SE=true;
 	if(c.SO!=NULL)
@@ -98,12 +102,12 @@ int distance_bord_nord(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
 	int distance=0;
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	if(relie_bord_nord(p,c,verif))return LIGNE_MAX+1;
+	if(relie_bord_nord(p,c,verif_b))return LIGNE_MAX+1;
 	if(c.NO==NULL)
 		return 0;
 	else
 	{
-		if(impasse(c,rouge,verif))return LIGNE_MAX+1;
+		if(impasse(c,verif))return LIGNE_MAX+1;
 		else
 		{
 			if(c.NO->coul!= bleu && !verif[c.co.abscisse][c.co.ordonnee-1])
@@ -144,12 +148,12 @@ int distance_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
 	int distance=0;
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	if(relie_bord_sud(p,c,verif))return LIGNE_MAX+1;
+	if(relie_bord_sud(p,c,verif_b))return LIGNE_MAX+1;
 	if(c.SE==NULL)
 		return 0;
 	else
 	{
-		if(impasse(c,rouge,verif))return LIGNE_MAX+1;
+		if(impasse(c,verif))return LIGNE_MAX+1;
 		else
 		{
 			if(c.SE->coul!=bleu && !verif[c.co.abscisse][c.co.ordonnee+1])
@@ -172,7 +176,7 @@ int distance_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
 								distance=1+distance_bord_sud(p,*(c.NE),verif);
 							else
 							{
-								if(c.E!=NULL && c.E->coul!=bleu && !verif[c.co.abscisse+1][c.co.ordonnee-1])
+								if(c.E!=NULL && c.E->coul!=bleu && !verif[c.co.abscisse+1][c.co.ordonnee])
 									distance=1+distance_bord_sud(p,*(c.E),verif);
 							}
 						}
@@ -214,32 +218,32 @@ Type_Case* voisin_SE(Type_Case c)
 	return c.SE;
 }
 
-bool impasse_bord(Type_Case c,Couleur cou,bool verif[LIGNE_MAX][COLONNE_MAX])
+bool impasse_bord(Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
 {
 	bool NE,NO,O,E,SO,SE; //chaque booleen indique true si la case concernée est libre
 	/* une case est dite libre si elle n'a pas déjà été vérifiée et si elle n'est pas de la couleur de l'adversaire */
 	if(c.NE!=NULL)
-		NE=(c.NE->coul==cou && !verif[c.co.abscisse+1][c.co.ordonnee-1]);
+		NE=(c.NE->coul==rouge && !verif[c.co.abscisse+1][c.co.ordonnee-1]);
 	else
 		NE=true;
 	if(c.NO!=NULL)
-		NO=(c.NO->coul==cou && !verif[c.co.abscisse-1][c.co.ordonnee-1]);
+		NO=(c.NO->coul==rouge && !verif[c.co.abscisse][c.co.ordonnee-1]);
 	else
 		NO=true;
 	if(c.E!=NULL)
-		E=(c.E->coul==cou && !verif[c.co.abscisse+1][c.co.ordonnee]);
+		E=(c.E->coul==rouge && !verif[c.co.abscisse+1][c.co.ordonnee]);
 	else
 		E=true;
 	if(c.O!=NULL)
-		O=(c.O->coul==cou && !verif[c.co.abscisse-1][c.co.ordonnee]);
+		O=(c.O->coul==rouge && !verif[c.co.abscisse-1][c.co.ordonnee]);
 	else
 		O=true;
 	if(c.SE!=NULL)
-		SE=(c.SE->coul==cou && !verif[c.co.abscisse+1][c.co.ordonnee+1]);
+		SE=(c.SE->coul==rouge && !verif[c.co.abscisse][c.co.ordonnee+1]);
 	else
 		SE=true;
 	if(c.SO!=NULL)
-		SO=(c.SO->coul==cou && !verif[c.co.abscisse-1][c.co.ordonnee+1]);
+		SO=(c.SO->coul==rouge && !verif[c.co.abscisse-1][c.co.ordonnee+1]);
 	else
 		SO=true;
 	return (NE && NO && E && O && SE && SO);
@@ -313,7 +317,7 @@ bool relie_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
 							relie=relie_bord_sud(p,*(c.NE),verif);
 						else
 						{
-							if(c.E!=NULL && c.E->coul!=bleu && !verif[c.co.abscisse+1][c.co.ordonnee-1] && !impasse_bord(*c.E,rouge,verif))
+							if(c.E!=NULL && c.E->coul!=bleu && !verif[c.co.abscisse+1][c.co.ordonnee] && !impasse_bord(*c.E,rouge,verif))
 								relie=relie_bord_sud(p,*(c.E),verif);
 							else
 								return false;
