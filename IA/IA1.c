@@ -131,10 +131,21 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	}
 	else
 	{
-		while(p[case_choisie->co.abscisse][case_choisie->co.ordonnee].coul!=neutre && case_choisie!=NULL)
+		while(case_choisie->coul!=neutre && case_choisie!=NULL)
+		{	
 			case_choisie=case_choisie->O;
-		while(p[case_choisie->co.abscisse][case_choisie->co.ordonnee].coul!=neutre && case_choisie!=NULL)
-			case_choisie=case_choisie->E;
+			if(case_choisie==NULL)
+				break;
+		}
+		if(case_choisie!=NULL)
+		{
+			while(case_choisie->coul!=neutre && case_choisie!=NULL)
+			{	
+				case_choisie=case_choisie->E;
+				if(case_choisie==NULL)
+					break;
+			}
+		}
 	}
 	return case_choisie->co;
 }
