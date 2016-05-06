@@ -135,32 +135,26 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	
 	if(!horizontal)
 	{
-		case_choisie=temp->SE;
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 			case_choisie=case_choisie->SE;
 		if(case_choisie==NULL)
 		{
-			case_choisie=temp;
 			while(case_choisie!=NULL && case_choisie->coul!=neutre)
 				case_choisie=case_choisie->NO;
 			if(case_choisie==NULL)
 			{
-				case_choisie=temp;
 				while(case_choisie!=NULL && case_choisie->coul!=neutre)
 					case_choisie=case_choisie->SO;
 				if(case_choisie==NULL)
 				{
-					case_choisie=temp;
 					while(case_choisie!=NULL && case_choisie->coul!=neutre)
 						case_choisie=case_choisie->NE;
 					if(case_choisie==NULL)
 					{
-						case_choisie=temp;
 						while(case_choisie!=NULL && case_choisie->coul!=neutre)
 							case_choisie=case_choisie->O;
 						if(case_choisie==NULL)
 						{
-							case_choisie=temp;
 							while(case_choisie!=NULL && case_choisie->coul!=neutre)
 								case_choisie=case_choisie->E;
 						}
@@ -171,34 +165,28 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	}
 	else
 	{
-		case_choisie=temp->O;
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 			case_choisie=case_choisie->O;
 		if(case_choisie==NULL)
 		{
-			case_choisie=temp;
 			while(case_choisie!=NULL && case_choisie->coul!=neutre)
 				case_choisie=case_choisie->E;
 			if(case_choisie==NULL)
 			{
-				case_choisie=temp;
 				while(case_choisie!=NULL && case_choisie->coul!=neutre)
 					case_choisie=case_choisie->SO;
 				if(case_choisie==NULL)
 				{
-					case_choisie=temp;
 					while(case_choisie!=NULL && case_choisie->coul!=neutre)
 						case_choisie=case_choisie->NE;
 					if(case_choisie==NULL)
 					{
-						case_choisie=temp;
 						while(case_choisie!=NULL && case_choisie->coul!=neutre)
-							case_choisie=case_choisie->NO;
+							case_choisie=case_choisie->SE;
 						if(case_choisie==NULL)
 						{
-							case_choisie=temp;
 							while(case_choisie!=NULL && case_choisie->coul!=neutre)
-								case_choisie=case_choisie->SE;
+								case_choisie=case_choisie->NO;
 						}
 					}
 				}
