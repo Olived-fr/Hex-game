@@ -287,23 +287,23 @@ int distance_bord_ouest(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX]
 				distance=1+distance_bord_ouest(p,*(c.O),verif,cou);
 			else
 			{
-				if(c.NO->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee-1])
+				if(c.NO!=NULL && c.NO->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee-1])
 					distance=1+distance_bord_ouest(p,*(c.NO),verif,cou);
 				else 
 				{
-					if(c.NE->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee-1])
+					if(c.NE!=NULL && c.NE->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee-1])
 						distance=1+distance_bord_ouest(p,*(c.NE),verif,cou);
 					else
 					{
-						if(c.E->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee])
+						if(c.E!=NULL && c.E->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee])
 							distance=1+distance_bord_ouest(p,*(c.E),verif,cou);
 						else
 						{
-							if(c.SE->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee+1])
+							if(c.SE!=NULL && c.SE->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee+1])
 								distance=1+distance_bord_ouest(p,*(c.SE),verif,cou);
 							else
 							{
-								if(c.SO->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee+1])
+								if(c.SO!=NULL && c.SO->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee+1])
 									distance=1+distance_bord_ouest(p,*(c.SO),verif,cou);
 							}
 						}
@@ -330,23 +330,23 @@ int distance_bord_est(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],C
 				distance=1+distance_bord_ouest(p,*(c.E),verif,cou);
 			else
 			{
-				if(c.SE->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee+1])
+				if(c.SE!=NULL && c.SE->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee+1])
 					distance=1+distance_bord_ouest(p,*(c.SE),verif,cou);
 				else 
 				{
-					if(c.SO->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee+1])
+					if(c.SO!=NULL && c.SO->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee+1])
 						distance=1+distance_bord_ouest(p,*(c.SO),verif,cou);
 					else
 					{
-						if(c.O->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee])
+						if(c.O!=NULL && c.O->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee])
 							distance=1+distance_bord_ouest(p,*(c.O),verif,cou);
 						else
 						{
-							if(c.NO->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee-1])
+							if(c.NO!=NULL && c.NO->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee-1])
 								distance=1+distance_bord_ouest(p,*(c.NO),verif,cou);
 							else
 							{
-								if(c.NE->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee-1])
+								if(c.NE!=NULL && c.NE->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee-1])
 									distance=1+distance_bord_ouest(p,*(c.NE),verif,cou);
 							}
 						}
@@ -373,23 +373,23 @@ int distance_bord_nord(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],
 				distance=1+distance_bord_ouest(p,*(c.NO),verif,cou);
 			else
 			{
-				if(c.NE->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee-1])
+				if(c.NE!=NULL && c.NE->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee-1])
 					distance=1+distance_bord_ouest(p,*(c.NE),verif,cou);
 				else 
 				{
-					if(c.E->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee])
+					if(c.E!=NULL && c.E->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee])
 						distance=1+distance_bord_ouest(p,*(c.E),verif,cou);
 					else
 					{
-						if(c.SE->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee+1])
+						if(c.SE!=NULL && c.SE->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee+1])
 							distance=1+distance_bord_ouest(p,*(c.SE),verif,cou);
 						else
 						{
-							if(c.SO->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee+1])
+							if(c.SO!=NULL && c.SO->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee+1])
 								distance=1+distance_bord_ouest(p,*(c.SO),verif,cou);
 							else
 							{
-								if(c.O->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee])
+								if(c.O!=NULL && c.O->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee])
 									distance=1+distance_bord_ouest(p,*(c.O),verif,cou);
 							}
 						}
@@ -416,24 +416,24 @@ int distance_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],C
 				distance=1+distance_bord_ouest(p,*(c.SE),verif,cou);
 			else
 			{
-				if(c.SO->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee+1])
+				if(c.SO!=NULL && c.SO->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee+1])
 					distance=1+distance_bord_ouest(p,*(c.SO),verif,cou);
 				else 
 				{
-					if(c.O->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee])
+					if(c.O!=NULL && c.O->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee])
 						distance=1+distance_bord_ouest(p,*(c.O),verif,cou);
 					else
 					{
-						if(c.NO->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee-1])
+						if(c.NO!=NULL && c.NO->coul!=changer_joueur(cou) && !verif[c.co.abscisse][c.co.ordonnee-1])
 							distance=1+distance_bord_ouest(p,*(c.NO),verif,cou);
 						else
 						{
-							if(c.NE->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee-1])
+							if(c.NE!=NULL && c.NE->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee-1])
 								distance=1+distance_bord_ouest(p,*(c.NE),verif,cou);
 							else
 							{
-								if(c.NE->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee-1])
-									distance=1+distance_bord_ouest(p,*(c.NE),verif,cou);
+								if(c.E!=NULL && c.E->coul!=changer_joueur(cou) && !verif[c.co.abscisse+1][c.co.ordonnee-1])
+									distance=1+distance_bord_ouest(p,*(c.E),verif,cou);
 							}
 						}
 					}
