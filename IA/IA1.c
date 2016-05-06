@@ -276,7 +276,7 @@ int distance_bord_ouest(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX]
 	int distance=0;
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	if(impasse_bord(c,cou,verif_b))return LIGNE_MAX+1;
+	if(relie_bord_ouest(p,c,verif,cou))return LIGNE_MAX+1;
 	if(c.O==NULL)
 		return 0;
 	else
@@ -322,7 +322,7 @@ int distance_bord_est(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],C
 	int distance=0;
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	if(impasse_bord(c,cou,verif_b))return LIGNE_MAX+1;
+	if(relie_bord_est(p,c,verif,cou))return LIGNE_MAX+1;
 	if(c.E==NULL)
 		return 0;
 	else
@@ -368,7 +368,7 @@ int distance_bord_nord(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],
 	int distance=0;
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	if(impasse_bord(c,cou,verif_b))return LIGNE_MAX+1;
+	if(relie_bord_nord(p,c,verif,cou))return LIGNE_MAX+1;
 	if(c.NO==NULL)
 		return 0;
 	else
@@ -414,7 +414,7 @@ int distance_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],C
 	int distance=0;
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	if(impasse_bord(c,cou,verif_b))return LIGNE_MAX+1;
+	if(relie_bord_sud(p,c,verif,cou))return LIGNE_MAX+1;
 	if(c.SE==NULL)
 		return 0;
 	else
