@@ -32,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		090991A21CDCD44C00E864BF /* IA1.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = IA1.c; path = IA/IA1.c; sourceTree = "<group>"; };
+		090991A41CDD070400E864BF /* IA */ = {isa = PBXFileReference; lastKnownFileType = folder; path = IA; sourceTree = "<group>"; };
 		0922C32F1CCD25EC00375706 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = SOURCE_ROOT; };
 		0922C3311CCD293400375706 /* Regles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Regles; sourceTree = "<group>"; };
 		0922C3321CCD294900375706 /* Structure */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Structure; sourceTree = "<group>"; };
@@ -69,6 +70,7 @@
 				0922C3361CCD2B8B00375706 /* plateau.c */,
 				0922C3341CCD2B5F00375706 /* regles.c */,
 				0922C32F1CCD25EC00375706 /* main.c */,
+				090991A41CDD070400E864BF /* IA */,
 				0922C3331CCD295000375706 /* Interface */,
 				0922C3321CCD294900375706 /* Structure */,
 				0922C3311CCD293400375706 /* Regles */,

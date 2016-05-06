@@ -582,9 +582,9 @@ bool relie_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Cou
 	return relie;
 }
 
-Type_Case* contourner(Type_Case* case_choisie,,Type_Case* voisin,bool horizontal,Couleur cou)
+Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin,bool horizontal,Couleur cou)
 {
-	if(horizontal)
+	if(!horizontal)
 	{
 		if(voisin!=NULL)
 		{
