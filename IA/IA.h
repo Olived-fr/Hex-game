@@ -6,8 +6,8 @@
 
 Coordonnees_tab coup_IA1(Plateau p);
 
-int distance_bord_nord(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX]);
-int distance_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX]);
+int distance_bord_nord(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MAX][COLONNE_MAX]);
+int distance_bord_sud(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MAX][COLONNE_MAX]);
 
 bool relie_bord_nord(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MAX][COLONNE_MAX]);
 bool relie_bord_sud(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MAX][COLONNE_MAX]);

@@ -120,7 +120,7 @@ int distance_bord_nord(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_
 	return distance;
 }
 
-int distance_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
+int distance_bord_sud(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MAX][COLONNE_MAX])
 {
 	verif[c.co.abscisse][c.co.ordonnee]=true;
 	int distance=0;
@@ -219,7 +219,7 @@ bool relie_bord_nord(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MA
 		{
 			Type_Case* temp;
 			do
-				temp=voisin_suivant(&c,c.NO);
+				temp=voisin_suivant(&c,voisin);
 			while(temp==NULL);
 			relie=relie_bord_nord(p,*temp,temp->NO,verif);
 		}
@@ -241,7 +241,7 @@ bool relie_bord_sud(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MAX
 		{
 			Type_Case* temp;
 			do
-				temp=voisin_suivant(&c,c.SE);
+				temp=voisin_suivant(&c,voisin);
 			while(temp==NULL);
 			relie=relie_bord_nord(p,*temp,temp->SE,verif);
 		}
