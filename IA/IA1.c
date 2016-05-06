@@ -3,7 +3,7 @@
 Coordonnees_tab coup_IA1(Plateau p)
 {	
 	int x,y,d1,d2;
-	int distance_min=LIGNE_MAX+2;
+	int distance_min;
 	bool trouve=false;
 	//afin de s'assurer que la première itération génerera une distance min
 	int(*distance_choisie)(Plateau,Type_Case,Type_Case*,bool verif2[LIGNE_MAX][COLONNE_MAX])=&distance_bord_sud;
@@ -19,6 +19,7 @@ Coordonnees_tab coup_IA1(Plateau p)
 	{
 		for(y=0;y<COLONNE_MAX;y++)
 		{
+			distance_min=LIGNE_MAX+2;
 			case_courante=p[x][y];
 			if(case_courante.coul==rouge)
 			{
