@@ -261,6 +261,7 @@ bool relie_bord_nord(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MA
 			relie=relie_bord_nord(p,*voisin,voisin->NO,verif);
 		else
 		{
+			Type_Case* temp;
 			do
 				temp=voisin_suivant(&c,c.NO);
 			while(temp==NULL);
