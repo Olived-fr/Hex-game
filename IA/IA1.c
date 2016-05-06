@@ -143,88 +143,65 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 			case_choisie=temp;
 			while(case_choisie!=NULL && case_choisie->coul!=neutre)
 				case_choisie=case_choisie->NO;
-		}
-		if(case_choisie==NULL)
-		{
-			case_choisie=temp;
-			while(case_choisie!=NULL && case_choisie->coul!=neutre)
-				case_choisie=case_choisie->SO;
-		}
-		if(case_choisie==NULL)
-		{
-			case_choisie=temp;
-			while(case_choisie!=NULL && case_choisie->coul!=neutre)
-				case_choisie=case_choisie->NE;
-		}
-		if(case_choisie==NULL)
-		{
-			case_choisie=temp;
-			while(case_choisie!=NULL && case_choisie->coul!=neutre)
-				case_choisie=case_choisie->O;
-		}
-		if(case_choisie==NULL)
-		{
-			case_choisie=temp;
-			while(case_choisie!=NULL && case_choisie->coul!=neutre)
-				case_choisie=case_choisie->E;
+			if(case_choisie==NULL)
+			{
+				case_choisie=temp;
+				while(case_choisie!=NULL && case_choisie->coul!=neutre)
+					case_choisie=case_choisie->SO;
+				if(case_choisie==NULL)
+				{
+					case_choisie=temp;
+					while(case_choisie!=NULL && case_choisie->coul!=neutre)
+						case_choisie=case_choisie->NE;
+					if(case_choisie==NULL)
+					{
+						case_choisie=temp;
+						while(case_choisie!=NULL && case_choisie->coul!=neutre)
+							case_choisie=case_choisie->O;
+						if(case_choisie==NULL)
+						{
+							case_choisie=temp;
+							while(case_choisie!=NULL && case_choisie->coul!=neutre)
+								case_choisie=case_choisie->E;
+						}
+					}
+				}
+			}
 		}
 	}
 	else
 	{
-		while(case_choisie->coul!=neutre && case_choisie!=NULL)
-		{	
+		case_choisie=temp->O;
+		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 			case_choisie=case_choisie->O;
-			if(case_choisie==NULL)
-				break;
-		}
 		if(case_choisie==NULL)
 		{
-			temp=case_choisie;
-			while(case_choisie->coul!=neutre && case_choisie!=NULL)
-			{	
+			case_choisie=temp;
+			while(case_choisie!=NULL && case_choisie->coul!=neutre)
 				case_choisie=case_choisie->E;
+			if(case_choisie==NULL)
+			{
+				case_choisie=temp;
+				while(case_choisie!=NULL && case_choisie->coul!=neutre)
+					case_choisie=case_choisie->SO;
 				if(case_choisie==NULL)
-					break;
-			}
-		}
-		if(case_choisie==NULL)
-		{
-			case_choisie=temp;
-			while(case_choisie->coul!=neutre && case_choisie!=NULL)
-			{	
-				case_choisie=case_choisie->NO;
-				if(case_choisie==NULL)
-					break;
-			}
-		}
-		if(case_choisie==NULL)
-		{
-			case_choisie=temp;
-			while(case_choisie->coul!=neutre && case_choisie!=NULL)
-			{	
-				case_choisie=case_choisie->NE;
-				if(case_choisie==NULL)
-					break;
-			}
-		}
-		if(case_choisie==NULL)
-		{
-			case_choisie=temp;
-			while(case_choisie->coul!=neutre && case_choisie!=NULL)
-			{	
-				case_choisie=case_choisie->SO;
-				if(case_choisie==NULL)
-					break;
-			}
-		}
-		if(case_choisie==NULL)
-		{
-			case_choisie=temp;
-			while(case_choisie->coul!=neutre && case_choisie!=NULL)
-			{	
-				case_choisie=case_choisie->SE;
-				if(case_choisie==NULL)
-					break;
+				{
+					case_choisie=temp;
+					while(case_choisie!=NULL && case_choisie->coul!=neutre)
+						case_choisie=case_choisie->NE;
+					if(case_choisie==NULL)
+					{
+						case_choisie=temp;
+						while(case_choisie!=NULL && case_choisie->coul!=neutre)
+							case_choisie=case_choisie->NO;
+						if(case_choisie==NULL)
+						{
+							case_choisie=temp;
+							while(case_choisie!=NULL && case_choisie->coul!=neutre)
+								case_choisie=case_choisie->SE;
+						}
+					}
+				}
 			}
 		}
 	}
