@@ -258,11 +258,11 @@ bool relie_bord_nord(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MA
 	else
 	{
 		if(voisin->coul==rouge && !impasse_bord(*c.NO,verif))
-			relie=relie_bord_nord(p,*voisin,voisin.NO,verif);
+			relie=relie_bord_nord(p,*voisin,voisin->NO,verif);
 		else
 		{
-			Type_Case temp=*voisin_suivant(&c,c.NO);
-			relie=relie_bord_nord(p,temp,temp.NO,verif);
+			Type_Case* temp=voisin_suivant(&c,c.NO);
+			relie=relie_bord_nord(p,*temp,temp->NO,verif);
 		}
 	}
 	return relie;
@@ -277,11 +277,11 @@ bool relie_bord_sud(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MAX
 	else
 	{
 		if(voisin->coul==rouge && !impasse_bord(*c.SE,verif))
-			relie=relie_bord_nord(p,*voisin,voisin.SE,verif);
+			relie=relie_bord_nord(p,*voisin,voisin->SE,verif);
 		else
 		{
-			Type_Case temp=*voisin_suivant(&c,c.SE);
-			relie=relie_bord_nord(p,temp,temp.SE,verif);
+			Type_Case* temp=voisin_suivant(&c,c.SE);
+			relie=relie_bord_nord(p,*temp,temp->SE,verif);
 		}
 	}
 	return relie;
