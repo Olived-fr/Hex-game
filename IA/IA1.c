@@ -135,7 +135,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	if(!horizontal)
 	{
 		case_choisie=temp->SE;
-		while(case_choisie!=NULL && case_choisie->coul!=neutre
+		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 			case_choisie=case_choisie->SE;
 		if(case_choisie==NULL)
 		{

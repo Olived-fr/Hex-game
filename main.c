@@ -159,6 +159,7 @@ int main (int argc, char * argv[])
 										affiche_vainqueur(menu, interface, joueur_courant);
 										menu.actualMenu = menu.mainMenu;
 										MaJ_Menu(menu, interface, nbMenuChoice);
+										joueur_courant = changer_joueur(joueur_courant);
 									}
 								
 									premier_coup = false;
@@ -184,6 +185,7 @@ int main (int argc, char * argv[])
 											affiche_vainqueur(menu, interface, joueur_courant);
 											menu.actualMenu = menu.mainMenu;
 											MaJ_Menu(menu, interface, nbMenuChoice);
+											joueur_courant = changer_joueur(joueur_courant);
 										}
 										premier_coup = false;
 										joueur_courant = changer_joueur(joueur_courant);
@@ -202,6 +204,7 @@ int main (int argc, char * argv[])
 									affiche_vainqueur(menu, interface, joueur_courant);
 									menu.actualMenu = menu.mainMenu;
 									MaJ_Menu(menu, interface, nbMenuChoice);
+									joueur_courant = changer_joueur(joueur_courant);
 								}
 								premier_coup = false;
 								joueur_courant = changer_joueur(joueur_courant);
