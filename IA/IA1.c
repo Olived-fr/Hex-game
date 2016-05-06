@@ -131,66 +131,82 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	initialiser_verif(verif1);
 	case_choisie=voisin_elu(case_proche); 
 	/*et on pose le pion à cet endroit là*/
-	Type_Case* temp=case_choisie;
-	
 	if(!horizontal)
 	{
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
-			case_choisie=case_choisie->SE;
-		if(case_choisie==NULL)
 		{
-			while(case_choisie!=NULL && case_choisie->coul!=neutre)
-				case_choisie=case_choisie->NO;
-			if(case_choisie==NULL)
-			{
-				while(case_choisie!=NULL && case_choisie->coul!=neutre)
-					case_choisie=case_choisie->SO;
-				if(case_choisie==NULL)
-				{
-					while(case_choisie!=NULL && case_choisie->coul!=neutre)
-						case_choisie=case_choisie->NE;
-					if(case_choisie==NULL)
-					{
-						while(case_choisie!=NULL && case_choisie->coul!=neutre)
-							case_choisie=case_choisie->O;
-						if(case_choisie==NULL)
-						{
-							while(case_choisie!=NULL && case_choisie->coul!=neutre)
-								case_choisie=case_choisie->E;
-						}
-					}
-				}
-			}
+			case_choisie=case_choisie->SE;
+			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+				break;
+		}
+		while(case_choisie!=NULL && case_choisie->coul!=neutre)
+		{
+			case_choisie=case_choisie->SO;
+			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+				break;
+		}
+		while(case_choisie!=NULL && case_choisie->coul!=neutre)
+		{
+			case_choisie=case_choisie->O;
+			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+				break;
+		}
+		while(case_choisie!=NULL && case_choisie->coul!=neutre)
+		{
+			case_choisie=case_choisie->NO;
+			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+				break;
+		}
+		while(case_choisie!=NULL && case_choisie->coul!=neutre)
+		{
+			case_choisie=case_choisie->NE;
+			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+				break;
+		}
+		while(case_choisie!=NULL && case_choisie->coul!=neutre)
+		{
+			case_choisie=case_choisie->E;
+			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+				break;
 		}
 	}
 	else
 	{
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
-			case_choisie=case_choisie->O;
-		if(case_choisie==NULL)
 		{
-			while(case_choisie!=NULL && case_choisie->coul!=neutre)
-				case_choisie=case_choisie->E;
-			if(case_choisie==NULL)
-			{
-				while(case_choisie!=NULL && case_choisie->coul!=neutre)
-					case_choisie=case_choisie->SO;
-				if(case_choisie==NULL)
-				{
-					while(case_choisie!=NULL && case_choisie->coul!=neutre)
-						case_choisie=case_choisie->NE;
-					if(case_choisie==NULL)
-					{
-						while(case_choisie!=NULL && case_choisie->coul!=neutre)
-							case_choisie=case_choisie->SE;
-						if(case_choisie==NULL)
-						{
-							while(case_choisie!=NULL && case_choisie->coul!=neutre)
-								case_choisie=case_choisie->NO;
-						}
-					}
-				}
-			}
+			case_choisie=case_choisie->O;
+			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+				break;
+		}
+		while(case_choisie!=NULL && case_choisie->coul!=neutre)
+		{
+			case_choisie=case_choisie->NO;
+			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+				break;
+		}
+		while(case_choisie!=NULL && case_choisie->coul!=neutre)
+		{
+			case_choisie=case_choisie->NE;
+			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+				break;
+		}
+		while(case_choisie!=NULL && case_choisie->coul!=neutre)
+		{
+			case_choisie=case_choisie->E;
+			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+				break;
+		}
+		while(case_choisie!=NULL && case_choisie->coul!=neutre)
+		{
+			case_choisie=case_choisie->SE;
+			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+				break;
+		}
+		while(case_choisie!=NULL && case_choisie->coul!=neutre)
+		{
+			case_choisie=case_choisie->SO;
+			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+				break;
 		}
 	}
 	return case_choisie->co;
