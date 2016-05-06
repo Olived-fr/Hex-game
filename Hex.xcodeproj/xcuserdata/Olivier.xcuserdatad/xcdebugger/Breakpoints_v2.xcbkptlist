@@ -395,22 +395,6 @@
             timestampString = "484242549.466136"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
-            landmarkName = "main()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "main.c"
-            timestampString = "484242549.466136"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
             startingLineNumber = "172"
             endingLineNumber = "172"
             landmarkName = "main()"
@@ -424,11 +408,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "main.c"
-            timestampString = "484242549.466136"
+            timestampString = "484253069.417316"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "main()"
             landmarkType = "7">
          </BreakpointContent>
@@ -436,32 +420,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "main.c"
-            timestampString = "484242549.466136"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
-            landmarkName = "main()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IA/IA1.c"
-            timestampString = "484242213.818093"
+            timestampString = "484254560.61077"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "coup_IA1()"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "distance_bord_nord()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -488,12 +456,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IA/IA1.c"
-            timestampString = "484243297.619241"
+            timestampString = "484254560.61077"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
-            landmarkName = "initialiser_verif()"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "distance_bord_nord()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -504,12 +472,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IA/IA1.c"
-            timestampString = "484243299.70157"
+            timestampString = "484254560.61077"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "initialiser_verif()"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "distance_bord_nord()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -520,12 +488,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IA/IA1.c"
-            timestampString = "484243346.107813"
+            timestampString = "484254560.61077"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "initialiser_verif()"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "distance_bord_nord()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IA/IA1.c"
+            timestampString = "484254560.61077"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "distance_bord_sud()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "IA/IA1.c"
+            timestampString = "484254560.61077"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "586"
+            endingLineNumber = "586"
+            landmarkName = "voisin_suivant()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -536,28 +536,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IA/IA1.c"
-            timestampString = "484244374.347574"
+            timestampString = "484254560.61077"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
-            landmarkName = "impasse()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "IA/IA1.c"
-            timestampString = "484249683.191189"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "589"
-            endingLineNumber = "589"
-            landmarkName = "contourner()"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "distance_bord_nord()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

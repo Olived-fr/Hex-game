@@ -28,7 +28,9 @@ int main (int argc, char * argv[])
 	
 	coord_tab.abscisse = 0;
 	coord_tab.ordonnee = 0;
-	while (!quit)
+	
+	
+	while (!quit)  //Boucle des évènements
 	{
 		SDL_WaitEvent(&event);
 		
@@ -38,13 +40,14 @@ int main (int argc, char * argv[])
 				event.button.button = SDL_BUTTON_LEFT;
 				event.type = SDL_MOUSEBUTTONDOWN;
 			}
+		
 		switch (event.type)
 		{
 			case SDL_QUIT:
 				quit = true;
 				break;
 				
-			case SDL_MOUSEBUTTONDOWN: //On clique sur la souris
+			case SDL_MOUSEBUTTONDOWN:	//On clique sur la souris
 				if (event.button.button == SDL_BUTTON_LEFT)
 				{
 					clic.CoordX = event.motion.x;
@@ -52,7 +55,10 @@ int main (int argc, char * argv[])
 					
 					choix = choix_Menu(clic, menu);
 					
-					if (menu.actualMenu == menu.mainMenu)
+					
+					/********************* Menus ***********************/
+					
+					if (menu.actualMenu == menu.mainMenu)	//Menu principal
 					{
 						if (choix == 1)
 							
@@ -75,7 +81,8 @@ int main (int argc, char * argv[])
 						}
 					}
 					
-					else if (menu.actualMenu == menu.playMenu)
+					
+					else if (menu.actualMenu == menu.playMenu)	//Menu de sélection de partie
 					{
 						if (choix == 0)
 						{
@@ -111,7 +118,8 @@ int main (int argc, char * argv[])
 						}
 					}
 					
-					else if (menu.actualMenu == menu.inGameMenu)
+					
+					else if (menu.actualMenu == menu.inGameMenu)	//Menu en jeu
 					{
 						if (choix == 0)
 						{
@@ -137,7 +145,10 @@ int main (int argc, char * argv[])
 							quit = true;
 						}
 						
-						if (!IA)
+						
+						/********************* Tour de jeu *********************/
+						
+						if (!IA)	//Partie humain vs humain
 						{
 							if (clic_on_board(clic, board))
 							{
@@ -160,43 +171,24 @@ int main (int argc, char * argv[])
 										menu.actualMenu = menu.mainMenu;
 										MaJ_Menu(menu, interface, nbMenuChoice);
 									}
-								
 									premier_coup = false;
 									joueur_courant = changer_joueur(joueur_courant);
 								}
 							}
 						}
 						
-						else if (IA)
+						else if (IA)	//Partie humain vs IA
 						{
 							if (joueur_courant == bleu)
-							{
-								if (clic_on_board(clic, board))
-								{
-									coord_tab = pos_pion_tab(clic, board);
-									if (coup_valide(board_tab, coord_tab))
-									{
-										placer_pion(board, coord_tab, joueur_courant, interface, board_tab);
-										historique(premier_coup, coord_tab, joueur_courant);
-										MaJ_Infos(menu, interface, joueur_courant);
-										if (verify_win(board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab))
-										{
-											affiche_vainqueur(menu, interface, joueur_courant);
-											menu.actualMenu = menu.mainMenu;
-											MaJ_Menu(menu, interface, nbMenuChoice);
-										}
-										premier_coup = false;
-										joueur_courant = changer_joueur(joueur_courant);
-									}
-								}
-							}
+								coord_tab = pos_pion_tab(clic, board);
 							else
+								coord_tab = coup_IA1 (board_tab);
+							
+							if (coup_valide(board_tab, coord_tab))
 							{
-								coord_tab = coup_IA1 (board_tab, joueur_courant);
 								placer_pion(board, coord_tab, joueur_courant, interface, board_tab);
 								historique(premier_coup, coord_tab, joueur_courant);
 								MaJ_Infos(menu, interface, joueur_courant);
-								
 								if (verify_win(board_tab[coord_tab.abscisse][coord_tab.ordonnee], board_tab))
 								{
 									affiche_vainqueur(menu, interface, joueur_courant);
@@ -206,13 +198,8 @@ int main (int argc, char * argv[])
 								premier_coup = false;
 								joueur_courant = changer_joueur(joueur_courant);
 							}
-							
-							
-							
-							
 						}
 					}
-					
 				}
 				break;
 				
