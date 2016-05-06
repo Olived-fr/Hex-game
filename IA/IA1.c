@@ -49,7 +49,7 @@ Coordonnees_tab coup_IA1(Plateau p)
 	/* case_proche contient la case la plus proche d'un bord parmi ses voisins neutres on regarde celui qui est
 	le plus proche du bord concerné*/
 	
-	if(distance_choisie==distance_bord_nord)
+	if(distance_choisie==&distance_bord_nord)
 		case_proche=contourner(case_proche,case_proche->NO);
 	else
 		case_proche=contourner(case_proche,case_proche->SE);
