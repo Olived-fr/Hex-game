@@ -171,6 +171,7 @@ void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant, bool
 	
 	if (premier_coup)
 	{
+		SDL_BlitSurface(menu.InfosSurface,NULL,interface.screenSurface,&menu.posInfos);
 		if (joueur_courant == bleu)
 			sprintf(infosJ2, "Bleu");
 		else
