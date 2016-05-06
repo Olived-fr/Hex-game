@@ -137,37 +137,55 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 		{
 			case_choisie=case_choisie->SE;
 			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			{
+				case_choisie=case_choisie->NO;
 				break;
+			}
 		}
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->SO;
 			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			{
+				case_choisie=case_choisie->NE;
 				break;
+			}
 		}
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->O;
 			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			{
+				case_choisie=case_choisie->E;
 				break;
+			}
 		}
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->NO;
 			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			{
+				case_choisie=case_choisie->SE;
 				break;
+			}
 		}
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->NE;
 			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			{
+				case_choisie=case_choisie->SO;
 				break;
+			}
 		}
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->E;
 			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			{
+				case_choisie=case_choisie->O;
 				break;
+			}
 		}
 	}
 	else
@@ -176,37 +194,55 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 		{
 			case_choisie=case_choisie->O;
 			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			{
+				case_choisie=case_choisie->E;
 				break;
+			}
 		}
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->NO;
 			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			{
+				case_choisie=case_choisie->SE;
 				break;
+			}
 		}
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->NE;
 			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			{
+				case_choisie=case_choisie->SO;
 				break;
+			}
 		}
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->E;
 			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			{
+				case_choisie=case_choisie->O;
 				break;
+			}
 		}
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->SE;
 			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			{
+				case_choisie=case_choisie->NO;
 				break;
+			}
 		}
 		while(case_choisie!=NULL && case_choisie->coul!=neutre)
 		{
 			case_choisie=case_choisie->SO;
 			if(case_choisie==NULL || case_choisie->coul==changer_joueur(couleur_courante))
+			{
+				case_choisie=case_choisie->NE;
 				break;
+			}
 		}
 	}
 	return case_choisie->co;
