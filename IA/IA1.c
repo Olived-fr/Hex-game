@@ -131,7 +131,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	initialiser_verif(verif1);
 	case_choisie=voisin_elu(case_proche); 
 	/*et on pose le pion à cet endroit là*/
-	case_choisie=contourner(case_choisie,horizontal,cou);
+	case_choisie=contourner(case_choisie,case_choisei->SE,horizontal,couleur_courante);
 	return case_choisie->co;
 }
 
@@ -582,164 +582,69 @@ bool relie_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],Cou
 	return relie;
 }
 
-Type_Case* contourner(Type_Case* case_choisie,bool horizontal,Couleur cou)
+Type_Case* contourner(Type_Case* case_choisie,,Type_Case* voisin,bool horizontal,Couleur cou)
 {
 	if(horizontal)
 	{
-		if(case_choisie->SE!=NULL)
+		if(voisin!=NULL)
 		{
-			switch case_choisie->SE->coul
+			switch (voisin->coul)
 			{
-				cou:
-					return contourner(case_choisie->SE);
+				case cou:
+					return contourner(voisin,voisin->SE,horizontal,cou);
 					break;
-				neutre:
-					return case_choisie->SE;
+				case neutre:
+					return voisin;
 					break;
 				default:
-					if(case_choisie->SO!=NULL)
-					{
-						switch case_choisie->SO->coul
-						{
-							cou:
-								return contourner(case_choisie->SO);
-								break;
-							neutre:
-								return case_choisie->SO;
-								break;
-							default:
-								if(case_choisie->O!=NULL){
-								switch case_choisie->O->coul
-								{
-									cou:
-									return contourner(case_choisie->O);
-									break;
-								neutre:
-									return case_choisie->O;
-									break;
-								default:
-								if(case_choisie->NO!=NULL){
-									switch case_choisie->NO->coul
-									{
-										cou:
-											return contourner(case_choisie->NO);
-											break;
-										neutre:
-											return case_choisie->NO;
-											break;
-										default:
-											if(case_choisie->NE!=NULL){
-											switch case_choisie->NE->coul
-											{
-												cou:
-													return contourner(case_choisie->NE);
-													break;
-												neutre:
-													return case_choisie->NE;
-													break;
-												default:
-													if(case_choisie->O!=NULL){
-													switch case_choisie->O->coul
-													{
-														cou:
-															return contourner(case_choisie->O);
-															break;
-														neutre:
-															return case_choisie->O;
-															break;
-														default:
-															return case_choisie;
-															break;
-													}}
-													break;
-											}}
-											break;
-								}}
-								break;
-								}}
-							break;
-					}
+					return contourner(voisin,voisin_suivant(case_choisie,voisin),horizontal,cou);
 					break;
 			}
 		}
+		return contourner(voisin,voisin_suivant(case_choisie,voisin),horizontal,cou);
 	}
 	else
 	{
-		if(case_choisie->O!=NULL)
+		if(voisin!=NULL)
 		{
-			switch case_choisie->O->coul
+			switch (voisin->coul)
 			{
-				cou:
-					return contourner(case_choisie->O);
+				case cou:
+					return contourner(voisin,voisin->O,horizontal,cou);
 					break;
-				neutre:
-					return case_choisie->O;
+				case neutre:
+					return voisin;
 					break;
 				default:
-					if(case_choisie->SO!=NULL)
-					{
-						switch case_choisie->SO->coul
-						{
-							cou:
-								return contourner(case_choisie->SO);
-								break;
-							neutre:
-								return case_choisie->SO;
-								break;
-							default:
-								if(case_choisie->SE!=NULL){
-								switch case_choisie->SE->coul
-								{
-									cou:
-									return contourner(case_choisie->SE);
-									break;
-								neutre:
-									return case_choisie->SE;
-									break;
-								default:
-								if(case_choisie->E!=NULL){
-									switch case_choisie->E->coul
-									{
-										cou:
-											return contourner(case_choisie->E);
-											break;
-										neutre:
-											return case_choisie->E;
-											break;
-										default:
-											if(case_choisie->NE!=NULL){
-											switch case_choisie->NE->coul
-											{
-												cou:
-													return contourner(case_choisie->NE);
-													break;
-												neutre:
-													return case_choisie->NE;
-													break;
-												default:
-													if(case_choisie->NO!=NULL){
-													switch case_choisie->NO->coul
-													{
-														cou:
-															return contourner(case_choisie->NO);
-															break;
-														neutre:
-															return case_choisie->NO;
-															break;
-														default:
-															return case_choisie;
-															break;
-													}}
-													break;
-											}}
-											break;
-								}}
-								break;
-								}}
-							break;
-					}
+					return contourner(voisin,voisin_suivant(case_choisie,voisin),horizontal,cou);
 					break;
 			}
 		}
+		return contourner(voisin,voisin_suivant(case_choisie,voisin),horizontal,cou);
+	}
+}
+
+Type_Case* voisin_suivant(Type_Case* depart,Type_Case* voisin)
+{
+	switch (voisin)
+	{
+		case depart->SO: 
+			return depart->O;
+			break;
+		case depart->O: 
+			return depart->NO;
+			break;
+		case depart->NO: 
+			return depart->NE;
+			break;
+		case depart->NE: 
+			return depart->E;
+			break;
+		case depart->E: 
+			return depart->SE;
+			break;
+		default: 
+			return depart->SE;
+			break;
 	}
 }
