@@ -67,42 +67,42 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	
 	int distance_courante;
 	initialiser_verif(verif1);
-	if(case_proche.NO!=NULL)
+	if(case_proche.NO!=NULL && case_proche.NE.coul==neutre)
 	{
 		distance_courante=distance_choisie(p,*case_proche.NO,verif1,couleur_courante);
 		if(distance_courante < distance_min && case_proche.NO->coul==neutre)
 			voisin_elu=&voisin_NO;
 	}
 	initialiser_verif(verif1);
-	if(case_proche.NE!=NULL)
+	if(case_proche.NE!=NULL && case_proche.NE.coul==neutre)
 	{
 		distance_courante=distance_choisie(p,*case_proche.NE,verif1,couleur_courante);
 		if(distance_courante < distance_min && case_proche.NE->coul==neutre)
 			voisin_elu=&voisin_NE;
 	}
 	initialiser_verif(verif1);
-	if(case_proche.O!=NULL)
+	if(case_proche.O!=NULL && case_proche.NE.coul==neutre)
 	{
 		distance_courante=distance_choisie(p,*case_proche.O,verif1,couleur_courante);
 		if(distance_courante < distance_min && case_proche.O->coul==neutre)
 			voisin_elu=&voisin_O;
 	}
 	initialiser_verif(verif1);
-	if(case_proche.SO!=NULL)
+	if(case_proche.SO!=NULL && case_proche.NE.coul==neutre)
 	{
 		distance_courante=distance_choisie(p,*case_proche.SO,verif1,couleur_courante);
 		if(distance_courante < distance_min && case_proche.SO->coul==neutre)
 			voisin_elu=&voisin_SO;
 	}
 	initialiser_verif(verif1);
-	if(case_proche.SE!=NULL)
+	if(case_proche.SE!=NULL && case_proche.NE.coul==neutre)
 	{
 		distance_courante=distance_choisie(p,*case_proche.SE,verif1,couleur_courante);
 		if(distance_courante < distance_min && case_proche.SE->coul==neutre)
 			voisin_elu=&voisin_SE;
 	}
 	initialiser_verif(verif1);
-	if(case_proche.NO!=NULL)
+	if(case_proche.NO!=NULL && case_proche.NE.coul==neutre)
 	{
 		distance_courante=distance_choisie(p,*case_proche.E,verif1,couleur_courante);
 		if(distance_courante < distance_min && case_proche.E->coul==neutre)
@@ -112,7 +112,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	case_choisie=voisin_elu(case_proche); 
 	/*et on pose le pion à cet endroit là*/
 
-	if(horizontal)
+	if(!horizontal)
 	{
 		while(p[case_choisie->co.abscisse][case_choisie->co.ordonnee].coul!=neutre && case_choisie!=NULL)
 			case_choisie=case_choisie->SE;
