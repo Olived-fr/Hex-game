@@ -6,7 +6,7 @@ Coordonnees_tab coup_IA1(Plateau p)
 	int distance_min=LIGNE_MAX+2;
 	bool trouve=false;
 	//afin de s'assurer que la première itération génerera une distance min
-	int(*distance_choisie)(Plateau,Type_Case,bool verif2[LIGNE_MAX][COLONNE_MAX])=&distance_bord_sud;
+	int(*distance_choisie)(Plateau,Type_Case,Type_Case*,bool verif2[LIGNE_MAX][COLONNE_MAX])=&distance_bord_sud;
 	Type_Case case_courante;
 	Type_Case case_proche=p[5][5];
 	if(case_proche.coul!=neutre)case_proche=*case_proche.O;
@@ -24,9 +24,9 @@ Coordonnees_tab coup_IA1(Plateau p)
 			{
 				trouve=true;
 				initialiser_verif(verif1);
-				d1=distance_bord_nord(p,case_courante,verif1);
+				d1=distance_bord_nord(p,case_courante,case_courante.NO,verif1);
 				initialiser_verif(verif2);
-				d2=distance_bord_sud(p,case_courante,verif2);
+				d2=distance_bord_sud(p,case_courante,case_courante.SE,verif2);
 				/*le troisième argument n'a aucun interêt ici, il n'est utile que dans le cas d'un appel récursif pour éviter de tourner en rond*/
 				if(d1 < distance_min && d1!=0)
 				{
@@ -96,47 +96,25 @@ bool impasse(Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
 	return (NE && NO && E && O && SE && SO);
 }
 
-int distance_bord_nord(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
+int distance_bord_nord(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MAX][COLONNE_MAX])
 {
 	verif[c.co.abscisse][c.co.ordonnee]=true;
 	int distance=0;
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	if(relie_bord_nord(p,c,c.NO,verif_b))return LIGNE_MAX+1;
-	if(c.NO==NULL)
+	if(relie_bord_nord(p,c,voisin,verif_b))return LIGNE_MAX+1;
+	if(voisin==NULL)
 		return 0;
 	else
 	{
 		if(impasse(c,verif))return LIGNE_MAX+1;
 		else
 		{
-			if(c.NO->coul!= bleu && !verif[c.co.abscisse][c.co.ordonnee-1])
-				distance=1+distance_bord_nord(p,*(c.NO),verif);
-			else
-			{
-				if(c.NE!=NULL && c.NE->coul!=bleu && !verif[c.co.abscisse+1][c.co.ordonnee-1])
-					distance=1+distance_bord_nord(p,*(c.NE),verif);
-				else 
-				{
-					if(c.E!=NULL && c.E->coul!=bleu && !verif[c.co.abscisse+1][c.co.ordonnee])
-						distance=1+distance_bord_nord(p,*(c.E),verif);
-					else
-					{
-						if(c.SE!=NULL && c.SE->coul!=bleu && !verif[c.co.abscisse][c.co.ordonnee+1])
-							distance=1+distance_bord_nord(p,*(c.SE),verif);
-						else
-						{
-							if(c.SO!=NULL && c.SO->coul!=bleu && !verif[c.co.abscisse-1][c.co.ordonnee+1])
-								distance=1+distance_bord_nord(p,*(c.SO),verif);
-							else
-							{
-								if(c.O!=NULL && c.O->coul!=bleu && !verif[c.co.abscisse-1][c.co.ordonnee])
-									distance=1+distance_bord_nord(p,*(c.O),verif);
-							}
-						}
-					}
-				}
-			}
+			Type_Case* temp;
+			do
+				temp=voisin_suivant(&c,voisin);
+			while(temp==NULL);
+			distance=1+distance_bord_nord(p,*temp,temp->NO,verif);
 		}
 	}
 	return distance;
@@ -148,41 +126,19 @@ int distance_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
 	int distance=0;
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	if(relie_bord_sud(p,c,c.SE,verif_b))return LIGNE_MAX+1;
-	if(c.SE==NULL)
+	if(relie_bord_nord(p,c,voisin,verif_b))return LIGNE_MAX+1;
+	if(voisin==NULL)
 		return 0;
 	else
 	{
 		if(impasse(c,verif))return LIGNE_MAX+1;
 		else
 		{
-			if(c.SE->coul!=bleu && !verif[c.co.abscisse][c.co.ordonnee+1])
-				distance=1+distance_bord_sud(p,*(c.SE),verif);
-			else
-			{
-				if(c.SO!=NULL && c.SO->coul!=bleu && !verif[c.co.abscisse-1][c.co.ordonnee+1])
-					distance=1+distance_bord_sud(p,*(c.SO),verif);
-				else 
-				{
-					if(c.O!=NULL && c.O->coul!=bleu && !verif[c.co.abscisse-1][c.co.ordonnee])
-						distance=1+distance_bord_sud(p,*(c.O),verif);
-					else
-					{
-						if(c.NO!=NULL && c.NO->coul!=bleu && !verif[c.co.abscisse][c.co.ordonnee-1])
-							distance=1+distance_bord_sud(p,*(c.NO),verif);
-						else
-						{
-							if(c.NE!=NULL && c.NE->coul!=bleu && !verif[c.co.abscisse+1][c.co.ordonnee-1])
-								distance=1+distance_bord_sud(p,*(c.NE),verif);
-							else
-							{
-								if(c.E!=NULL && c.E->coul!=bleu && !verif[c.co.abscisse+1][c.co.ordonnee])
-									distance=1+distance_bord_sud(p,*(c.E),verif);
-							}
-						}
-					}
-				}
-			}
+			Type_Case* temp;
+			do
+				temp=voisin_suivant(&c,voisin);
+			while(temp==NULL);
+			distance=1+distance_bord_nord(p,*temp,temp->SE,verif);
 		}
 	}
 	return distance;
