@@ -103,7 +103,7 @@ int distance_bord_nord(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_
 	int distance=0;
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	if(relie_bord_nord(p,c,voisin,verif_b))return LIGNE_MAX+1;
+	if(relie_bord_nord(&c,poubelle))return LIGNE_MAX+1;
 	if(voisin==NULL)
 		return 0;
 	else
@@ -127,7 +127,8 @@ int distance_bord_sud(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_M
 	int distance=0;
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	if(relie_bord_nord(p,c,voisin,verif_b))return LIGNE_MAX+1;
+	Type_Case* poubelle;
+	if(relie_bord_sud(&c,poubelle))return LIGNE_MAX+1;
 	if(voisin==NULL)
 		return 0;
 	else
@@ -206,72 +207,212 @@ bool impasse_bord(Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
 	return (NE && NO && E && O && SE && SO);
 }
 
-bool relie_bord_nord(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MAX][COLONNE_MAX])
+bool relie_bord_nord(Type_Case* cur, Type_Case* ret)
 {
-	verif[c.co.abscisse][c.co.ordonnee]=true;
-	bool relie=true;
-	int nb_voisins_verifies;
-	if(voisin==NULL)
-		return true;
-	else
-	{
-		if(voisin->coul==rouge && !impasse_bord(*voisin,verif))
-			return relie_bord_sud(p,*voisin,voisin->SE,verif);
-        else
-        {
-		
-			if(impasse_bord(*voisin,verif))
-				return false;
-			else
-			{
-				nb_voisins_verifies=0;
-				do
-				{
-					nb_voisins_verifies++;
-					voisin=voisin_suivant(&c,voisin);
-				}
-				while(nb_voisins_verifies!=6 && voisin!=NULL && voisin->coul!=rouge);
-				if(voisin->coul==rouge)
-                    return relie_bord_sud(p,*voisin,voisin->SE,verif);
-			}
-        }
+	int i=0;
+	bool b=false;
 
+	while(!b && i!=6)
+	/* On continue tant que tous les voisins n'ont pas été checkés ou tant que le bord n'a pas été trouvé */
+	{
+		if(cur->NO==NULL))
+		{
+			b=true;
+			*ret=*cur;
+		}
+		switch (i)
+		{
+			case 0:
+				if(cur->SE==NULL || cur->SE->check==1 || cur->SE->coul!=cur->coul)
+				{
+					i++;
+					if(cur->SE!=NULL)
+						cur->SE->check=1;
+				}
+				else
+				{
+					cur->SE->check=1;
+					b=verify_bord(cur->SE,ret);
+				}
+			break;
+
+			case 1:
+				if(cur->SO==NULL || cur->SO->check==1 || cur->SO->coul!=cur->coul)
+				{
+					i++;
+					if(cur->SO!=NULL)
+						cur->SO->check=1;
+				}
+				else
+				{
+					cur->SO->check=1;
+					b=verify_bord(cur->SO,ret);
+				}
+			break;
+
+			case 2:
+				if(cur->O==NULL || cur->O->check==1 || cur->O->coul!=cur->coul)
+				{
+					i++;
+					if(cur->O!=NULL)
+						cur->O->check=1;
+				}
+				else
+				{
+					cur->O->check=1;
+					b=verify_bord(cur->O,ret);
+				}
+			break;
+
+			case 3:
+				if(cur->NO==NULL || cur->NO->check==1 || cur->NO->coul!=cur->coul)
+				{
+					i++;
+					if(cur->NO!=NULL)
+						cur->NO->check=1;
+				}
+				else
+				{
+					cur->NO->check=1;
+					b=verify_bord(cur->NO,ret);
+				}
+			break;
+
+			case 4:
+				if(cur->NE==NULL || cur->NE->check==1 || cur->NE->coul!=cur->coul)
+				{
+					i++;
+					if(cur->NE!=NULL)
+						cur->NE->check=1;
+				}
+				else
+				{
+					cur->NE->check=1;
+					b=verify_bord(cur->NE,ret);
+				}
+			break;
+
+			default:
+				if(cur->E==NULL || cur->E->check==1 || cur->E->coul!=cur->coul)
+				{
+					i++;
+					if(cur->E!=NULL)
+						cur->E->check=1;
+				}
+				else
+				{
+					cur->E->check=1;
+					b=verify_bord(cur->E,ret);
+				}
+			break;
+		}
 	}
-	return relie;
+
+	return b;
 }
 
-bool relie_bord_sud(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MAX][COLONNE_MAX])
+bool relie_bord_sud(Type_Case* cur, Type_Case* ret)
 {
-	verif[c.co.abscisse][c.co.ordonnee]=true;
-	bool relie=true;
-	int nb_voisins_verifies;
-	if(voisin==NULL)
-		return true;
-	else
-	{
-		if(voisin->coul==rouge && !impasse_bord(*voisin,verif))
-			return relie_bord_sud(p,*voisin,voisin->NO,verif);
-		else
-		{
-			if(impasse_bord(*voisin,verif))
-				return false;
-			else
-			{
-				nb_voisins_verifies=0;
-				do
-				{
-					nb_voisins_verifies++;
-					voisin=voisin_suivant(&c,voisin);
-				}
-				while(nb_voisins_verifies!=6 && voisin!=NULL && voisin->coul!=rouge);
-				if(voisin->coul==rouge)
-					return relie_bord_sud(p,*voisin,voisin->NO,verif);
-			}
-		}
+	int i=0;
+	bool b=false;
 
-		return !impasse_bord(*voisin,verif);
+	while(!b && i!=6)
+	/* On continue tant que tous les voisins n'ont pas été checkés ou tant que le bord n'a pas été trouvé */
+	{
+		if(cur->SE==NULL))
+		{
+			b=true;
+			*ret=*cur;
+		}
+		switch (i)
+		{
+			case 0:
+				if(cur->SE==NULL || cur->SE->check==1 || cur->SE->coul!=cur->coul)
+				{
+					i++;
+					if(cur->SE!=NULL)
+						cur->SE->check=1;
+				}
+				else
+				{
+					cur->SE->check=1;
+					b=verify_bord(cur->SE,ret);
+				}
+			break;
+
+			case 1:
+				if(cur->SO==NULL || cur->SO->check==1 || cur->SO->coul!=cur->coul)
+				{
+					i++;
+					if(cur->SO!=NULL)
+						cur->SO->check=1;
+				}
+				else
+				{
+					cur->SO->check=1;
+					b=verify_bord(cur->SO,ret);
+				}
+			break;
+
+			case 2:
+				if(cur->O==NULL || cur->O->check==1 || cur->O->coul!=cur->coul)
+				{
+					i++;
+					if(cur->O!=NULL)
+						cur->O->check=1;
+				}
+				else
+				{
+					cur->O->check=1;
+					b=verify_bord(cur->O,ret);
+				}
+			break;
+
+			case 3:
+				if(cur->NO==NULL || cur->NO->check==1 || cur->NO->coul!=cur->coul)
+				{
+					i++;
+					if(cur->NO!=NULL)
+						cur->NO->check=1;
+				}
+				else
+				{
+					cur->NO->check=1;
+					b=verify_bord(cur->NO,ret);
+				}
+			break;
+
+			case 4:
+				if(cur->NE==NULL || cur->NE->check==1 || cur->NE->coul!=cur->coul)
+				{
+					i++;
+					if(cur->NE!=NULL)
+						cur->NE->check=1;
+				}
+				else
+				{
+					cur->NE->check=1;
+					b=verify_bord(cur->NE,ret);
+				}
+			break;
+
+			default:
+				if(cur->E==NULL || cur->E->check==1 || cur->E->coul!=cur->coul)
+				{
+					i++;
+					if(cur->E!=NULL)
+						cur->E->check=1;
+				}
+				else
+				{
+					cur->E->check=1;
+					b=verify_bord(cur->E,ret);
+				}
+			break;
+		}
 	}
-	return relie;
+
+	return b;
 }
 
 Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin)
