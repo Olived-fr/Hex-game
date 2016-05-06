@@ -216,9 +216,10 @@ bool relie_bord_nord(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MA
 	else
 	{
 		if(voisin->coul==rouge && !impasse_bord(*voisin,verif))
-			return relie_bord_sud(p,*voisin,voisin->SE,verif));
-		else
-		{
+			return relie_bord_sud(p,*voisin,voisin->SE,verif);
+        else
+        {
+		
 			if(impasse_bord(*voisin,verif))
 				return false;
 			else
@@ -231,9 +232,10 @@ bool relie_bord_nord(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MA
 				}
 				while(nb_voisins_verifies!=6 && voisin!=NULL && voisin->coul!=rouge);
 				if(voisin->coul==rouge)
-					return relie_bord_sud(p,*voisin,voisin->SE,verif));
+                    return relie_bord_sud(p,*voisin,voisin->SE,verif);
 			}
-		}
+        }
+
 	}
 	return relie;
 }
@@ -248,7 +250,7 @@ bool relie_bord_sud(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MAX
 	else
 	{
 		if(voisin->coul==rouge && !impasse_bord(*voisin,verif))
-			return relie_bord_sud(p,*voisin,voisin->NO,verif));
+			return relie_bord_sud(p,*voisin,voisin->NO,verif);
 		else
 		{
 			if(impasse_bord(*voisin,verif))
@@ -263,9 +265,11 @@ bool relie_bord_sud(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MAX
 				}
 				while(nb_voisins_verifies!=6 && voisin!=NULL && voisin->coul!=rouge);
 				if(voisin->coul==rouge)
-					return relie_bord_sud(p,*voisin,voisin->NO,verif));
+					return relie_bord_sud(p,*voisin,voisin->NO,verif);
 			}
 		}
+
+		return !impasse_bord(*voisin,verif);
 	}
 	return relie;
 }
