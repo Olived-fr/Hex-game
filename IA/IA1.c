@@ -3,7 +3,7 @@
 Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 {	
 	int x,y,d1,d2;
-	int distance_min=LIGNE_MAX+1;
+	int distance_min=LIGNE_MAX+2;
 	//afin de s'assurer que la première itération génerera une distance min
 	int(*distance_extremite1)(Plateau,Type_Case,bool verif1[LIGNE_MAX][COLONNE_MAX],Couleur);
 	int(*distance_extremite2)(Plateau,Type_Case,bool verif2[LIGNE_MAX][COLONNE_MAX],Couleur);
@@ -66,7 +66,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	}
 	/* case_proche contient la case la plus proche d'un bord parmi ses voisins neutres on regarde celui qui est
 	le plus proche du bord concerné*/
-	
+	/*
 	int distance_courante;
 	initialiser_verif(verif1);
 	if(case_proche.NO!=NULL && case_proche.NO->coul==neutre)
@@ -129,9 +129,9 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 		}
 	}
 	initialiser_verif(verif1);
-	case_choisie=voisin_elu(case_proche); 
+	case_choisie=voisin_elu(case_proche); */
 	/*et on pose le pion à cet endroit là*/
-	case_choisie=contourner(case_choisie,case_choisie->SE,horizontal,couleur_courante);
+	case_choisie=contourner(case_proche,case_proche->SE,horizontal,couleur_courante);
 	return case_choisie->co;
 }
 
@@ -589,7 +589,7 @@ Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin,bool horizontal,
 		if(voisin!=NULL)
 		{
 			if(voisin->coul==cou)
-				return contourner(voisin,voisin->SE,horizontal,cou);
+				return contourner(voisin,voisin->SE,!horizontal,cou);
 			if(voisin->coul==neutre)
 					return voisin;
 			if(voisin->coul==changer_joueur(cou))
