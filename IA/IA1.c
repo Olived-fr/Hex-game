@@ -102,7 +102,7 @@ int distance_bord_nord(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
 	int distance=0;
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	if(relie_bord_nord(p,c.NO,verif_b))return LIGNE_MAX+1;
+	if(relie_bord_nord(p,c,*c.NO,verif_b))return LIGNE_MAX+1;
 	if(c.NO==NULL)
 		return 0;
 	else
@@ -148,7 +148,7 @@ int distance_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
 	int distance=0;
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	if(relie_bord_sud(p,c,c.SE,verif_b))return LIGNE_MAX+1;
+	if(relie_bord_sud(p,c,*c.SE,verif_b))return LIGNE_MAX+1;
 	if(c.SE==NULL)
 		return 0;
 	else
@@ -257,7 +257,7 @@ bool relie_bord_nord(Plateau p,Type_Case c,Type_Case voisin,bool verif[LIGNE_MAX
 		return true;
 	else
 	{
-		if(voisin->coul==rouge && !impasse_bord(*c.NO,rouge,verif))
+		if(voisin->coul==rouge && !impasse_bord(*c.NO,verif))
 			relie=relie_bord_nord(p,voisin,voisin.NO,verif);
 		else
 		{
@@ -268,7 +268,7 @@ bool relie_bord_nord(Plateau p,Type_Case c,Type_Case voisin,bool verif[LIGNE_MAX
 	return relie;
 }
 
-bool relie_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
+bool relie_bord_sud(Plateau p,Type_Case c,Type_Case voisin,bool verif[LIGNE_MAX][COLONNE_MAX])
 {
 	verif[c.co.abscisse][c.co.ordonnee]=true;
 	bool relie=true;
@@ -276,7 +276,7 @@ bool relie_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
 		return true;
 	else
 	{
-		if(voisin->coul==rouge && !impasse_bord(*c.SE,rouge,verif))
+		if(voisin->coul==rouge && !impasse_bord(*c.SE,verif))
 			relie=relie_bord_nord(p,voisin,voisin.SE,verif);
 		else
 		{
