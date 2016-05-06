@@ -8,7 +8,7 @@ Coordonnees_tab coup_IA1(Plateau p)
 	//afin de s'assurer que la première itération génerera une distance min
 	int(*distance_choisie)(Plateau,Type_Case,bool verif2[LIGNE_MAX][COLONNE_MAX])=&distance_bord_sud;
 	Type_Case case_courante;
-	Type_Case* case_proche=&p[5][5];
+	Type_Case case_proche=p[5][5];
 	if(case_proche->coul!=neutre)case_proche=case_proche->O;
 	bool verif1[LIGNE_MAX][COLONNE_MAX];
 	bool verif2[LIGNE_MAX][COLONNE_MAX];
@@ -30,13 +30,13 @@ Coordonnees_tab coup_IA1(Plateau p)
 				/*le troisième argument n'a aucun interêt ici, il n'est utile que dans le cas d'un appel récursif pour éviter de tourner en rond*/
 				if(d1 < distance_min && d1!=0)
 				{
-					case_proche=&case_courante;
+					case_proche=case_courante;
 					distance_choisie=&distance_bord_nord;
 					distance_min=d1;
 				}
 				if(d2 < distance_min && d2!=0)
 				{
-					case_proche=&case_courante;
+					case_proche=case_courante;
 					distance_choisie=distance_bord_sud;
 					distance_min=d2;
 				}
@@ -50,11 +50,11 @@ Coordonnees_tab coup_IA1(Plateau p)
 	if(trouve)
 	{
 		if(distance_choisie==&distance_bord_nord)
-			case_proche=contourner(case_proche,case_proche->NO);
+			*case_proche=contourner(&case_proche,case_proche->NO);
 		else
-			case_proche=contourner(case_proche,case_proche->SE);
+			*case_proche=contourner(&case_proche,case_proche->SE);
 	}
-	return case_proche->co;
+	return case_proche.co;
 }
 
 void initialiser_verif(bool verif[LIGNE_MAX][COLONNE_MAX])
@@ -261,23 +261,23 @@ bool relie_bord_nord(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
 			relie=relie_bord_nord(p,*(c.NO),verif);
 		else
 		{
-			if(c.NE!=NULL && c.NE->coul!=bleu && !verif[c.co.abscisse+1][c.co.ordonnee-1] && !impasse_bord(*c.NE,rouge,verif))
+			if(c.NE!=NULL && c.NE->coul!=bleu && !verif[c.co.abscisse+1][c.co.ordonnee-1] && !impasse_bord(*c.NE,verif))
 				relie=relie_bord_nord(p,*(c.NE),verif);
 			else 
 			{
-				if(c.E!=NULL && c.E->coul!=bleu && !verif[c.co.abscisse+1][c.co.ordonnee] && !impasse_bord(*c.E,rouge,verif))
+				if(c.E!=NULL && c.E->coul!=bleu && !verif[c.co.abscisse+1][c.co.ordonnee] && !impasse_bord(*c.E,verif))
 					relie=relie_bord_nord(p,*(c.E),verif);
 				else
 				{
-					if(c.SE!=NULL && c.SE->coul!=bleu && !verif[c.co.abscisse][c.co.ordonnee+1] && !impasse_bord(*c.SE,rouge,verif))
+					if(c.SE!=NULL && c.SE->coul!=bleu && !verif[c.co.abscisse][c.co.ordonnee+1] && !impasse_bord(*c.SE,verif))
 						relie=relie_bord_nord(p,*(c.SE),verif);
 					else
 					{
-						if(c.SO!=NULL && c.SO->coul!=bleu && !verif[c.co.abscisse-1][c.co.ordonnee+1] && !impasse_bord(*c.SO,rouge,verif))
+						if(c.SO!=NULL && c.SO->coul!=bleu && !verif[c.co.abscisse-1][c.co.ordonnee+1] && !impasse_bord(*c.SO,verif))
 							relie=relie_bord_nord(p,*(c.SO),verif);
 						else
 						{
-							if(c.O!=NULL && c.O->coul!=bleu && !verif[c.co.abscisse-1][c.co.ordonnee] && !impasse_bord(*c.O,rouge,verif))
+							if(c.O!=NULL && c.O->coul!=bleu && !verif[c.co.abscisse-1][c.co.ordonnee] && !impasse_bord(*c.O,verif))
 								relie=relie_bord_nord(p,*(c.O),verif);
 							else
 								return false;
