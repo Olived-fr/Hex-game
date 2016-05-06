@@ -274,9 +274,9 @@ int distance_bord_ouest(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX]
 {
 	verif[c.co.abscisse][c.co.ordonnee]=true;
 	int distance=0;
-	bool verif_b[LIGNE_MAX][COLONNE_MAX]
+	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	if(impasse_bord(c,cou,verif_b)return LIGNE_MAX+1;
+	if(impasse_bord(c,cou,verif_b))return LIGNE_MAX+1;
 	if(c.O==NULL)
 		return 0;
 	else
@@ -320,9 +320,9 @@ int distance_bord_est(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],C
 {
 	verif[c.co.abscisse][c.co.ordonnee]=true;
 	int distance=0;
-	bool verif_b[LIGNE_MAX][COLONNE_MAX]
+	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	if(impasse_bord(c,cou,verif_b)return LIGNE_MAX+1;
+	if(impasse_bord(c,cou,verif_b))return LIGNE_MAX+1;
 	if(c.E==NULL)
 		return 0;
 	else
@@ -366,9 +366,9 @@ int distance_bord_nord(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],
 {
 	verif[c.co.abscisse][c.co.ordonnee]=true;
 	int distance=0;
-	bool verif_b[LIGNE_MAX][COLONNE_MAX]
+	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	if(impasse_bord(c,cou,verif_b)return LIGNE_MAX+1;
+	if(impasse_bord(c,cou,verif_b))return LIGNE_MAX+1;
 	if(c.NO==NULL)
 		return 0;
 	else
@@ -412,9 +412,9 @@ int distance_bord_sud(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],C
 {
 	verif[c.co.abscisse][c.co.ordonnee]=true;
 	int distance=0;
-	bool verif_b[LIGNE_MAX][COLONNE_MAX]
+	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	if(impasse_bord(c,cou,verif_b)return LIGNE_MAX+1;
+	if(impasse_bord(c,cou,verif_b))return LIGNE_MAX+1;
 	if(c.SE==NULL)
 		return 0;
 	else
@@ -497,7 +497,7 @@ bool impasse_bord(Type_Case c,Couleur cou,bool verif[LIGNE_MAX][COLONNE_MAX])
 	else
 		NO=true;
 	if(c.E!=NULL)
-		E=(c.E->coul==cou) && !verif[c.co.abscisse+1][c.co.ordonnee]);
+		E=(c.E->coul==cou && !verif[c.co.abscisse+1][c.co.ordonnee]);
 	else
 		E=true;
 	if(c.O!=NULL)
@@ -543,7 +543,7 @@ bool relie_bord_ouest(Plateau p,Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX],C
 							relie=relie_bord_ouest(p,*(c.SE),verif,cou);
 						else
 						{
-							if(c.SO!=NULL && c.SO->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee+1] && !impasse_bord(*c.SO,cou,verif)))
+							if(c.SO!=NULL && c.SO->coul!=changer_joueur(cou) && !verif[c.co.abscisse-1][c.co.ordonnee+1] && !impasse_bord(*c.SO,cou,verif))
 								relie=relie_bord_ouest(p,*(c.SO),verif,cou);
 							else
 								return false;
