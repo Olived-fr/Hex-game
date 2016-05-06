@@ -588,18 +588,12 @@ Type_Case* contourner(Type_Case* case_choisie,,Type_Case* voisin,bool horizontal
 	{
 		if(voisin!=NULL)
 		{
-			switch (voisin->coul)
-			{
-				case cou:
-					return contourner(voisin,voisin->SE,horizontal,cou);
-					break;
-				case neutre:
+			if(voisin->coul==cou)
+				return contourner(voisin,voisin->SE,horizontal,cou);
+			if(voisin->coul==neutre)
 					return voisin;
-					break;
-				default:
+			if(voisin->coul==changer_joueur(cou))
 					return contourner(voisin,voisin_suivant(case_choisie,voisin),horizontal,cou);
-					break;
-			}
 		}
 		return contourner(voisin,voisin_suivant(case_choisie,voisin),horizontal,cou);
 	}
@@ -607,18 +601,12 @@ Type_Case* contourner(Type_Case* case_choisie,,Type_Case* voisin,bool horizontal
 	{
 		if(voisin!=NULL)
 		{
-			switch (voisin->coul)
-			{
-				case cou:
-					return contourner(voisin,voisin->O,horizontal,cou);
-					break;
-				case neutre:
+			if(voisin->coul==cou)
+				return contourner(voisin,voisin->O,horizontal,cou);
+			if(voisin->coul==neutre)
 					return voisin;
-					break;
-				default:
+			if(voisin->coul==changer_joueur(cou))
 					return contourner(voisin,voisin_suivant(case_choisie,voisin),horizontal,cou);
-					break;
-			}
 		}
 		return contourner(voisin,voisin_suivant(case_choisie,voisin),horizontal,cou);
 	}
@@ -626,25 +614,17 @@ Type_Case* contourner(Type_Case* case_choisie,,Type_Case* voisin,bool horizontal
 
 Type_Case* voisin_suivant(Type_Case* depart,Type_Case* voisin)
 {
-	switch (voisin)
-	{
-		case depart->SO: 
-			return depart->O;
-			break;
-		case depart->O: 
-			return depart->NO;
-			break;
-		case depart->NO: 
-			return depart->NE;
-			break;
-		case depart->NE: 
-			return depart->E;
-			break;
-		case depart->E: 
-			return depart->SE;
-			break;
-		default: 
-			return depart->SE;
-			break;
-	}
+	if(voisin==depart->SO) 
+		return depart->O;
+	if(voisin==depart->O) 
+		return depart->NO;
+	if(voisin==depart->NO) 
+		return depart->NE;
+	if(voisin==depart->NE) 
+		return depart->E;
+	if(voisin==depart->E) 
+		return depart->SE;
+	if(voisin==depart->SE) 
+		return depart->SO;
+	return depart;
 }
