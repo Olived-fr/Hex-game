@@ -102,7 +102,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 			voisin_elu=&voisin_SE;
 	}
 	initialiser_verif(verif1);
-	if(case_proche.NO!=NULL && case_proche.E->coul==neutre)
+	if(case_proche.E!=NULL && case_proche.E->coul==neutre)
 	{
 		distance_courante=distance_choisie(p,*case_proche.E,verif1,couleur_courante);
 		if(distance_courante < distance_min && case_proche.E->coul==neutre)
@@ -111,64 +111,42 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 	initialiser_verif(verif1);
 	case_choisie=voisin_elu(case_proche); 
 	/*et on pose le pion à cet endroit là*/
+	/*
 	Type_Case* temp=case_choisie;
 	if(!horizontal)
 	{
-		while(case_choisie->coul!=neutre && case_choisie!=NULL)
-		{	
+		case_choisie=temp->SE;
+		while(case_choisie!=NULL && case_choisie->coul!=neutre
 			case_choisie=case_choisie->SE;
-			if(case_choisie==NULL)
-				break;
-		}
 		if(case_choisie==NULL)
 		{
 			case_choisie=temp;
-			while(case_choisie->coul!=neutre && case_choisie!=NULL)
-			{	
+			while(case_choisie!=NULL && case_choisie->coul!=neutre)
 				case_choisie=case_choisie->NO;
-				if(case_choisie==NULL)
-					break;
-			}
 		}
 		if(case_choisie==NULL)
 		{
 			case_choisie=temp;
-			while(case_choisie->coul!=neutre && case_choisie!=NULL)
-			{	
+			while(case_choisie!=NULL && case_choisie->coul!=neutre)
 				case_choisie=case_choisie->SO;
-				if(case_choisie==NULL)
-					break;
-			}
 		}
 		if(case_choisie==NULL)
 		{
 			case_choisie=temp;
-			while(case_choisie->coul!=neutre && case_choisie!=NULL)
-			{	
+			while(case_choisie!=NULL && case_choisie->coul!=neutre)
 				case_choisie=case_choisie->NE;
-				if(case_choisie==NULL)
-					break;
-			}
 		}
 		if(case_choisie==NULL)
 		{
 			case_choisie=temp;
-			while(case_choisie->coul!=neutre && case_choisie!=NULL)
-			{	
+			while(case_choisie!=NULL && case_choisie->coul!=neutre)
 				case_choisie=case_choisie->O;
-				if(case_choisie==NULL)
-					break;
-			}
 		}
 		if(case_choisie==NULL)
 		{
 			case_choisie=temp;
-			while(case_choisie->coul!=neutre && case_choisie!=NULL)
-			{	
+			while(case_choisie!=NULL && case_choisie->coul!=neutre)
 				case_choisie=case_choisie->E;
-				if(case_choisie==NULL)
-					break;
-			}
 		}
 	}
 	else
@@ -230,6 +208,7 @@ Coordonnees_tab coup_IA1(Plateau p, Couleur couleur_courante)
 			}
 		}
 	}
+	*/
 	return case_choisie->co;
 }
 
