@@ -72,7 +72,8 @@ void distance_bord_sud(Type_Case* c,Type_Case* voisin,int* d,int* min_interne)
 Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin)
 {
 	Type_Case* temp=voisin;
-	int compteur,min;
+	int compteur;
+	int min=LIGNE_MAX+2;
 	int sortie=LIGNE_MAX+2;
 	int i=0;
 	Type_Case* elue;
