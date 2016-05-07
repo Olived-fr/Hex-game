@@ -24,7 +24,11 @@ Coordonnees_tab coup_IA1(Plateau p)
 				reinitialise_case_checked(p);
 				nb_appels=0;
 				distance_bord_sud(p,case_courante,case_courante->SE,&nb_appels,&min_interne);
+<<<<<<< HEAD
 				if(nb_appel <= distance_min && nb_appels!=0)
+=======
+				if(nb_appels <= distance_min && nb_appels!=0)
+>>>>>>> origin/master
 				{
 					case_proche=case_courante;
 					distance_min=nb_appels;
@@ -65,7 +69,7 @@ void distance_bord_sud(Plateau p,Type_Case* c,Type_Case* voisin,int* d,int* min_
 			i++;
 			nouveau_voisin=voisin_suivant(c,nouveau_voisin);
 		}
-		*d=min_interne;
+		*d=*min_interne;
 	}
 }
 
