@@ -49,18 +49,12 @@ int distance_bord_sud(Plateau p,Type_Case c,Type_Case* voisin)
 	else
 	{
 		voisin->check=true;
-		Type_Case* temp=voisin;
-		i=0;
-		while(i!=6 && (temp==NULL || temp->coul!=neutre || voisin->check))
-		{
-			i++;
-			temp=voisin_suivant(&c,temp);
-		}
-		if(i==6 || voisin==NULL)
+		Type_Case* nouveau_voisin=contourner(&c,voisin);
+		if(i==6 || nouveau_voisin==NULL)
 			return LIGNE_MAX+1;
 		//cas de l'impasse
 		else
-			return(1+distance_bord_sud(p,*voisin,voisin->SE));
+			return(1+distance_bord_sud(p,nouveau_voisin,nouveau_voisin->SE));
 	}
 }
 
@@ -68,7 +62,7 @@ Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin)
 {
 	Type_Case* temp=voisin;
 	int i=0;
-	while(i!=6 && (temp==NULL || temp->coul!=neutre || voisin->check))
+	while(i!=6 && (temp==NULL || temp->coul!=neutre || temp->check))
 	{
 		i++;
 		temp=voisin_suivant(case_choisie,temp);
