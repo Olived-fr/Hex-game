@@ -10,9 +10,9 @@ Coordonnees_tab coup_IA1(Plateau p)
 	Type_Case* case_proche=&p[5][0];
 	if(case_proche->coul!=neutre)case_proche=case_proche->O;
 	//si le plateau est de taille 11 par exemple la distance maximale qu'une case peut avoir à un bord est égal à 10
-	for(x=0;x<LIGNE_MAX;x++)
+	for(y=0;y<LIGNE_MAX;y++)
 	{
-		for(y=0;y<COLONNE_MAX;y++)
+		for(x=0;x<COLONNE_MAX;x++)
 		{
 			distance_min=COLONNE_MAX+2;
 			case_courante=&p[x][y];
