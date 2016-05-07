@@ -2,20 +2,19 @@
 
 Coordonnees_tab coup_IA1(Plateau p)
 {
-	srand((unsigned int)time(NULL));
 	int x,y,d;
 	int distance_min;
 	bool trouve=false;
-	Type_Case case_courante;
-	Type_Case case_proche=p[rand() %11][0];
-	if(case_proche.coul!=neutre)case_proche=*case_proche.O;
+	Type_Case* case_courante;
+	Type_Case* case_proche=&p[5][0];
+	if(case_proche->coul!=neutre)case_proche=case_proche.O;
 	//si le plateau est de taille 11 par exemple la distance maximale qu'une case peut avoir à un bord est égal à 10
 	for(x=0;x<LIGNE_MAX;x++)
 	{
 		for(y=0;y<COLONNE_MAX;y++)
 		{
 			distance_min=LIGNE_MAX+2;
-			case_courante=p[x][y];
+			case_courante=&p[x][y];
 			if(case_courante.coul==rouge)
 			{
 				trouve=true;
@@ -40,15 +39,16 @@ Coordonnees_tab coup_IA1(Plateau p)
 	return case_proche.co;
 }
 
-int distance_bord_sud(Plateau p,Type_Case c,Type_Case* voisin)
+int distance_bord_sud(Plateau p,Type_Case* c,Type_Case* voisin)
 {
 	int i;
+	c->check=true;
 	if(voisin==NULL)
 		return 0;
 	else
 	{
 		voisin->check=true;
-		Type_Case* nouveau_voisin=contourner(&c,voisin);
+		Type_Case* nouveau_voisin=contourner(c,voisin);
 		if(i==6 || nouveau_voisin==NULL)
 			return LIGNE_MAX+1;
 		//cas de l'impasse
