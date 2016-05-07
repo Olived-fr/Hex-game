@@ -99,6 +99,7 @@ bool impasse(Type_Case c,bool verif[LIGNE_MAX][COLONNE_MAX])
 
 int distance_bord_nord(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MAX][COLONNE_MAX])
 {
+	int i;
 	verif[c.co.abscisse][c.co.ordonnee]=true;
 	int distance=0;
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
@@ -111,14 +112,19 @@ int distance_bord_nord(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_
 		return 0;
 	else
 	{
-		if(impasse(c,verif))return LIGNE_MAX+1;
+		if(impasse(c,verif))
+			return LIGNE_MAX+1;
 		else
 		{
 			Type_Case* temp;
-			do
+			i=0;
+			{
 				temp=voisin_suivant(&c,voisin);
-			while(temp==NULL);
-			distance=1+distance_bord_nord(p,*temp,temp->NO,verif);
+				i++;
+				if(temp==NULL || temp->coul==bleu)
+					distance=1+distance_bord_nord(p,*temp,temp->NO,verif);
+			}
+			while(i!=6);
 		}
 	}
 	return distance;
@@ -126,26 +132,32 @@ int distance_bord_nord(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_
 
 int distance_bord_sud(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_MAX][COLONNE_MAX])
 {
+	int i;
 	verif[c.co.abscisse][c.co.ordonnee]=true;
 	int distance=0;
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
 	Type_Case* poubelle;
 	reinitialise_case_checked(p);
-	if(relie_bord_sud(&c,poubelle))
+	if(relie_bord_nord(&c,poubelle))
 		return LIGNE_MAX+1;
 	if(voisin==NULL)
 		return 0;
 	else
 	{
-		if(impasse(c,verif))return LIGNE_MAX+1;
+		if(impasse(c,verif))
+			return LIGNE_MAX+1;
 		else
 		{
 			Type_Case* temp;
-			do
+			i=0;
+			{
 				temp=voisin_suivant(&c,voisin);
-			while(temp==NULL);
-			distance=1+distance_bord_nord(p,*temp,temp->SE,verif);
+				i++;
+				if(temp==NULL || temp->coul==bleu)
+					distance=1+distance_bord_nord(p,*temp,temp->SE,verif);
+			}
+			while(i!=6);
 		}
 	}
 	return distance;
