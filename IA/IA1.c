@@ -13,7 +13,7 @@ Coordonnees_tab coup_IA1(Plateau p)
 	{
 		for(y=0;y<COLONNE_MAX;y++)
 		{
-			distance_min=LIGNE_MAX+2;
+			distance_min=COLONNE_MAX+2;
 			case_courante=&p[x][y];
 			if(case_courante->coul==rouge)
 			{
@@ -34,7 +34,7 @@ Coordonnees_tab coup_IA1(Plateau p)
 	if(trouve)
 	{
 		reinitialise_case_checked(p);
-		case_proche=*contourner(&case_proche,case_proche->SE);
+		case_proche=contourner(case_proche,case_proche->SE);
 	}
 	return case_proche->co;
 }
@@ -42,17 +42,26 @@ Coordonnees_tab coup_IA1(Plateau p)
 int distance_bord_sud(Plateau p,Type_Case* c,Type_Case* voisin)
 {
 	int i;
+	int min_interne=COLONNE_MAX+2;
 	c->check=true;
 	if(voisin==NULL)
 		return 0;
 	else
 	{
-		Type_Case* nouveau_voisin=contourner(c,voisin);
-		if(i==6 || nouveau_voisin==NULL)
-			return LIGNE_MAX+1;
-		//cas de l'impasse
-		else
-			return(1+distance_bord_sud(p,nouveau_voisin,nouveau_voisin->SE));
+		Type_Case* nouveau_voisin=voisin;
+		int i=0;
+		while(i!=6)
+		{
+			if(!nouveau_voisin->check && nouveau_voisin!=NULL && nouveau_voisin->coul==neutre)
+			{
+				d=distance_bord_sud(p,nouveau_voisin,nouveau_voisin->SE);
+				if(nouveau_voisin->coul==neutre && d < min_interne)
+					min_interne=d;
+			}
+			i++;
+			nouveau_voisin=voisin_suivant(c,nouveau_voisin);
+		}
+		return d;
 	}
 }
 
@@ -62,7 +71,8 @@ Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin)
 	int i=0;
 	while(i!=6 && (temp==NULL || temp->coul!=neutre || temp->check))
 	{
-		temp->check=true;
+		if(temp!=NULL)
+			temp->check=true;
 		i++;
 		temp=voisin_suivant(case_choisie,temp);
 	}
