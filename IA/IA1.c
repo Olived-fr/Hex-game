@@ -81,8 +81,28 @@ Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin)
 	{
 		if(temp!=NULL)
 			temp->check=true;
+		switch(i)
+		{
+			case 0:
+				temp=case_choisie->SE;
+				break;
+			case 1:
+				temp=case_choisie->SO;
+				break;
+			case 2:
+				temp=case_choisie->O;
+				break;
+			case 3:
+				temp=case_choisie->NO;
+				break;
+			case 4:
+				temp=case_choisie->NE;
+				break;
+			case 5:
+				temp=case_choisie->E;
+				break;
+		}
 		i++;
-		temp=voisin_suivant(case_choisie,temp);
 	}
 	return temp;
 }
