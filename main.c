@@ -21,7 +21,7 @@ int main (int argc, char * argv[])
 	SDL_Event event;
 	Plateau board_tab;
 	Coordonnees_tab coord_tab;
-	Couleur joueur_courant = bleu, dernier_joueur = bleu;
+	Couleur joueur_courant = neutre, dernier_joueur = neutre;
 	menu.actualMenu = menu.mainMenu;
 	bool quit = false, premier_coup = true, IA = false;
 	int choix;
@@ -105,6 +105,7 @@ int main (int argc, char * argv[])
 							joueur_courant = bleu;
 							premier_coup = true;
 							IA = true;
+							MaJ_Infos(menu, interface, joueur_courant, premier_coup);
 							
 						}
 						if (choix == 2)
@@ -120,7 +121,10 @@ int main (int argc, char * argv[])
 						}
 						if (choix == 3)
 						{
-							menu.actualMenu = menu.mainMenu;
+							if (premier_coup == true)
+								menu.actualMenu = menu.mainMenu;
+							else
+								menu.actualMenu = menu.inGameMenu;
 							MaJ_Menu(menu, interface, nbMenuChoice);
 						}
 					}
@@ -178,6 +182,7 @@ int main (int argc, char * argv[])
 										affiche_vainqueur(menu, interface, joueur_courant);
 										menu.actualMenu = menu.mainMenu;
 										MaJ_Menu(menu, interface, nbMenuChoice);
+										joueur_courant = neutre;
 									}
 									joueur_courant = changer_joueur(joueur_courant);
 								}
@@ -189,7 +194,10 @@ int main (int argc, char * argv[])
 							if (joueur_courant == bleu)
 								coord_tab = pos_pion_tab(clic, board);
 							else
+							{
 								coord_tab = coup_IA1 (board_tab);
+								SDL_Delay(500);
+							}
 							
 							if (coup_valide(board_tab, coord_tab))
 							{
@@ -203,6 +211,7 @@ int main (int argc, char * argv[])
 									affiche_vainqueur(menu, interface, joueur_courant);
 									menu.actualMenu = menu.mainMenu;
 									MaJ_Menu(menu, interface, nbMenuChoice);
+									joueur_courant = neutre;
 								}
 								joueur_courant = changer_joueur(joueur_courant);
 							}

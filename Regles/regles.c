@@ -319,8 +319,10 @@ Couleur changer_joueur(Couleur couleur_courante)
 {
 	if (couleur_courante==bleu)
 		return rouge;
-	else
+	else if (couleur_courante == rouge)
 		return bleu;
+	else
+		return couleur_courante;
 }
 
 void choix_coup(Plateau p,Coordonnees_tab c,Couleur couleur_courante)
