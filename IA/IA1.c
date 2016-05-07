@@ -1,12 +1,13 @@
 #include "IA.h"
 
 Coordonnees_tab coup_IA1(Plateau p)
-{	
-	int x,y,d1,d2;
+{
+	srand((unsigned int)time(NULL));
+	int x,y,d;
 	int distance_min;
 	bool trouve=false;
 	Type_Case case_courante;
-	Type_Case case_proche=p[1][5];
+	Type_Case case_proche=p[rand() %11][0];
 	if(case_proche.coul!=neutre)case_proche=*case_proche.O;
 	//si le plateau est de taille 11 par exemple la distance maximale qu'une case peut avoir à un bord est égal à 10
 	for(x=0;x<LIGNE_MAX;x++)
@@ -19,11 +20,11 @@ Coordonnees_tab coup_IA1(Plateau p)
 			{
 				trouve=true;
 				reinitialise_case_checked(p);
-				d=distance_bord_sud(p,case_courante,case_courante.SE,verif2);
+				d=distance_bord_sud(p,case_courante,case_courante.SE);
 				if(d < distance_min && d!=0)
 				{
 					case_proche=case_courante;
-					distance_min=d2;
+					distance_min=d;
 				}
 				/*Ainsi, on retient la distance la plus courte et on retient également la direction la plus courte avec la variable "distance_choisie"*/
 			}
@@ -42,54 +43,37 @@ Coordonnees_tab coup_IA1(Plateau p)
 int distance_bord_sud(Plateau p,Type_Case c,Type_Case* voisin)
 {
 	int i;
-	temp->checked=true;
-	int distance=0;
+	voisin->check=true;
 	if(voisin==NULL)
 		return 0;
 	else
 	{
+		voisin->check=true;
 		Type_Case* temp=voisin;
 		i=0;
-		while(i!=6 && (temp==NULL || temp->coul!=neutre || temp->checked))
+		while(i!=6 && (temp==NULL || temp->coul!=neutre || voisin->check))
 		{
 			i++;
 			temp=voisin_suivant(&c,temp);
 		}
-		if(i==6 || temp==NULL))
+		if(i==6 || voisin==NULL)
 			return LIGNE_MAX+1;
 		//cas de l'impasse
 		else
-			return(1+distance_bord_sud(p,voisin,voisin->SE));
+			return(1+distance_bord_sud(p,*voisin,voisin->SE));
 	}
 }
 
 Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin)
 {
-<<<<<<< HEAD
 	Type_Case* temp=voisin;
 	int i=0;
-	while(i!=6 && (temp==NULL || temp->coul!=neutre || temp->checked))
+	while(i!=6 && (temp==NULL || temp->coul!=neutre || voisin->check))
 	{
 		i++;
-		temp=voisin_suivant(&c,temp);
+		temp=voisin_suivant(case_choisie,temp);
 	}
 	return temp;
-=======
-	if(voisin!=NULL)
-	{
-		if(voisin->coul==rouge)
-			return contourner(voisin,voisin->SE);
-		if(voisin->coul==neutre)
-				return voisin;
-		if(voisin->coul==bleu)
-				return contourner(voisin,voisin_suivant(case_choisie,voisin));
-	}
-	/*else
-	{
-		return
-	}*/
-	return case_choisie;
->>>>>>> origin/master
 }
 
 Type_Case* voisin_suivant(Type_Case* depart,Type_Case* voisin)
@@ -101,7 +85,7 @@ Type_Case* voisin_suivant(Type_Case* depart,Type_Case* voisin)
 	if(voisin==depart->O) 
 		return depart->E;
 	if(voisin==depart->E) 
-		return depart->N0;
+		return depart->NO;
 	if(voisin==depart->NO) 
 		return depart->NE;
 	if(voisin==depart->NE) 
