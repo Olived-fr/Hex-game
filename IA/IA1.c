@@ -65,6 +65,7 @@ int distance_bord_sud(Plateau p,Type_Case c,Type_Case* voisin)
 
 Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin)
 {
+<<<<<<< HEAD
 	Type_Case* temp=voisin;
 	int i=0;
 	while(i!=6 && (temp==NULL || temp->coul!=neutre || temp->checked))
@@ -73,6 +74,22 @@ Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin)
 		temp=voisin_suivant(&c,temp);
 	}
 	return temp;
+=======
+	if(voisin!=NULL)
+	{
+		if(voisin->coul==rouge)
+			return contourner(voisin,voisin->SE);
+		if(voisin->coul==neutre)
+				return voisin;
+		if(voisin->coul==bleu)
+				return contourner(voisin,voisin_suivant(case_choisie,voisin));
+	}
+	/*else
+	{
+		return
+	}*/
+	return case_choisie;
+>>>>>>> origin/master
 }
 
 Type_Case* voisin_suivant(Type_Case* depart,Type_Case* voisin)

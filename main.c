@@ -92,6 +92,7 @@ int main (int argc, char * argv[])
 							MaJ_Board(board, interface, board_tab);
 							joueur_courant = bleu;
 							premier_coup = true;
+							IA = false;
 							MaJ_Infos(menu, interface, joueur_courant, premier_coup);
 
 						}
