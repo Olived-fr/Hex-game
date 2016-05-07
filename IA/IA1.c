@@ -104,7 +104,7 @@ int distance_bord_nord(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_
 	int distance=0;
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	Type_Case* poubelle;
+	Type_Case* poubelle=&c;
 	reinitialise_case_checked(p);
 	if(relie_bord_nord(&c,poubelle))
 		return LIGNE_MAX+1;
@@ -118,6 +118,7 @@ int distance_bord_nord(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_
 		{
 			Type_Case* temp;
 			i=0;
+			do
 			{
 				temp=voisin_suivant(&c,voisin);
 				i++;
@@ -137,7 +138,7 @@ int distance_bord_sud(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_M
 	int distance=0;
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	Type_Case* poubelle;
+	Type_Case* poubelle=&c;
 	reinitialise_case_checked(p);
 	if(relie_bord_nord(&c,poubelle))
 		return LIGNE_MAX+1;
@@ -151,6 +152,7 @@ int distance_bord_sud(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_M
 		{
 			Type_Case* temp;
 			i=0;
+			do
 			{
 				temp=voisin_suivant(&c,voisin);
 				i++;
@@ -442,6 +444,10 @@ Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin)
 				return voisin;
 		if(voisin->coul==bleu)
 				return contourner(voisin,voisin_suivant(case_choisie,voisin));
+	}
+	else
+	{
+		return
 	}
 	return case_choisie;
 }
