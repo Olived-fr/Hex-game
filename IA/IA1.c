@@ -2,12 +2,14 @@
 
 Coordonnees_tab coup_IA1(Plateau p)
 {
+	srand((unsigned int)time(NULL));
+	int depart=rand()%11;
 	int x,y;
 	int distance_min;
 	int nb_appel;
 	bool trouve=false;
 	Type_Case* case_courante;
-	Type_Case* case_proche=&p[5][0];
+	Type_Case* case_proche=&p[depart][0];
 	int tab[11][11];
 	if(case_proche->coul!=neutre)case_proche=case_proche->O;
 	//si le plateau est de taille 11 par exemple la distance maximale qu'une case peut avoir à un bord est égal à 10
@@ -57,7 +59,7 @@ int distance_bord_sud(Plateau p,Type_Case* c,Type_Case* voisin,int* d)
 		i=0;
 		while(i!=6)
 		{
-			if(nouveau_voisin!=NULL && !nouveau_voisin->check && nouveau_voisin->coul=neutre)
+			if(nouveau_voisin!=NULL && !nouveau_voisin->check && nouveau_voisin->coul==neutre)
 			{
 				temp=*d;
 				distance_bord_sud(p,nouveau_voisin,nouveau_voisin->SE,&temp);
