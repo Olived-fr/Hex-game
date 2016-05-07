@@ -23,11 +23,11 @@ Coordonnees_tab coup_IA1(Plateau p)
 				trouve=true;
 				reinitialise_case_checked(p);
 				nb_appels=0;
-				distance_bord_sud(p,case_courante,case_courante->SE,&nb_appels,min_interne);
-				if(nb_appel <= distance_min && nb_appels!=0)
+				distance_bord_sud(p,case_courante,case_courante->SE,&nb_appels,&min_interne);
+				if(nb_appels <= distance_min && nb_appels!=0)
 				{
 					case_proche=case_courante;
-					distance_min=nb_appesl;
+					distance_min=nb_appels;
 				}
 				/*Ainsi, on retient la distance la plus courte et on retient également la direction la plus courte avec la variable "distance_choisie"*/
 			}
@@ -65,7 +65,7 @@ void distance_bord_sud(Plateau p,Type_Case* c,Type_Case* voisin,int* d,int* min_
 			i++;
 			nouveau_voisin=voisin_suivant(c,nouveau_voisin);
 		}
-		*d=min_interne;
+		*d=*min_interne;
 	}
 }
 
