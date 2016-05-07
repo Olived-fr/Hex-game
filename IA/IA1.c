@@ -24,11 +24,19 @@ Coordonnees_tab coup_IA1(Plateau p)
 				trouve=true;
 				reinitialise_case_checked(p);
 				nb_appels=0;
+<<<<<<< HEAD
 				d=distance_bord_sud(case_courante,&min_courant);
 				if(d <= distance_min && d!=0)
 				{
 					case_proche=case_courante;
 					distance_min=d;
+=======
+				distance_bord_sud(p,case_courante,case_courante->SE,&nb_appels,min_interne);
+				if(nb_appel <= distance_min && nb_appels!=0)
+				{
+					case_proche=case_courante;
+					distance_min=nb_appesl;
+>>>>>>> parent of 0e0c4a2... Ooooh
 				}
 				/*Ainsi, on retient la distance la plus courte et on retient également la direction la plus courte avec la variable "distance_choisie"*/
 			}
@@ -69,15 +77,17 @@ int distance_bord_sud(Type_Case* c,int* min)
 Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin)
 {
 	Type_Case* temp=voisin;
+<<<<<<< HEAD
 	int compteur;
 	int min=LIGNE_MAX+2;
+=======
+>>>>>>> parent of 0e0c4a2... Ooooh
 	int i=0;
-	Type_Case* elue;
 	while(i!=6 && (temp==NULL || temp->coul!=neutre || temp->check))
 	{
 		if(temp!=NULL)
-		{
 			temp->check=true;
+<<<<<<< HEAD
 			if(temp->coul==neutre)
 			{
 				compteur=0;
@@ -89,6 +99,8 @@ Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin)
 				}
 			}
 		}
+=======
+>>>>>>> parent of 0e0c4a2... Ooooh
 		switch(i)
 		{
 			case 0:
