@@ -59,11 +59,11 @@ int distance_bord_sud(Plateau p,Type_Case* c,Type_Case* voisin,int* d)
 		i=0;
 		while(i!=6)
 		{
-			if(nouveau_voisin!=NULL && !nouveau_voisin->check && nouveau_voisin->coul==neutre)
+			if(nouveau_voisin!=NULL && !nouveau_voisin->check && nouveau_voisin->coul!=bleu)
 			{
 				temp=*d;
 				distance_bord_sud(p,nouveau_voisin,nouveau_voisin->SE,&temp);
-				if(nouveau_voisin->coul==neutre && temp < min_interne)
+				if(temp < min_interne)
 					min_interne=temp;
 			}
 			i++;
