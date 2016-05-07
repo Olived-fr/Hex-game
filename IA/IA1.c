@@ -4,7 +4,7 @@ Coordonnees_tab coup_IA1(Plateau p)
 {
 	srand((unsigned int)time(NULL));
 	int depart=rand()%11;
-	int x,y,d;
+	int x,y;
 	int distance_min,nb_appels;
 	int min_courant=LIGNE_MAX+2;
 	bool trouve=false;
@@ -71,6 +71,7 @@ Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin)
 	Type_Case* temp=voisin;
 	int compteur;
 	int min=LIGNE_MAX+2;
+	int sortie=LIGNE_MAX+2;
 	int i=0;
 	Type_Case* elue;
 	while(i!=6 && (temp==NULL || temp->coul!=neutre || temp->check))
@@ -81,7 +82,7 @@ Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin)
 			if(temp->coul==neutre)
 			{
 				compteur=0;
-				distance_bord_sud(temp,&min);
+				distance_bord_sud(temp,temp->SE,&compteur,&sortie);
 				if(compteur < min)
 				{
 					min=compteur;

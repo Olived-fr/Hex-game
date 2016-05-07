@@ -7,7 +7,7 @@
 
 Coordonnees_tab coup_IA1(Plateau p);
 
-void distance_bord_sud(Type_Case* c,int* min);
+void distance_bord_sud(Type_Case* c);
 
 Type_Case* voisin_suivant(Type_Case* depart,Type_Case* voisin);
 Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin);
