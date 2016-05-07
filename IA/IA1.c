@@ -93,13 +93,13 @@ Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin)
 				temp=case_choisie->O;
 				break;
 			case 3:
-				temp=case_choisie->NO;
+				temp=case_choisie->E;
 				break;
 			case 4:
-				temp=case_choisie->NE;
+				temp=case_choisie->NO;
 				break;
 			case 5:
-				temp=case_choisie->E;
+				temp=case_choisie->NE;
 				break;
 		}
 		i++;
