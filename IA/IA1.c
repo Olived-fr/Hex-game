@@ -44,6 +44,7 @@ Coordonnees_tab coup_IA1(Plateau p)
 int distance_bord_sud(Plateau p,Type_Case* c,Type_Case* voisin,int* d)
 {
 	d++;
+	int temp=*d;
 	int i;
 	int min_interne=LIGNE_MAX+2;
 	c->check=true;
@@ -57,9 +58,10 @@ int distance_bord_sud(Plateau p,Type_Case* c,Type_Case* voisin,int* d)
 		{
 			if(nouveau_voisin!=NULL && !nouveau_voisin->check && nouveau_voisin->coul==neutre)
 			{
-				distance_bord_sud(p,nouveau_voisin,nouveau_voisin->SE,d);
-				if(nouveau_voisin->coul==neutre && d < min_interne)
-					min_interne=d;
+				temp=*d;
+				distance_bord_sud(p,nouveau_voisin,nouveau_voisin->SE,temp);
+				if(nouveau_voisin->coul==neutre && temp < min_interne)
+					min_interne=temp;
 			}
 			i++;
 			nouveau_voisin=voisin_suivant(c,nouveau_voisin);
