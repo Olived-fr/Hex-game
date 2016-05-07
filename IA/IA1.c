@@ -445,10 +445,10 @@ Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin)
 		if(voisin->coul==bleu)
 				return contourner(voisin,voisin_suivant(case_choisie,voisin));
 	}
-	else
+	/*else
 	{
 		return
-	}
+	}*/
 	return case_choisie;
 }
 
