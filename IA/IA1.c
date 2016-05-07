@@ -23,12 +23,8 @@ Coordonnees_tab coup_IA1(Plateau p)
 				trouve=true;
 				reinitialise_case_checked(p);
 				nb_appels=0;
-				distance_bord_sud(p,case_courante,case_courante->SE,&nb_appels,&min_interne);
-<<<<<<< HEAD
-				if(nb_appel <= distance_min && nb_appels!=0)
-=======
+				distance_bord_sud(case_courante,case_courante->SE,&nb_appels,&min_interne);
 				if(nb_appels <= distance_min && nb_appels!=0)
->>>>>>> origin/master
 				{
 					case_proche=case_courante;
 					distance_min=nb_appels;
@@ -47,7 +43,7 @@ Coordonnees_tab coup_IA1(Plateau p)
 	return case_proche->co;
 }
 
-void distance_bord_sud(Plateau p,Type_Case* c,Type_Case* voisin,int* d,int* min_interne)
+void distance_bord_sud(Type_Case* c,Type_Case* voisin,int* d,int* min_interne)
 {
 	
 	int temp,i;
@@ -62,7 +58,7 @@ void distance_bord_sud(Plateau p,Type_Case* c,Type_Case* voisin,int* d,int* min_
 			if(nouveau_voisin!=NULL && !nouveau_voisin->check && nouveau_voisin->coul!=bleu)
 			{
 				temp=*d;
-				distance_bord_sud(p,nouveau_voisin,nouveau_voisin->SE,&temp,min_interne);
+				distance_bord_sud(nouveau_voisin,nouveau_voisin->SE,&temp,min_interne);
 				if(temp < *min_interne)
 					*min_interne=temp;
 			}
@@ -88,7 +84,7 @@ Type_Case* contourner(Type_Case* case_choisie,Type_Case* voisin)
 			if(temp->coul==neutre)
 			{
 				compteur=0;
-				distance_bord_sud(p,temp,temp->SE,&compteur,&sortie);
+				distance_bord_sud(temp,temp->SE,&compteur,&sortie);
 				if(compteur < min)
 				{
 					min=compteur;
