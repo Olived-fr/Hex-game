@@ -43,7 +43,6 @@ Coordonnees_tab coup_IA1(Plateau p)
 int distance_bord_sud(Plateau p,Type_Case c,Type_Case* voisin)
 {
 	int i;
-	voisin->check=true;
 	if(voisin==NULL)
 		return 0;
 	else
@@ -54,7 +53,7 @@ int distance_bord_sud(Plateau p,Type_Case c,Type_Case* voisin)
 			return LIGNE_MAX+1;
 		//cas de l'impasse
 		else
-			return(1+distance_bord_sud(p,nouveau_voisin,nouveau_voisin->SE));
+			return(1+distance_bord_sud(p,*nouveau_voisin,nouveau_voisin->SE));
 	}
 }
 
