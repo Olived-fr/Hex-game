@@ -103,7 +103,10 @@ int distance_bord_nord(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_
 	int distance=0;
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
-	if(relie_bord_nord(&c,poubelle))return LIGNE_MAX+1;
+	Type_Case* poubelle;
+	reinitialise_case_checked(p);
+	if(relie_bord_nord(&c,poubelle))
+		return LIGNE_MAX+1;
 	if(voisin==NULL)
 		return 0;
 	else
@@ -128,7 +131,9 @@ int distance_bord_sud(Plateau p,Type_Case c,Type_Case* voisin,bool verif[LIGNE_M
 	bool verif_b[LIGNE_MAX][COLONNE_MAX];
 	initialiser_verif(verif_b);
 	Type_Case* poubelle;
-	if(relie_bord_sud(&c,poubelle))return LIGNE_MAX+1;
+	reinitialise_case_checked(p);
+	if(relie_bord_sud(&c,poubelle))
+		return LIGNE_MAX+1;
 	if(voisin==NULL)
 		return 0;
 	else
@@ -215,7 +220,7 @@ bool relie_bord_nord(Type_Case* cur, Type_Case* ret)
 	while(!b && i!=6)
 	/* On continue tant que tous les voisins n'ont pas été checkés ou tant que le bord n'a pas été trouvé */
 	{
-		if(cur->NO==NULL))
+		if(cur->NO==NULL)
 		{
 			b=true;
 			*ret=*cur;
@@ -319,7 +324,7 @@ bool relie_bord_sud(Type_Case* cur, Type_Case* ret)
 	while(!b && i!=6)
 	/* On continue tant que tous les voisins n'ont pas été checkés ou tant que le bord n'a pas été trouvé */
 	{
-		if(cur->SE==NULL))
+		if(cur->SE==NULL)
 		{
 			b=true;
 			*ret=*cur;
