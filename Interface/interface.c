@@ -163,12 +163,13 @@ void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant, bool
 	char infosC[10];
 	char infosJ[10];
 	char infosJ2[10];
-	int abscisse, ordonnee;
+	int abscisse=12, ordonnee=12;
 	char couleur[1];
 	
+	if (!premier_coup)
+		dernier_coup(couleur, &abscisse, &ordonnee);
 	
-	
-	if (premier_coup)
+	if (abscisse > 11 || ordonnee > 11)
 	{
 		SDL_BlitSurface(menu.InfosSurface,NULL,interface.screenSurface,&menu.posInfos);
 		if (joueur_courant == bleu)
@@ -189,7 +190,6 @@ void MaJ_Infos (s_Menu menu, s_Interface interface, Couleur joueur_courant, bool
 		else
 			sprintf(infosJ2, "Bleu");
 		
-		dernier_coup(couleur, &abscisse, &ordonnee);
 		sprintf(infosC, "(%d , %d)", abscisse,ordonnee);
 		if (couleur[0] == 'B')
 			sprintf(infosJ, "%s","Bleu");
@@ -368,7 +368,7 @@ Coord_SDL pos_pion_SDL (Coordonnees_tab coord_tab, s_Board board)
 	if (coord_tab.ordonnee == 2)
 		coord.CoordX = coord_tab.abscisse * 44.3 + coord_tab.abscisse + coord_tab.ordonnee * 23.2+ board.posBoard.x + 6.3;
 	if (coord_tab.ordonnee >= 3 && coord_tab.ordonnee <= 4)
-		coord.CoordX = coord_tab.abscisse * 44.2 + coord_tab.abscisse + coord_tab.ordonnee * 22.9 + board.posBoard.x + 6.8;
+		coord.CoordX = coord_tab.abscisse * 44.2 + coord_tab.abscisse + coord_tab.ordonnee * 22.9 + board.posBoard.x + 6.9;
 	if (coord_tab.ordonnee >= 5 && coord_tab.ordonnee <= 11)
 		coord.CoordX = coord_tab.abscisse * 44.2 + coord_tab.abscisse + coord_tab.ordonnee * 22.5 + board.posBoard.x + 9;
 	

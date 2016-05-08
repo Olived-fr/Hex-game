@@ -21,7 +21,7 @@ int main (int argc, char * argv[])
 	SDL_Event event;
 	Plateau board_tab;
 	Coordonnees_tab coord_tab;
-	Couleur joueur_courant = neutre, dernier_joueur = neutre;
+	Couleur joueur_courant = bleu, dernier_joueur = bleu;
 	menu.actualMenu = menu.mainMenu;
 	bool quit = false, premier_coup = true, IA = false;
 	int choix;
@@ -145,10 +145,13 @@ int main (int argc, char * argv[])
 						{
 							if (joueur_courant != dernier_joueur)
 							{
+								if (!premier_coup)
+								{
 								annuler(board_tab);
 								MaJ_Board(board, interface, board_tab);
 								MaJ_Infos(menu, interface, joueur_courant, premier_coup);
 								joueur_courant = changer_joueur(joueur_courant);
+								}
 							}
 						}
 						if (choix == 3)
