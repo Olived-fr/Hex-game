@@ -1,5 +1,5 @@
-#include "plateau.h"
-#include "regles.h"
+#include "Structure/plateau.h"
+#include "Regles/regles.h"
 #include <string.h>
 
 int main()
