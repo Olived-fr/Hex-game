@@ -5,23 +5,25 @@ Coordonnees_tab coup_IA1(Plateau p)
 	srand((unsigned int)time(NULL));
 	int depart=rand()%11;
 	int x,y;
-	int distance_min,nb_appels;
-	int min_interne=LIGNE_MAX+2;
+	int distance_min;
+	int nb_appel;
 	bool trouve=false;
 	Type_Case* case_courante;
 	Type_Case* case_proche=&p[depart][0];
-	distance_min=COLONNE_MAX+2;
+	int tab[11][11];
 	if(case_proche->coul!=neutre)case_proche=case_proche->O;
 	//si le plateau est de taille 11 par exemple la distance maximale qu'une case peut avoir à un bord est égal à 10
 	for(y=0;y<LIGNE_MAX;y++)
 	{
 		for(x=0;x<COLONNE_MAX;x++)
 		{
+			distance_min=COLONNE_MAX+2;
 			case_courante=&p[x][y];
 			if(case_courante->coul==rouge)
 			{
 				trouve=true;
 				reinitialise_case_checked(p);
+<<<<<<< HEAD
 				nb_appels=0;
 				distance_bord_sud(p,case_courante,case_courante->SE,&nb_appels,&min_interne);
 <<<<<<< HEAD
@@ -32,6 +34,15 @@ Coordonnees_tab coup_IA1(Plateau p)
 				{
 					case_proche=case_courante;
 					distance_min=nb_appels;
+=======
+				nb_appel=0;
+				distance_bord_sud(p,case_courante,case_courante->SE,&nb_appel);
+				tab[x][y]=nb_appel;
+				if(nb_appel <= distance_min && nb_appel!=0)
+				{
+					case_proche=case_courante;
+					distance_min=nb_appel;
+>>>>>>> parent of 61af48d... You
 				}
 				/*Ainsi, on retient la distance la plus courte et on retient également la direction la plus courte avec la variable "distance_choisie"*/
 			}
@@ -47,14 +58,16 @@ Coordonnees_tab coup_IA1(Plateau p)
 	return case_proche->co;
 }
 
-void distance_bord_sud(Plateau p,Type_Case* c,Type_Case* voisin,int* d,int* min_interne)
+void distance_bord_sud(Plateau p,Type_Case* c,Type_Case* voisin,int* d)
 {
-	
+	*d=*d+1;
 	int temp,i;
+	int min_interne=LIGNE_MAX+2;
 	c->check=true;
-	if(voisin!=NULL)
+	if(voisin==NULL)
+		return 0;
+	else
 	{
-		*d=*d+1;
 		Type_Case* nouveau_voisin=voisin;
 		i=0;
 		while(i!=6)
@@ -62,14 +75,18 @@ void distance_bord_sud(Plateau p,Type_Case* c,Type_Case* voisin,int* d,int* min_
 			if(nouveau_voisin!=NULL && !nouveau_voisin->check && nouveau_voisin->coul!=bleu)
 			{
 				temp=*d;
-				distance_bord_sud(p,nouveau_voisin,nouveau_voisin->SE,&temp,min_interne);
-				if(temp < *min_interne)
-					*min_interne=temp;
+				distance_bord_sud(p,nouveau_voisin,nouveau_voisin->SE,&temp);
+				if(temp < min_interne)
+					min_interne=temp;
 			}
 			i++;
 			nouveau_voisin=voisin_suivant(c,nouveau_voisin);
 		}
+<<<<<<< HEAD
 		*d=*min_interne;
+=======
+		d=&min_interne;
+>>>>>>> parent of 61af48d... You
 	}
 }
 
